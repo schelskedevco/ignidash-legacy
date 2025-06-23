@@ -71,3 +71,7 @@ Import with `@/*` alias. Components use Radix UI + CVA patterns.
 - When pushing changes, use `git add -A` to stage all changes
 - Write clear and brief commit messages that describe the changes
 - Use `git push` to update the remote repository
+
+## Code Practices
+
+- Always remember to actually use the components that you import.

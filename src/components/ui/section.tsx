@@ -14,37 +14,37 @@ export function Section({ children, index, className = "" }: SectionProps) {
 
   switch (patternIndex) {
     case 0:
-      // Section 1: Background color with smooth fade to orange at bottom
+      // Section 1: Background color with smooth fade to vibrant Vanguard-style purple at bottom
       gradientClass = `
         bg-gradient-to-b
         from-background from-0%
         via-background via-70%
-        via-orange-500/5 via-85%
-        to-orange-500/10 to-100%
+        via-rose-600/30 dark:via-rose-500/20 via-85%
+        to-rose-600/45 dark:to-rose-500/30 to-100%
       `;
       break;
 
     case 1:
-      // Section 2: Orange color maintained, fade back to background at bottom
+      // Section 2: Strong purple color maintained, fade back to background at bottom
       gradientClass = `
         bg-gradient-to-b
-        from-orange-500/10 from-0%
-        via-orange-500/10 via-70%
-        via-orange-500/5 via-85%
+        from-rose-600/45 dark:from-rose-500/30 from-0%
+        via-rose-600/45 dark:via-rose-500/30 via-70%
+        via-rose-600/30 dark:via-rose-500/20 via-85%
         to-background to-100%
       `;
       break;
 
     case 2:
-      // Section 3: Complete the cycle - fade from orange to background, then back to orange
+      // Section 3: Complete the cycle - strong purple fade transitions
       gradientClass = `
         bg-gradient-to-b
-        from-orange-500/10 from-0%
-        via-orange-500/5 via-15%
+        from-rose-600/45 dark:from-rose-500/30 from-0%
+        via-rose-600/30 dark:via-rose-500/20 via-15%
         via-background via-30%
         via-background via-70%
-        via-orange-500/5 via-85%
-        to-orange-500/10 to-100%
+        via-rose-600/30 dark:via-rose-500/20 via-85%
+        to-rose-600/45 dark:to-rose-500/30 to-100%
       `;
       break;
   }

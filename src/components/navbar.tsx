@@ -10,22 +10,35 @@ import {
 } from "@/components/ui/sheet";
 import { ModeToggle } from "@/components/mode-toggle";
 
+const ICON_SIZE = "h-6 w-6";
+const LOGO_ICON_SIZE = "h-8 w-8";
+const SHEET_WIDTH = "w-[400px] sm:w-[540px]";
+
+function Logo() {
+  return (
+    <Link href="/" className="flex items-center gap-2">
+      <Flame className={`${LOGO_ICON_SIZE} text-orange-500`} />
+      <span className="text-xl font-bold">Ignidash</span>
+    </Link>
+  );
+}
+
 function NavLink({
   href,
   children,
-  className = "",
 }: {
   href: string;
   children: React.ReactNode;
-  className?: string;
 }) {
   return (
     <Link
       href={href}
-      className={`flex items-center justify-between px-4 py-5 text-base font-medium hover:bg-muted/50 transition-colors ${className}`}
+      className="flex items-center justify-between p-4 text-base font-medium group"
     >
-      {children}
-      <ChevronRight className="h-6 w-6" />
+      <span className="group-hover:text-orange-500 transition-colors">
+        {children}
+      </span>
+      <ChevronRight className={`${ICON_SIZE} text-muted-foreground`} />
     </Link>
   );
 }
@@ -34,44 +47,37 @@ export function Navbar() {
   return (
     <nav className="border-b bg-background sticky top-0 z-50">
       <div className="flex items-center justify-between h-16 px-4 max-w-7xl mx-auto">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <Flame className="h-8 w-8 text-orange-500" />
-          <span className="text-xl font-bold">Ignidash</span>
-        </Link>
+        <Logo />
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-4">
-          <ModeToggle />
+          <ModeToggle iconSize={ICON_SIZE} />
           <Button asChild variant="ghost">
             <Link href="/dashboard">Sign In</Link>
           </Button>
           <Button asChild className="bg-orange-500 hover:bg-orange-600">
             <Link href="/dashboard" className="flex items-center gap-2">
               Get Started
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className={ICON_SIZE} />
             </Link>
           </Button>
         </div>
 
         {/* Mobile Navigation */}
         <div className="flex md:hidden items-center gap-2">
-          <ModeToggle />
+          <ModeToggle iconSize={ICON_SIZE} />
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Open menu">
-                <Menu className="h-5 w-5" />
+                <Menu className={ICON_SIZE} />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[400px] sm:w-[540px]">
+            <SheetContent side="right" className={SHEET_WIDTH}>
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
 
               {/* Mobile Header */}
               <div className="flex items-center justify-between h-16 px-4 border-b">
-                <Link href="/" className="flex items-center gap-2">
-                  <Flame className="h-8 w-8 text-orange-500" />
-                  <span className="text-xl font-bold">Ignidash</span>
-                </Link>
+                <Logo />
               </div>
 
               {/* Navigation Links */}

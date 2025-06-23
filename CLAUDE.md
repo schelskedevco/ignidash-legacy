@@ -65,3 +65,9 @@ Import with `@/*` alias. Components use Radix UI + CVA patterns.
 4. **Responsive Design**: Test on both desktop and mobile viewports
 5. **Performance**: Use React.memo, useMemo, and useCallback where appropriate
 6. **Accessibility**: Maintain ARIA labels and keyboard navigation
+
+## Git Workflow
+
+- When pushing changes, use `git add -A` to stage all changes
+- Write clear and brief commit messages that describe the changes
+- Use `git push` to update the remote repository

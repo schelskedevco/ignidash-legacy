@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Flame, Menu } from "lucide-react";
+import { Flame, Menu, ArrowRight, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -25,6 +25,7 @@ function NavLink({
       className={`flex items-center justify-between px-4 py-5 text-base font-medium hover:bg-muted/50 transition-colors ${className}`}
     >
       {children}
+      <ChevronRight className="h-6 w-6" />
     </Link>
   );
 }
@@ -46,7 +47,10 @@ export function Navbar() {
             <Link href="/dashboard">Sign In</Link>
           </Button>
           <Button asChild className="bg-orange-500 hover:bg-orange-600">
-            <Link href="/dashboard">Get Started</Link>
+            <Link href="/dashboard" className="flex items-center gap-2">
+              Get Started
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </Button>
         </div>
 

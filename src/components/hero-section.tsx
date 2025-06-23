@@ -29,12 +29,12 @@ export function HeroSection() {
           className="bg-orange-500 hover:bg-orange-600 text-base"
         >
           <Link href="/dashboard" className="flex items-center gap-2">
-            Create Your Plan
+            Create your plan
             <ArrowRight className={BUTTON_ICON_SIZE} />
           </Link>
         </Button>
         <Button asChild size="lg" variant="outline" className="text-base">
-          <Link href="/demo">See How It Works</Link>
+          <Link href="/demo">See how it works</Link>
         </Button>
       </div>
     </>

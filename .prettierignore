@@ -1,0 +1,42 @@
+# Don't format dependencies or output
+node_modules
+.next
+out
+build
+dist
+coverage
+
+# Ignore system & Vercel files
+.DS_Store
+.vercel
+
+# Ignore generated files
+*.pem
+*.lock
+*.tsbuildinfo
+tailwind.css
+next-env.d.ts
+
+# Ignore logs and debug
+*.log
+
+# Environment variables
+.env*
+
+# Public/static assets
+public/
+static/
+
+# Package manager files
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Cache directories
+.cache
+.parcel-cache
+.turbo
+
+# IDE
+.vscode/
+.idea/

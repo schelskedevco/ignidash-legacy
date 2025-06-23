@@ -77,3 +77,7 @@ Import with `@/*` alias. Components use Radix UI + CVA patterns.
 - Always remember to actually use the components that you import.
 - Check if there's a Shadcn component that's available before implementing UIs from scratch
 - Always make separate React component files for distinct functionality
+
+## Development Reminders
+
+- Run linter and formatter after your changes

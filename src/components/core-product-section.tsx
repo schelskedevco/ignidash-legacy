@@ -1,4 +1,3 @@
-import { HeaderSection } from "@/components/ui/header-section";
 import {
   Carousel,
   CarouselContent,
@@ -7,11 +6,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-interface CoreProductSectionProps {
-  index: number;
-}
-
-export function CoreProductSection({ index }: CoreProductSectionProps) {
+export function CoreProductSection() {
   const scenarios = [
     {
       title: "Traditional Saver",
@@ -32,7 +27,7 @@ export function CoreProductSection({ index }: CoreProductSectionProps) {
   ];
 
   return (
-    <HeaderSection index={index}>
+    <>
       <div className="mb-12">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Three simple steps to your FIRE plan
@@ -68,6 +63,6 @@ export function CoreProductSection({ index }: CoreProductSectionProps) {
           Dynamic output will appear here based on carousel selection
         </p>
       </div>
-    </HeaderSection>
+    </>
   );
 }

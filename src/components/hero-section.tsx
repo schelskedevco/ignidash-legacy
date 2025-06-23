@@ -1,17 +1,12 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { HeaderSection } from "@/components/ui/header-section";
 
 const BUTTON_ICON_SIZE = "h-4 w-4";
 
-interface HeroSectionProps {
-  index: number;
-}
-
-export function HeroSection({ index }: HeroSectionProps) {
+export function HeroSection() {
   return (
-    <HeaderSection index={index}>
+    <>
       <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6 max-w-4xl mx-auto xl:mx-0">
         <span className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent">
           Design your life.
@@ -42,6 +37,6 @@ export function HeroSection({ index }: HeroSectionProps) {
           <Link href="/demo">See How It Works</Link>
         </Button>
       </div>
-    </HeaderSection>
+    </>
   );
 }

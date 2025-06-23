@@ -13,8 +13,8 @@ export function Footer() {
   ];
 
   return (
-    <section>
-      <div className="max-w-6xl mx-auto">
+    <section className="py-16 sm:py-20 md:py-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <Separator className="mb-8" />
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">

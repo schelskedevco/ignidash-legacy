@@ -11,6 +11,7 @@ import {
 import { ModeToggle } from "@/components/mode-toggle";
 
 const ICON_SIZE = "h-6 w-6";
+const BUTTON_ICON_SIZE = "h-4 w-4";
 const LOGO_ICON_SIZE = "h-8 w-8";
 const SHEET_WIDTH = "w-[400px] sm:w-[540px]";
 
@@ -58,7 +59,7 @@ export function Navbar() {
           <Button asChild className="bg-orange-500 hover:bg-orange-600">
             <Link href="/dashboard" className="flex items-center gap-2">
               Get Started
-              <ArrowRight className={ICON_SIZE} />
+              <ArrowRight className={BUTTON_ICON_SIZE} />
             </Link>
           </Button>
         </div>

@@ -6,12 +6,24 @@ interface SectionProps {
   className?: string;
 }
 
-export function Section({ children, index, className = "" }: SectionProps) {
+export function HeaderSection({
+  children,
+  index,
+  className = "",
+}: SectionProps) {
   // Create a 3-section repeating pattern
-  const patternIndex = index % 3;
+  const patternIndex = index % 2;
 
   let gradientClass = "";
-
+  if (patternIndex === 0) {
+    gradientClass = `
+        bg-gradient-to-b
+        from-background from-0%
+        via-background via-70%
+        via-rose-600/30 dark:via-rose-500/20 via-85%
+        to-rose-600/45 dark:to-rose-500/30 to-100%
+      `;
+  }
   switch (patternIndex) {
     case 0:
       // Section 1: Background color with smooth fade to vibrant Vanguard-style purple at bottom
@@ -25,27 +37,8 @@ export function Section({ children, index, className = "" }: SectionProps) {
       break;
 
     case 1:
-      // Section 2: Strong purple color maintained, fade back to background at bottom
-      gradientClass = `
-        bg-gradient-to-b
-        from-rose-600/45 dark:from-rose-500/30 from-0%
-        via-rose-600/45 dark:via-rose-500/30 via-70%
-        via-rose-600/30 dark:via-rose-500/20 via-85%
-        to-background to-100%
-      `;
-      break;
-
-    case 2:
-      // Section 3: Complete the cycle - strong purple fade transitions
-      gradientClass = `
-        bg-gradient-to-b
-        from-rose-600/45 dark:from-rose-500/30 from-0%
-        via-rose-600/30 dark:via-rose-500/20 via-15%
-        via-background via-30%
-        via-background via-70%
-        via-rose-600/30 dark:via-rose-500/20 via-85%
-        to-rose-600/45 dark:to-rose-500/30 to-100%
-      `;
+      // Section 2: Solid rose color
+      gradientClass = `bg-rose-600/45 dark:bg-rose-500/30`;
       break;
   }
 

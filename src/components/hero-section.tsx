@@ -1,3 +1,9 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const BUTTON_ICON_SIZE = "h-4 w-4";
+
 export function HeroSection() {
   return (
     <section className="px-4 py-24 max-w-7xl mx-auto text-center xl:text-left">
@@ -11,10 +17,26 @@ export function HeroSection() {
         </span>
       </h1>
 
-      <p className="text-xl md:text-2xl text-muted-foreground max-w-sm md:max-w-3xl mx-auto xl:mx-0 leading-relaxed">
+      <p className="text-xl md:text-2xl text-muted-foreground max-w-sm md:max-w-3xl mx-auto xl:mx-0 leading-relaxed mb-8">
         Explore retirement timelines, run what-if projections, and get
         AI-powered insights — all tailored to your values and goals.
       </p>
+
+      <div className="flex flex-col sm:flex-row gap-4 justify-center xl:justify-start">
+        <Button
+          asChild
+          size="lg"
+          className="bg-orange-500 hover:bg-orange-600 text-base"
+        >
+          <Link href="/dashboard" className="flex items-center gap-2">
+            Create Your Plan
+            <ArrowRight className={BUTTON_ICON_SIZE} />
+          </Link>
+        </Button>
+        <Button asChild size="lg" variant="outline" className="text-base">
+          <Link href="/demo">See How It Works</Link>
+        </Button>
+      </div>
     </section>
   );
 }

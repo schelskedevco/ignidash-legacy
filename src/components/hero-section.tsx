@@ -7,13 +7,13 @@ export function HeroSection() {
         </span>
         <br />
         <span className="text-foreground">
-          Then plan your finances around it.
+          Then plan your FIRE journey around it.
         </span>
       </h1>
 
       <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl leading-relaxed">
-        Explore timelines, run projections, and get AI-powered insights — all
-        tailored to your values and goals.
+        Explore retirement timelines, run what-if projections, and get
+        AI-powered insights — all tailored to your values and goals.
       </p>
     </section>
   );

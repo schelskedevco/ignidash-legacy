@@ -54,12 +54,12 @@ export function GrowthChart({ data, projections }: GrowthChartProps) {
     : { top: 20, right: 20, left: 40, bottom: 40 };
 
   const fontSize = isMobile ? 10 : 12;
-  const xAxisInterval = isMobile ? 1 : 0;
+  const xAxisInterval = isMobile ? 2 : 1;
 
   return (
     <ChartContainer
       config={chartConfig}
-      className="h-[250px] sm:h-[320px] md:h-[400px]"
+      className="h-[250px] sm:h-[320px] md:h-[400px] w-full max-w-full"
     >
       <AreaChart data={chartData} margin={margin}>
         <CartesianGrid strokeDasharray="3 3" className="stroke-muted/20" />
@@ -110,6 +110,17 @@ export function GrowthChart({ data, projections }: GrowthChartProps) {
           y={projections.fireNumber}
           stroke="hsl(var(--destructive))"
           strokeDasharray="5 5"
+        />
+        <ReferenceLine
+          x={projections.targetAge}
+          stroke="#ef4444"
+          strokeDasharray="8 4"
+          strokeWidth={3}
+          label={{
+            value: `FIRE at ${projections.targetAge}`,
+            position: "top",
+            style: { fontSize: isMobile ? 10 : 12, fill: "#ef4444" },
+          }}
         />
       </AreaChart>
     </ChartContainer>

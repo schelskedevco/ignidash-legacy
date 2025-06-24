@@ -10,9 +10,9 @@ interface KeyMetricsProps {
 
 export function KeyMetrics({ projections, scenario }: KeyMetricsProps) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+    <div className="grid grid-cols-2 gap-4 mt-6">
       <div className="text-center">
-        <p className="text-2xl md:text-3xl font-bold text-foreground tabular-nums">
+        <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
           {projections.yearsToTarget}
           {projections.monthsToTarget > 0
             ? `.${projections.monthsToTarget}`
@@ -27,7 +27,7 @@ export function KeyMetrics({ projections, scenario }: KeyMetricsProps) {
       </div>
 
       <div className="text-center">
-        <p className="text-2xl md:text-3xl font-bold text-foreground tabular-nums">
+        <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
           ${projections.fireNumber.toLocaleString()}
         </p>
         <p className="text-sm font-medium text-foreground mt-1">FIRE target</p>
@@ -37,7 +37,7 @@ export function KeyMetrics({ projections, scenario }: KeyMetricsProps) {
       </div>
 
       <div className="text-center">
-        <p className="text-2xl md:text-3xl font-bold text-foreground tabular-nums">
+        <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
           $<AnimatedNumber value={projections.retirementIncome} />
         </p>
         <p className="text-sm font-medium text-foreground mt-1">
@@ -51,7 +51,7 @@ export function KeyMetrics({ projections, scenario }: KeyMetricsProps) {
       </div>
 
       <div className="text-center">
-        <p className="text-2xl md:text-3xl font-bold text-foreground tabular-nums">
+        <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
           {projections.savingsRate}%
         </p>
         <p className="text-sm font-medium text-foreground mt-1">savings rate</p>

@@ -19,15 +19,15 @@ export const SCENARIOS: Scenario[] = [
     color: "text-green-500",
     bgColor: "bg-green-500/10",
     inputs: {
-      age: 30,
-      annualIncome: 80000,
-      annualExpenses: 40000,
-      currentNetWorth: 100000,
+      age: 25,
+      annualIncome: 75000,
+      annualExpenses: 45000,
+      currentNetWorth: 50000,
       safeWithdrawalRate: 0.04,
       expectedReturns: 0.07,
     },
     assumptions: {
-      fireTarget: 1000000, // 25x annual expenses
+      fireTarget: 1125000, // 25x annual expenses ($45k * 25)
     } as RegularFireAssumptions,
   },
   {
@@ -42,17 +42,17 @@ export const SCENARIOS: Scenario[] = [
     color: "text-blue-500",
     bgColor: "bg-blue-500/10",
     inputs: {
-      age: 28,
-      annualIncome: 95000,
-      annualExpenses: 48000,
-      currentNetWorth: 125000,
+      age: 25,
+      annualIncome: 85000,
+      annualExpenses: 50000,
+      currentNetWorth: 75000,
       safeWithdrawalRate: 0.04,
       expectedReturns: 0.07,
     },
     assumptions: {
-      coastFireTarget: 300000,
-      reducedIncomeAfterKids: 55000,
-      increasedExpensesWithKids: 65000,
+      coastFireTarget: 400000, // Reach by age 30, then coast
+      reducedIncomeAfterKids: 60000,
+      increasedExpensesWithKids: 70000,
       fullRetirementAge: 55,
     } as CoastFireAssumptions,
   },
@@ -68,16 +68,16 @@ export const SCENARIOS: Scenario[] = [
     color: "text-purple-500",
     bgColor: "bg-purple-500/10",
     inputs: {
-      age: 32,
-      annualIncome: 72000,
-      annualExpenses: 36000,
-      currentNetWorth: 180000,
-      safeWithdrawalRate: 0.035,
-      expectedReturns: 0.065,
+      age: 28,
+      annualIncome: 80000,
+      annualExpenses: 60000,
+      currentNetWorth: 120000,
+      safeWithdrawalRate: 0.04,
+      expectedReturns: 0.07,
     },
     assumptions: {
-      baristaFireTarget: 400000,
-      partTimeIncome: 30000,
+      baristaFireTarget: 600000, // $24k/year from portfolio + $36k part-time = $60k total
+      partTimeIncome: 36000,
       travelBudget: 15000,
       miniRetirements: 3,
     } as BaristaFireAssumptions,

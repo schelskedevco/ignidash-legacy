@@ -70,9 +70,7 @@ export function calculateProjections(scenario: Scenario): Projections {
 
     case "Barista FIRE": {
       const baristaAssumptions = assumptions as BaristaFireAssumptions;
-      const expensesNotCovered =
-        annualExpenses - baristaAssumptions.partTimeIncome;
-      const baristaNumber = expensesNotCovered / inputs.safeWithdrawalRate;
+      const baristaTarget = baristaAssumptions.baristaFireTarget;
 
       // Calculate time with compound growth
       let months = 0;
@@ -80,7 +78,7 @@ export function calculateProjections(scenario: Scenario): Projections {
       const monthlyReturn = expectedReturns / 12;
       const monthlySavings = annualSavings / 12;
 
-      while (futureValue < baristaNumber && months < 400) {
+      while (futureValue < baristaTarget && months < 400) {
         futureValue =
           currentNetWorth * Math.pow(1 + monthlyReturn, months) +
           monthlySavings *
@@ -88,13 +86,13 @@ export function calculateProjections(scenario: Scenario): Projections {
         months++;
       }
 
-      projections.fireNumber = Math.round(baristaNumber);
+      projections.fireNumber = baristaTarget;
       projections.yearsToTarget = Math.floor(months / 12);
       projections.monthsToTarget = months % 12;
       projections.targetAge = age + Math.ceil(months / 12);
-      projections.projectedPortfolio = Math.round(baristaNumber);
+      projections.projectedPortfolio = baristaTarget;
       projections.retirementIncome =
-        Math.round(baristaNumber * 0.04) + baristaAssumptions.partTimeIncome;
+        Math.round(baristaTarget * 0.04) + baristaAssumptions.partTimeIncome;
       break;
     }
 
@@ -143,51 +141,61 @@ export function generateGrowthData(
   const monthlyReturn = expectedReturns / 12;
 
   const dataPoints: GrowthDataPoint[] = [];
-  let portfolio = currentNetWorth;
-  const totalMonths =
+  const milestoneMonths =
     projections.yearsToTarget * 12 + projections.monthsToTarget;
+  const totalMonthsWithExtension = milestoneMonths + 5 * 12; // Add 5 years beyond milestone
 
-  // Generate yearly data points
-  for (let month = 0; month <= totalMonths; month += 12) {
+  // Generate yearly data points up to milestone + 5 years
+  for (let month = 0; month <= totalMonthsWithExtension; month += 12) {
     const year = Math.floor(month / 12);
+    let portfolio = currentNetWorth;
 
-    if (month > 0) {
-      portfolio =
-        currentNetWorth * Math.pow(1 + monthlyReturn, month) +
+    if (month <= milestoneMonths) {
+      // Before milestone: normal savings pattern
+      if (month > 0) {
+        portfolio =
+          currentNetWorth * Math.pow(1 + monthlyReturn, month) +
+          monthlySavings *
+            ((Math.pow(1 + monthlyReturn, month) - 1) / monthlyReturn);
+      }
+    } else {
+      // After milestone: different behavior based on FIRE type
+      const milestonePortfolio =
+        currentNetWorth * Math.pow(1 + monthlyReturn, milestoneMonths) +
         monthlySavings *
-          ((Math.pow(1 + monthlyReturn, month) - 1) / monthlyReturn);
+          ((Math.pow(1 + monthlyReturn, milestoneMonths) - 1) / monthlyReturn);
+
+      const monthsSinceMilestone = month - milestoneMonths;
+
+      if (scenario.fireType === "Barista FIRE") {
+        // Barista FIRE: reduced or no additional savings, portfolio grows from returns only
+        portfolio =
+          milestonePortfolio *
+          Math.pow(1 + monthlyReturn, monthsSinceMilestone);
+      } else if (scenario.fireType === "Coast FIRE") {
+        // Coast FIRE: no additional savings, portfolio grows from returns only
+        portfolio =
+          milestonePortfolio *
+          Math.pow(1 + monthlyReturn, monthsSinceMilestone);
+      } else {
+        // Regular FIRE: typically stop saving, portfolio grows from returns only
+        portfolio =
+          milestonePortfolio *
+          Math.pow(1 + monthlyReturn, monthsSinceMilestone);
+      }
     }
+
+    const contributionsToDate =
+      month <= milestoneMonths
+        ? (annualIncome - annualExpenses) * (month / 12)
+        : (annualIncome - annualExpenses) * (milestoneMonths / 12);
 
     dataPoints.push({
       year: `Year ${year}`,
       age: inputs.age + year,
       portfolio: Math.round(portfolio),
-      contributions: Math.round((annualIncome - annualExpenses) * year),
-      earnings: Math.round(
-        portfolio - currentNetWorth - (annualIncome - annualExpenses) * year
-      ),
-    });
-  }
-
-  // Add final data point if not on a year boundary
-  if (projections.monthsToTarget > 0) {
-    portfolio =
-      currentNetWorth * Math.pow(1 + monthlyReturn, totalMonths) +
-      monthlySavings *
-        ((Math.pow(1 + monthlyReturn, totalMonths) - 1) / monthlyReturn);
-
-    dataPoints.push({
-      year: `Year ${projections.yearsToTarget + 1}`,
-      age: projections.targetAge,
-      portfolio: Math.round(portfolio),
-      contributions: Math.round(
-        (annualIncome - annualExpenses) * (totalMonths / 12)
-      ),
-      earnings: Math.round(
-        portfolio -
-          currentNetWorth -
-          (annualIncome - annualExpenses) * (totalMonths / 12)
-      ),
+      contributions: Math.round(contributionsToDate),
+      earnings: Math.round(portfolio - currentNetWorth - contributionsToDate),
     });
   }
 

@@ -1,22 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { type CarouselApi } from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 import { SCENARIOS } from "./data";
 import { calculateProjections, generateGrowthData } from "./utils";
-import { ScenarioCarousel } from "./scenario-carousel";
+import { ScenarioTabs } from "./scenario-tabs";
 import { GrowthChart } from "./growth-chart";
 import { KeyMetrics } from "./key-metrics";
 
 export function FireScenariosSection() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [api, setApi] = useState<CarouselApi>();
+  const [selectedScenario, setSelectedScenario] = useState("regular-fire");
 
-  const selectedScenario = SCENARIOS[selectedIndex];
-  const projections = calculateProjections(selectedScenario);
-  const growthData = generateGrowthData(selectedScenario, projections);
+  const scenario = SCENARIOS.find(s => s.id === selectedScenario) || SCENARIOS[0];
+  const projections = calculateProjections(scenario);
+  const growthData = generateGrowthData(scenario, projections);
 
   return (
     <>
@@ -34,32 +33,29 @@ export function FireScenariosSection() {
         </p>
       </div>
 
-      <ScenarioCarousel
-        scenarios={SCENARIOS}
-        selectedIndex={selectedIndex}
-        onSelectionChange={setSelectedIndex}
-        api={api}
-        setApi={setApi}
-      />
+      {/* Side-by-side layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 lg:items-start">
+        {/* Left Panel - Scenario Selection */}
+        <ScenarioTabs
+          scenarios={SCENARIOS}
+          selectedScenario={selectedScenario}
+          onScenarioChange={setSelectedScenario}
+        />
 
-      {/* Dynamic output section */}
-      <div className="mt-16 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-        <div className="text-center">
-          <h3 className="text-2xl font-semibold mb-2">Your Path to Freedom</h3>
-          <p className="text-muted-foreground">
-            Real-time projections for {selectedScenario.title}
-          </p>
-        </div>
+        {/* Right Panel - Chart and Results */}
+        <div className="space-y-6">
 
-        {/* Single Chart Card with Embedded Metrics */}
-        <div className="max-w-5xl mx-auto rounded-lg border bg-card text-card-foreground shadow-sm">
-          <div className="p-4 sm:p-6">
-            <GrowthChart data={growthData} projections={projections} />
+          <Card className="overflow-hidden">
+            <CardContent className="p-4 sm:p-6">
+              <div className="w-full overflow-hidden">
+                <GrowthChart data={growthData} projections={projections} />
+              </div>
 
-            <Separator className="my-6" />
+              <Separator className="my-6" />
 
-            <KeyMetrics projections={projections} scenario={selectedScenario} />
-          </div>
+              <KeyMetrics projections={projections} scenario={scenario} />
+            </CardContent>
+          </Card>
         </div>
       </div>
     </>

@@ -81,3 +81,7 @@ Import with `@/*` alias. Components use Radix UI + CVA patterns.
 ## Development Reminders
 
 - Run linter and formatter after your changes
+
+## Resources and References
+
+- Consistently fetch data from https://ui.shadcn.com/docs/components to see the shadcn component's that are available to us when planning how to build UIs

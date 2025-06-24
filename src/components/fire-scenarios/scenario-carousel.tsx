@@ -46,7 +46,7 @@ export function ScenarioCarousel({
   }, [api, onSelectionChange]);
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto px-12">
       <Carousel
         className="w-full"
         opts={{ align: "center", loop: true }}

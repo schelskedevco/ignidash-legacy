@@ -2,13 +2,13 @@ import { ReactNode } from "react";
 
 interface HeaderSectionProps {
   heroSection: ReactNode;
-  coreProductSection: ReactNode;
+  fireScenarios: ReactNode;
   className?: string;
 }
 
 export function HeaderSection({
   heroSection,
-  coreProductSection,
+  fireScenarios,
   className = "",
 }: HeaderSectionProps) {
   // Hero section gets the gradient background (pattern 0)
@@ -20,8 +20,8 @@ export function HeaderSection({
     to-rose-600/45 dark:to-rose-500/30 to-100%
   `;
 
-  // Core product section gets solid rose background (pattern 1)
-  const coreProductGradientClass = `bg-rose-600/45 dark:bg-rose-500/30`;
+  // Fire scenarios section gets solid rose background (pattern 1)
+  const fireScenariosGradientClass = `bg-rose-600/45 dark:bg-rose-500/30`;
 
   return (
     <>
@@ -41,18 +41,18 @@ export function HeaderSection({
         </div>
       </section>
 
-      {/* Core Product Section */}
+      {/* Fire Scenarios Section */}
       <section
         className={`relative overflow-hidden ${className}`}
-        aria-label="Core Product Section"
+        aria-label="Fire Scenarios Section"
       >
         <div className="relative min-h-[600px] sm:min-h-[700px] md:min-h-[800px] py-16 sm:py-20 md:py-24">
           <div
-            className={`absolute inset-0 ${coreProductGradientClass}`}
+            className={`absolute inset-0 ${fireScenariosGradientClass}`}
             aria-hidden="true"
           />
           <div className="relative z-10 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
-            <div className="text-center xl:text-left">{coreProductSection}</div>
+            <div className="text-center xl:text-left">{fireScenarios}</div>
           </div>
         </div>
         {/* Enhanced bottom shadow with multiple layers for depth */}

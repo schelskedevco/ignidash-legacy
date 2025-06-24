@@ -10,6 +10,48 @@ import {
   FireOutputs,
 } from "./types";
 
+// Helper function to calculate FIRE number
+function calculateFireNumber(
+  annualExpenses: number,
+  withdrawalRate: number
+): number {
+  return annualExpenses / withdrawalRate;
+}
+
+// Helper function to calculate future value with compound interest
+function calculateFutureValue(
+  principal: number,
+  annualReturn: number,
+  years: number,
+  annualContribution: number
+): number {
+  if (years === 0) return principal;
+  return (
+    principal * Math.pow(1 + annualReturn, years) +
+    annualContribution *
+      ((Math.pow(1 + annualReturn, years) - 1) / annualReturn)
+  );
+}
+
+// Helper function to calculate years to reach target
+function yearsToReachTarget(
+  currentAssets: number,
+  targetAmount: number,
+  annualSavings: number,
+  annualReturn: number,
+  maxYears: number = 50
+): number {
+  let years = 0;
+  let portfolio = currentAssets;
+
+  while (portfolio < targetAmount && years < maxYears) {
+    portfolio = portfolio * (1 + annualReturn) + annualSavings;
+    years++;
+  }
+
+  return years;
+}
+
 // Calculate FIRE projections
 export function calculateProjections(scenario: Scenario): FireOutputs {
   const { inputs, parameters } = scenario;
@@ -18,6 +60,7 @@ export function calculateProjections(scenario: Scenario): FireOutputs {
     annualExpenses,
     currentInvestedAssets,
     expectedReturns,
+    safeWithdrawalRate,
     age,
   } = inputs;
 
@@ -26,40 +69,57 @@ export function calculateProjections(scenario: Scenario): FireOutputs {
   const monthlySavings = Math.round(annualSavings / 12);
 
   switch (scenario.fireType) {
+    case FireType.REGULAR_FIRE: {
+      const fireNumber = calculateFireNumber(
+        annualExpenses,
+        safeWithdrawalRate
+      );
+      const years = yearsToReachTarget(
+        currentInvestedAssets,
+        fireNumber,
+        annualSavings,
+        expectedReturns
+      );
+
+      return {
+        fireAge: age + years,
+        yearsToFire: years,
+        fireNumber: Math.round(fireNumber),
+        savingsRate: Math.round(savingsRate),
+        monthlySavings,
+      } as RegularFireOutputs;
+    }
+
     case FireType.COAST_FIRE: {
       const coastParams = parameters as CoastFireParameters;
       const { targetRetirementAge } = coastParams;
 
-      // Calculate coast fire target: what we need today to reach FIRE at target retirement age
+      const fireNumber = calculateFireNumber(
+        annualExpenses,
+        safeWithdrawalRate
+      );
       const yearsToRetirement = targetRetirementAge - age;
-      const fireTarget = annualExpenses / 0.04;
-      const coastFireTarget =
-        fireTarget / Math.pow(1 + expectedReturns, yearsToRetirement);
 
-      // Calculate time to reach coast target with compound growth
-      let months = 0;
-      let futureValue = currentInvestedAssets;
-      const monthlyReturn = expectedReturns / 12;
-      const monthlyContributions = annualSavings / 12;
+      // Coast FIRE Number: PV = FV / (1+r)^n
+      const coastFireNumber =
+        fireNumber / Math.pow(1 + expectedReturns, yearsToRetirement);
 
-      while (futureValue < coastFireTarget && months < 300) {
-        futureValue =
-          currentInvestedAssets * Math.pow(1 + monthlyReturn, months) +
-          monthlyContributions *
-            ((Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn);
-        months++;
-      }
+      const years = yearsToReachTarget(
+        currentInvestedAssets,
+        coastFireNumber,
+        annualSavings,
+        expectedReturns,
+        yearsToRetirement
+      );
 
-      const yearsToCoastFire = Math.floor(months / 12);
-      const coastFireAge = age + yearsToCoastFire + (months % 12 > 0 ? 1 : 0);
+      // What will coast number grow to?
       const portfolioAtRetirement =
-        coastFireTarget *
-        Math.pow(1 + expectedReturns, targetRetirementAge - coastFireAge);
+        coastFireNumber * Math.pow(1 + expectedReturns, yearsToRetirement);
 
       return {
-        coastFireAge,
-        yearsToCoastFire,
-        coastFireNumber: Math.round(coastFireTarget),
+        coastFireAge: age + years,
+        yearsToCoastFire: years,
+        coastFireNumber: Math.round(coastFireNumber),
         monthlySavings,
         portfolioAtRetirement: Math.round(portfolioAtRetirement),
       } as CoastFireOutputs;
@@ -68,69 +128,35 @@ export function calculateProjections(scenario: Scenario): FireOutputs {
     case FireType.BARISTA_FIRE: {
       const baristaParams = parameters as BaristaFireParameters;
       const { partTimeMonthlyIncome } = baristaParams;
-      const partTimeAnnualIncome = partTimeMonthlyIncome * 12;
+      const partTimeAnnual = partTimeMonthlyIncome * 12;
 
-      // Calculate barista fire target: (expenses - part-time income) / 4%
-      const baristaFireTarget = (annualExpenses - partTimeAnnualIncome) / 0.04;
-
-      // Calculate time with compound growth
-      let months = 0;
-      let futureValue = currentInvestedAssets;
-      const monthlyReturn = expectedReturns / 12;
-      const monthlyContributions = annualSavings / 12;
-
-      while (futureValue < baristaFireTarget && months < 400) {
-        futureValue =
-          currentInvestedAssets * Math.pow(1 + monthlyReturn, months) +
-          monthlyContributions *
-            ((Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn);
-        months++;
-      }
-
-      const yearsToBaristaFire = Math.floor(months / 12);
-      const baristaFireAge =
-        age + yearsToBaristaFire + (months % 12 > 0 ? 1 : 0);
-      const investmentIncome = Math.round(baristaFireTarget * 0.04);
-      const coveragePercentage = Math.round(
-        (investmentIncome / annualExpenses) * 100
+      // Barista FIRE Number: only need to cover the gap
+      const expenseGap = annualExpenses - partTimeAnnual;
+      const baristaFireNumber = calculateFireNumber(
+        expenseGap,
+        safeWithdrawalRate
       );
 
+      const years = yearsToReachTarget(
+        currentInvestedAssets,
+        baristaFireNumber,
+        annualSavings,
+        expectedReturns
+      );
+
+      // What investment income at switch?
+      const investmentIncome = baristaFireNumber * safeWithdrawalRate;
+
+      // Coverage percentage
+      const coveragePercentage = (investmentIncome / annualExpenses) * 100;
+
       return {
-        baristaFireAge,
-        yearsToBaristaFire,
-        baristaFireNumber: Math.round(baristaFireTarget),
-        investmentIncome,
-        coveragePercentage,
+        baristaFireAge: age + years,
+        yearsToBaristaFire: years,
+        baristaFireNumber: Math.round(baristaFireNumber),
+        investmentIncome: Math.round(investmentIncome),
+        coveragePercentage: Math.round(coveragePercentage),
       } as BaristaFireOutputs;
-    }
-
-    case FireType.REGULAR_FIRE: {
-      const fireTarget = annualExpenses / 0.04;
-
-      // Calculate time with compound growth
-      let months = 0;
-      let futureValue = currentInvestedAssets;
-      const monthlyReturn = expectedReturns / 12;
-      const monthlyContributions = annualSavings / 12;
-
-      while (futureValue < fireTarget && months < 600) {
-        futureValue =
-          currentInvestedAssets * Math.pow(1 + monthlyReturn, months) +
-          monthlyContributions *
-            ((Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn);
-        months++;
-      }
-
-      const yearsToFire = Math.floor(months / 12);
-      const fireAge = age + yearsToFire + (months % 12 > 0 ? 1 : 0);
-
-      return {
-        fireAge,
-        yearsToFire,
-        fireNumber: Math.round(fireTarget),
-        savingsRate: Math.round(savingsRate),
-        monthlySavings,
-      } as RegularFireOutputs;
     }
   }
 }
@@ -142,88 +168,96 @@ export function generateGrowthData(
 ): GrowthDataPoint[] {
   const { inputs } = scenario;
   const {
+    age,
     annualIncome,
     annualExpenses,
     currentInvestedAssets,
     expectedReturns,
+    safeWithdrawalRate,
   } = inputs;
-  const monthlySavings = (annualIncome - annualExpenses) / 12;
-  const monthlyReturn = expectedReturns / 12;
 
+  const annualSavings = annualIncome - annualExpenses;
   const dataPoints: GrowthDataPoint[] = [];
 
-  // Get years to target based on fire type
-  let yearsToTarget: number;
-  let fireNumber: number;
+  // Determine projection parameters based on FIRE type
+  let yearsToProject: number;
+  let milestoneYear: number;
+  let milestoneAmount: number;
 
-  if (scenario.fireType === FireType.REGULAR_FIRE) {
-    const regularOutputs = outputs as RegularFireOutputs;
-    yearsToTarget = regularOutputs.yearsToFire;
-    fireNumber = regularOutputs.fireNumber;
-  } else if (scenario.fireType === FireType.COAST_FIRE) {
-    const coastOutputs = outputs as CoastFireOutputs;
-    yearsToTarget = coastOutputs.yearsToCoastFire;
-    fireNumber = coastOutputs.coastFireNumber;
-  } else {
-    const baristaOutputs = outputs as BaristaFireOutputs;
-    yearsToTarget = baristaOutputs.yearsToBaristaFire;
-    fireNumber = baristaOutputs.baristaFireNumber;
+  switch (scenario.fireType) {
+    case FireType.REGULAR_FIRE: {
+      const regularOutputs = outputs as RegularFireOutputs;
+      milestoneYear = regularOutputs.yearsToFire;
+      milestoneAmount = regularOutputs.fireNumber;
+      yearsToProject = Math.max(milestoneYear + 5, 20);
+      break;
+    }
+
+    case FireType.COAST_FIRE: {
+      const coastOutputs = outputs as CoastFireOutputs;
+      const coastParams = scenario.parameters as CoastFireParameters;
+      milestoneYear = coastOutputs.yearsToCoastFire;
+      milestoneAmount = coastOutputs.coastFireNumber;
+      yearsToProject = coastParams.targetRetirementAge - age + 5;
+      break;
+    }
+
+    case FireType.BARISTA_FIRE: {
+      const baristaOutputs = outputs as BaristaFireOutputs;
+      milestoneYear = baristaOutputs.yearsToBaristaFire;
+      milestoneAmount = baristaOutputs.baristaFireNumber;
+      yearsToProject = Math.max(milestoneYear + 10, 25);
+      break;
+    }
   }
 
-  const milestoneMonths = yearsToTarget * 12;
-  const totalMonthsWithExtension = milestoneMonths + 5 * 12; // Add 5 years beyond milestone
+  // Generate yearly data points
+  for (let year = 0; year <= yearsToProject; year++) {
+    let portfolio: number;
+    let contributions: number;
 
-  // Generate yearly data points up to milestone + 5 years
-  for (let month = 0; month <= totalMonthsWithExtension; month += 12) {
-    const year = Math.floor(month / 12);
-    let portfolio = currentInvestedAssets;
-
-    if (month <= milestoneMonths) {
-      // Before milestone: normal savings pattern
-      if (month > 0) {
-        portfolio =
-          currentInvestedAssets * Math.pow(1 + monthlyReturn, month) +
-          monthlySavings *
-            ((Math.pow(1 + monthlyReturn, month) - 1) / monthlyReturn);
-      }
+    if (year <= milestoneYear) {
+      // Accumulation phase - same for all strategies
+      portfolio = calculateFutureValue(
+        currentInvestedAssets,
+        expectedReturns,
+        year,
+        annualSavings
+      );
+      contributions = annualSavings * year;
     } else {
-      // After milestone: different behavior based on FIRE type
-      const exactMilestonePortfolio = fireNumber;
-      const monthsSinceMilestone = month - milestoneMonths;
+      // Post-milestone phase - different for each strategy
+      const yearsSinceMilestone = year - milestoneYear;
+      contributions = annualSavings * milestoneYear; // No new contributions after milestone
 
-      if (scenario.fireType === FireType.COAST_FIRE) {
-        // Coast FIRE: portfolio grows from returns only during coasting phase
-        portfolio =
-          exactMilestonePortfolio *
-          Math.pow(1 + monthlyReturn, monthsSinceMilestone);
-      } else if (scenario.fireType === FireType.BARISTA_FIRE) {
-        // Barista FIRE: portfolio maintained at target level (withdrawals offset by growth)
-        const netGrowthRate = expectedReturns - 0.04; // 3% net growth
-        portfolio =
-          exactMilestonePortfolio *
-          Math.pow(1 + netGrowthRate / 12, monthsSinceMilestone);
-      } else {
-        // Regular FIRE: portfolio declines due to 4% withdrawals
-        const netGrowthRate = expectedReturns - 0.04;
-        portfolio =
-          exactMilestonePortfolio *
-          Math.pow(1 + netGrowthRate / 12, monthsSinceMilestone);
+      switch (scenario.fireType) {
+        case FireType.COAST_FIRE: {
+          // Pure growth, no contributions
+          portfolio =
+            milestoneAmount *
+            Math.pow(1 + expectedReturns, yearsSinceMilestone);
+          break;
+        }
+
+        case FireType.BARISTA_FIRE:
+        case FireType.REGULAR_FIRE: {
+          // Portfolio grows but with withdrawals
+          const netGrowthRate = expectedReturns - safeWithdrawalRate;
+          portfolio =
+            milestoneAmount * Math.pow(1 + netGrowthRate, yearsSinceMilestone);
+          break;
+        }
       }
     }
 
-    const contributionsToDate =
-      month <= milestoneMonths
-        ? (annualIncome - annualExpenses) * (month / 12)
-        : (annualIncome - annualExpenses) * (milestoneMonths / 12);
+    const earnings = portfolio - currentInvestedAssets - contributions;
 
     dataPoints.push({
       year: `Year ${year}`,
-      age: inputs.age + year,
+      age: age + year,
       portfolio: Math.round(portfolio),
-      contributions: Math.round(contributionsToDate),
-      earnings: Math.round(
-        portfolio - currentInvestedAssets - contributionsToDate
-      ),
+      contributions: Math.round(contributions),
+      earnings: Math.round(earnings),
     });
   }
 

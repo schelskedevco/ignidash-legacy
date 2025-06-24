@@ -114,10 +114,11 @@ export function ScenarioCarousel({
                         </div>
                         <div className="flex justify-between">
                           <span className="text-muted-foreground">
-                            Current Net Worth:
+                            Current Invested Assets:
                           </span>
                           <span className="font-medium">
-                            ${scenario.inputs.currentNetWorth.toLocaleString()}
+                            $
+                            {scenario.inputs.currentInvestedAssets.toLocaleString()}
                           </span>
                         </div>
                       </div>

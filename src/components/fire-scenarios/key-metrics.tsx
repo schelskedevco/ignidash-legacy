@@ -1,34 +1,88 @@
 "use client";
 
-import { Projections, Scenario } from "./types";
+import {
+  FireOutputs,
+  Scenario,
+  FireType,
+  RegularFireOutputs,
+  CoastFireOutputs,
+  BaristaFireOutputs,
+} from "./types";
 import { AnimatedNumber } from "./animated-number";
 
 interface KeyMetricsProps {
-  projections: Projections;
+  outputs: FireOutputs;
   scenario: Scenario;
 }
 
-export function KeyMetrics({ projections, scenario }: KeyMetricsProps) {
+export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
+  // Extract common values based on FIRE type
+  const getDisplayValues = () => {
+    if (scenario.fireType === FireType.REGULAR_FIRE) {
+      const regularOutputs = outputs as RegularFireOutputs;
+      const retirementIncome = regularOutputs.fireNumber * 0.04;
+      return {
+        yearsToTarget: regularOutputs.yearsToFire,
+        targetAge: regularOutputs.fireAge,
+        fireNumber: regularOutputs.fireNumber,
+        retirementIncome,
+        savingsRate: regularOutputs.savingsRate,
+        monthlySavings: regularOutputs.monthlySavings,
+      };
+    } else if (scenario.fireType === FireType.COAST_FIRE) {
+      const coastOutputs = outputs as CoastFireOutputs;
+      const retirementIncome = coastOutputs.portfolioAtRetirement * 0.04;
+      const annualSavings =
+        scenario.inputs.annualIncome - scenario.inputs.annualExpenses;
+      const savingsRate = Math.round(
+        (annualSavings / scenario.inputs.annualIncome) * 100
+      );
+      return {
+        yearsToTarget: coastOutputs.yearsToCoastFire,
+        targetAge: coastOutputs.coastFireAge,
+        fireNumber: coastOutputs.coastFireNumber,
+        retirementIncome,
+        savingsRate,
+        monthlySavings: coastOutputs.monthlySavings,
+      };
+    } else {
+      const baristaOutputs = outputs as BaristaFireOutputs;
+      const annualSavings =
+        scenario.inputs.annualIncome - scenario.inputs.annualExpenses;
+      const savingsRate = Math.round(
+        (annualSavings / scenario.inputs.annualIncome) * 100
+      );
+      const monthlySavings = Math.round(annualSavings / 12);
+      return {
+        yearsToTarget: baristaOutputs.yearsToBaristaFire,
+        targetAge: baristaOutputs.baristaFireAge,
+        fireNumber: baristaOutputs.baristaFireNumber,
+        retirementIncome: baristaOutputs.investmentIncome,
+        savingsRate,
+        monthlySavings,
+      };
+    }
+  };
+
+  const displayValues = getDisplayValues();
+
   return (
     <div className="grid grid-cols-2 gap-4 mt-6">
       <div className="text-center">
         <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
-          {projections.yearsToTarget}
-          {projections.monthsToTarget > 0
-            ? `.${projections.monthsToTarget}`
-            : ""}
+          {displayValues.yearsToTarget}
         </p>
         <p className="text-sm font-medium text-foreground mt-1">
           years to FIRE
         </p>
         <p className="text-xs text-muted-foreground mt-1">
-          (age {projections.targetAge})
+          (age {displayValues.targetAge})
         </p>
       </div>
 
       <div className="text-center">
         <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
-          ${projections.fireNumber.toLocaleString()}
+          ${displayValues.fireNumber.toLocaleString()}
         </p>
         <p className="text-sm font-medium text-foreground mt-1">FIRE target</p>
         <p className="text-xs text-muted-foreground mt-1">
@@ -38,29 +92,25 @@ export function KeyMetrics({ projections, scenario }: KeyMetricsProps) {
 
       <div className="text-center">
         <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
-          $<AnimatedNumber value={projections.retirementIncome} />
+          $<AnimatedNumber value={Math.round(displayValues.retirementIncome)} />
         </p>
         <p className="text-sm font-medium text-foreground mt-1">
           /year retirement income
         </p>
         <p className="text-xs text-muted-foreground mt-1">
           ($
-          {Math.round(projections.retirementIncome / 12).toLocaleString()}
+          {Math.round(displayValues.retirementIncome / 12).toLocaleString()}
           /month)
         </p>
       </div>
 
       <div className="text-center">
         <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
-          {projections.savingsRate}%
+          {displayValues.savingsRate}%
         </p>
         <p className="text-sm font-medium text-foreground mt-1">savings rate</p>
         <p className="text-xs text-muted-foreground mt-1">
-          $
-          {Math.round(
-            (scenario.inputs.annualIncome - scenario.inputs.annualExpenses) / 12
-          ).toLocaleString()}{" "}
-          saved monthly
+          ${displayValues.monthlySavings.toLocaleString()} saved monthly
         </p>
       </div>
     </div>

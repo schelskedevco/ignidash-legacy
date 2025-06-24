@@ -18,8 +18,8 @@ export function FireScenariosSection() {
 
   const scenario =
     SCENARIOS.find((s) => s.id === selectedScenario) || SCENARIOS[0];
-  const projections = calculateProjections(scenario);
-  const growthData = generateGrowthData(scenario, projections);
+  const outputs = calculateProjections(scenario);
+  const growthData = generateGrowthData(scenario, outputs);
 
   return (
     <>
@@ -53,14 +53,14 @@ export function FireScenariosSection() {
               <div className="w-full overflow-hidden">
                 <GrowthChart
                   data={growthData}
-                  projections={projections}
+                  outputs={outputs}
                   scenario={scenario}
                 />
               </div>
 
               <Separator className="my-6" />
 
-              <KeyMetrics projections={projections} scenario={scenario} />
+              <KeyMetrics outputs={outputs} scenario={scenario} />
             </CardContent>
           </Card>
         </div>

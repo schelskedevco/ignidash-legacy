@@ -3,9 +3,8 @@
 import { Badge } from "@/components/ui/badge";
 import {
   Scenario,
-  CoastFireAssumptions,
-  BaristaFireAssumptions,
-  RegularFireAssumptions,
+  CoastFireParameters,
+  BaristaFireParameters,
   FireType,
 } from "./types";
 
@@ -16,45 +15,31 @@ interface ScenarioDetailsProps {
 export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
   const Icon = scenario.icon;
 
-  // Type-safe helpers to access specific assumption properties
-  const getCoastFireAssumptions = () => {
-    if (
-      scenario.fireType === FireType.COAST_FIRE &&
-      "coastFireTarget" in scenario.assumptions
-    ) {
-      return scenario.assumptions as CoastFireAssumptions;
+  // Type-safe helpers to access specific parameter properties
+  const getCoastFireParameters = () => {
+    if (scenario.fireType === FireType.COAST_FIRE) {
+      return scenario.parameters as CoastFireParameters;
     }
     return null;
   };
 
-  const getBaristaFireAssumptions = () => {
-    if (
-      scenario.fireType === FireType.BARISTA_FIRE &&
-      "partTimeIncome" in scenario.assumptions
-    ) {
-      return scenario.assumptions as BaristaFireAssumptions;
+  const getBaristaFireParameters = () => {
+    if (scenario.fireType === FireType.BARISTA_FIRE) {
+      return scenario.parameters as BaristaFireParameters;
     }
     return null;
   };
 
-  // Calculate dynamic Barista FIRE target
+  // Calculate FIRE targets
+  const getFireTarget = () => {
+    return scenario.inputs.annualExpenses / 0.04;
+  };
+
   const getBaristaFireTarget = () => {
-    const baristaAssumptions = getBaristaFireAssumptions();
-    if (baristaAssumptions) {
-      return (
-        (scenario.inputs.annualExpenses - baristaAssumptions.partTimeIncome) /
-        0.04
-      );
-    }
-    return null;
-  };
-
-  const getRegularFireAssumptions = () => {
-    if (
-      scenario.fireType === FireType.REGULAR_FIRE &&
-      "fireTarget" in scenario.assumptions
-    ) {
-      return scenario.assumptions as RegularFireAssumptions;
+    const baristaParams = getBaristaFireParameters();
+    if (baristaParams) {
+      const partTimeAnnualIncome = baristaParams.partTimeMonthlyIncome * 12;
+      return (scenario.inputs.annualExpenses - partTimeAnnualIncome) / 0.04;
     }
     return null;
   };
@@ -108,9 +93,11 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-muted-foreground">Current Net Worth:</span>
+          <span className="text-muted-foreground">
+            Current Invested Assets:
+          </span>
           <span className="font-medium">
-            ${scenario.inputs.currentNetWorth.toLocaleString()}
+            ${scenario.inputs.currentInvestedAssets.toLocaleString()}
           </span>
         </div>
       </div>
@@ -119,31 +106,26 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
       <div className="space-y-3 text-sm">
         <h4 className="font-semibold text-foreground">Strategy Details</h4>
         {scenario.fireType === FireType.COAST_FIRE &&
-          getCoastFireAssumptions() && (
+          getCoastFireParameters() && (
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Coast Target:</span>
+                <span className="text-muted-foreground">
+                  Target Retirement Age:
+                </span>
                 <span className="font-medium">
-                  ${getCoastFireAssumptions()!.coastFireTarget.toLocaleString()}
+                  {getCoastFireParameters()!.targetRetirementAge}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Reduced Income:</span>
+                <span className="text-muted-foreground">Full FIRE Target:</span>
                 <span className="font-medium">
-                  $
-                  {getCoastFireAssumptions()!.reducedIncomeAfterKids.toLocaleString()}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Retirement Age:</span>
-                <span className="font-medium">
-                  {getCoastFireAssumptions()!.fullRetirementAge}
+                  ${getFireTarget().toLocaleString()}
                 </span>
               </div>
             </div>
           )}
         {scenario.fireType === FireType.BARISTA_FIRE &&
-          getBaristaFireAssumptions() && (
+          getBaristaFireParameters() && (
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Barista Target:</span>
@@ -152,45 +134,34 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Part-time Income:</span>
+                <span className="text-muted-foreground">
+                  Part-time Monthly Income:
+                </span>
                 <span className="font-medium">
                   $
-                  {getBaristaFireAssumptions()!.partTimeIncome.toLocaleString()}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Travel Budget:</span>
-                <span className="font-medium">
-                  ${getBaristaFireAssumptions()!.travelBudget.toLocaleString()}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Mini Retirements:</span>
-                <span className="font-medium">
-                  {getBaristaFireAssumptions()!.miniRetirements} planned
+                  {getBaristaFireParameters()!.partTimeMonthlyIncome.toLocaleString()}
                 </span>
               </div>
             </div>
           )}
-        {scenario.fireType === FireType.REGULAR_FIRE &&
-          getRegularFireAssumptions() && (
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">FIRE Target:</span>
-                <span className="font-medium">
-                  ${getRegularFireAssumptions()!.fireTarget.toLocaleString()}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Withdrawal Rate:</span>
-                <span className="font-medium">4.0%</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Expected Returns:</span>
-                <span className="font-medium">7.0%</span>
-              </div>
+        {scenario.fireType === FireType.REGULAR_FIRE && (
+          <div className="space-y-2">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">FIRE Target:</span>
+              <span className="font-medium">
+                ${getFireTarget().toLocaleString()}
+              </span>
             </div>
-          )}
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Withdrawal Rate:</span>
+              <span className="font-medium">4.0%</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Expected Returns:</span>
+              <span className="font-medium">7.0%</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Key Strategy Points */}

@@ -15,11 +15,20 @@ import {
   YAxis,
   ReferenceLine,
 } from "recharts";
-import { GrowthDataPoint, Projections, Scenario, FireType } from "./types";
+import {
+  GrowthDataPoint,
+  FireOutputs,
+  Scenario,
+  FireType,
+  RegularFireOutputs,
+  CoastFireOutputs,
+  BaristaFireOutputs,
+  CoastFireParameters,
+} from "./types";
 
 interface GrowthChartProps {
   data: GrowthDataPoint[];
-  projections: Projections;
+  outputs: FireOutputs;
   scenario: Scenario;
 }
 
@@ -30,19 +39,42 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function GrowthChart({ data, projections, scenario }: GrowthChartProps) {
+export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
   const [isMobile, setIsMobile] = useState(false);
 
-  // Helper to get fullRetirementAge for Coast FIRE
-  const getFullRetirementAge = () => {
-    if (
-      scenario.fireType === FireType.COAST_FIRE &&
-      "fullRetirementAge" in scenario.assumptions
-    ) {
-      return scenario.assumptions.fullRetirementAge;
+  // Helper to get target retirement age for Coast FIRE
+  const getTargetRetirementAge = () => {
+    if (scenario.fireType === FireType.COAST_FIRE) {
+      const coastParams = scenario.parameters as CoastFireParameters;
+      return coastParams.targetRetirementAge;
     }
     return null;
   };
+
+  // Get display values based on fire type
+  const getDisplayValues = () => {
+    if (scenario.fireType === FireType.REGULAR_FIRE) {
+      const regularOutputs = outputs as RegularFireOutputs;
+      return {
+        fireNumber: regularOutputs.fireNumber,
+        targetAge: regularOutputs.fireAge,
+      };
+    } else if (scenario.fireType === FireType.COAST_FIRE) {
+      const coastOutputs = outputs as CoastFireOutputs;
+      return {
+        fireNumber: coastOutputs.coastFireNumber,
+        targetAge: coastOutputs.coastFireAge,
+      };
+    } else {
+      const baristaOutputs = outputs as BaristaFireOutputs;
+      return {
+        fireNumber: baristaOutputs.baristaFireNumber,
+        targetAge: baristaOutputs.baristaFireAge,
+      };
+    }
+  };
+
+  const displayValues = getDisplayValues();
 
   useEffect(() => {
     const checkMobile = () => {
@@ -119,33 +151,33 @@ export function GrowthChart({ data, projections, scenario }: GrowthChartProps) {
           strokeWidth={isMobile ? 1.5 : 2}
         />
         <ReferenceLine
-          y={projections.fireNumber}
+          y={displayValues.fireNumber}
           stroke="hsl(var(--destructive))"
           strokeDasharray="5 5"
         />
         <ReferenceLine
-          x={projections.targetAge}
+          x={displayValues.targetAge}
           stroke="#ef4444"
           strokeDasharray="8 4"
           strokeWidth={3}
           label={{
             value:
               scenario.fireType === FireType.COAST_FIRE
-                ? `Coast at ${projections.targetAge}`
-                : `FIRE at ${projections.targetAge}`,
+                ? `Coast at ${displayValues.targetAge}`
+                : `FIRE at ${displayValues.targetAge}`,
             position: "top",
             style: { fontSize: isMobile ? 10 : 12, fill: "#ef4444" },
           }}
         />
         {scenario.fireType === FireType.COAST_FIRE &&
-          getFullRetirementAge() && (
+          getTargetRetirementAge() && (
             <ReferenceLine
-              x={getFullRetirementAge()!}
+              x={getTargetRetirementAge()!}
               stroke="#10b981"
               strokeDasharray="6 3"
               strokeWidth={2}
               label={{
-                value: `Full retirement at ${getFullRetirementAge()}`,
+                value: `Full retirement at ${getTargetRetirementAge()}`,
                 position: "bottom",
                 style: { fontSize: isMobile ? 10 : 12, fill: "#10b981" },
               }}

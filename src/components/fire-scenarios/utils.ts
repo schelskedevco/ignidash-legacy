@@ -173,7 +173,6 @@ export function generateGrowthData(
     annualExpenses,
     currentInvestedAssets,
     expectedReturns,
-    safeWithdrawalRate,
   } = inputs;
 
   const annualSavings = annualIncome - annualExpenses;
@@ -182,13 +181,11 @@ export function generateGrowthData(
   // Determine projection parameters based on FIRE type
   let yearsToProject: number;
   let milestoneYear: number;
-  let milestoneAmount: number;
 
   switch (scenario.fireType) {
     case FireType.REGULAR_FIRE: {
       const regularOutputs = outputs as RegularFireOutputs;
       milestoneYear = regularOutputs.yearsToFire;
-      milestoneAmount = regularOutputs.fireNumber;
       yearsToProject = Math.max(milestoneYear + 5, 20);
       break;
     }
@@ -197,7 +194,6 @@ export function generateGrowthData(
       const coastOutputs = outputs as CoastFireOutputs;
       const coastParams = scenario.parameters as CoastFireParameters;
       milestoneYear = coastOutputs.yearsToCoastFire;
-      milestoneAmount = coastOutputs.coastFireNumber;
       yearsToProject = coastParams.targetRetirementAge - age + 5;
       break;
     }
@@ -205,11 +201,18 @@ export function generateGrowthData(
     case FireType.BARISTA_FIRE: {
       const baristaOutputs = outputs as BaristaFireOutputs;
       milestoneYear = baristaOutputs.yearsToBaristaFire;
-      milestoneAmount = baristaOutputs.baristaFireNumber;
       yearsToProject = Math.max(milestoneYear + 10, 25);
       break;
     }
   }
+
+  // Calculate the actual portfolio value at milestone year for continuity
+  const portfolioAtMilestone = calculateFutureValue(
+    currentInvestedAssets,
+    expectedReturns,
+    milestoneYear,
+    annualSavings
+  );
 
   // Generate yearly data points
   for (let year = 0; year <= yearsToProject; year++) {
@@ -232,19 +235,31 @@ export function generateGrowthData(
 
       switch (scenario.fireType) {
         case FireType.COAST_FIRE: {
-          // Pure growth, no contributions
+          // Pure growth, no contributions - use actual portfolio value at milestone
           portfolio =
-            milestoneAmount *
+            portfolioAtMilestone *
             Math.pow(1 + expectedReturns, yearsSinceMilestone);
           break;
         }
 
         case FireType.BARISTA_FIRE:
         case FireType.REGULAR_FIRE: {
-          // Portfolio grows but with withdrawals
-          const netGrowthRate = expectedReturns - safeWithdrawalRate;
-          portfolio =
-            milestoneAmount * Math.pow(1 + netGrowthRate, yearsSinceMilestone);
+          // Portfolio grows at full return rate, then subtract fixed annual withdrawals
+          // Start with actual portfolio value at milestone, not target amount
+          let currentPortfolio = portfolioAtMilestone;
+          const annualWithdrawal =
+            scenario.fireType === FireType.REGULAR_FIRE
+              ? annualExpenses
+              : annualExpenses -
+                (scenario.parameters as BaristaFireParameters)
+                  .partTimeMonthlyIncome *
+                  12;
+
+          for (let i = 0; i < yearsSinceMilestone; i++) {
+            currentPortfolio =
+              currentPortfolio * (1 + expectedReturns) - annualWithdrawal;
+          }
+          portfolio = Math.max(0, currentPortfolio); // Ensure portfolio doesn't go negative
           break;
         }
       }

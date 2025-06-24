@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import {
   ChartConfig,
   ChartContainer,
@@ -29,27 +30,52 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function GrowthChart({ data, projections }: GrowthChartProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Filter data points for mobile to reduce clutter
+  const chartData = isMobile
+    ? data.filter((_, index) => index % 2 === 0 || index === data.length - 1)
+    : data;
+
+  // Responsive configurations
+  const margin = isMobile
+    ? { top: 10, right: 10, left: 20, bottom: 20 }
+    : { top: 20, right: 20, left: 40, bottom: 40 };
+
+  const fontSize = isMobile ? 10 : 12;
+  const xAxisInterval = isMobile ? 1 : 0;
+
   return (
     <ChartContainer
       config={chartConfig}
-      className="h-[350px] sm:h-[400px] md:h-[500px]"
+      className="h-[250px] sm:h-[320px] md:h-[400px]"
     >
-      <AreaChart
-        data={data}
-        margin={{ top: 20, right: 20, left: 40, bottom: 40 }}
-      >
+      <AreaChart data={chartData} margin={margin}>
         <CartesianGrid strokeDasharray="3 3" className="stroke-muted/20" />
         <XAxis
           dataKey="age"
-          tick={{ fontSize: 12 }}
+          tick={{ fontSize }}
           tickLine={false}
           axisLine={false}
+          interval={xAxisInterval}
         />
         <YAxis
           tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
-          tick={{ fontSize: 12 }}
+          tick={{ fontSize }}
           tickLine={false}
           axisLine={false}
+          width={isMobile ? 35 : 50}
         />
         <ChartTooltip
           content={
@@ -78,17 +104,12 @@ export function GrowthChart({ data, projections }: GrowthChartProps) {
           stroke="hsl(var(--chart-1))"
           fillOpacity={1}
           fill="url(#colorPortfolio)"
-          strokeWidth={2}
+          strokeWidth={isMobile ? 1.5 : 2}
         />
         <ReferenceLine
           y={projections.fireNumber}
           stroke="hsl(var(--destructive))"
           strokeDasharray="5 5"
-          label={{
-            value: "FIRE Target",
-            position: "right",
-            style: { fontSize: 12 },
-          }}
         />
       </AreaChart>
     </ChartContainer>

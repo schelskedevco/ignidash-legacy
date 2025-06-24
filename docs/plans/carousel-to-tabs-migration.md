@@ -1,14 +1,17 @@
 # Carousel to Tabs Migration Plan
 
 ## Overview
+
 Migrate from carousel-based scenario selection to a side-by-side split view with tabs for better UX and clearer input → output relationship.
 
 ## Current State
+
 - Carousel component for scenario selection
 - Chart updates based on carousel selection
 - Disconnected UX between input and output
 
 ## Target State
+
 - Left panel: Tabbed scenario switcher with details
 - Right panel: Chart + metrics
 - Clear cause-and-effect relationship
@@ -17,6 +20,7 @@ Migrate from carousel-based scenario selection to a side-by-side split view with
 ## Architecture Changes
 
 ### New File Structure
+
 ```
 src/components/fire-scenarios/
 ├── fire-scenarios-section.tsx     # Main container (updated)
@@ -31,6 +35,7 @@ src/components/fire-scenarios/
 ```
 
 ### Files to DELETE
+
 - `scenario-carousel.tsx` (no longer needed)
 
 ## shadcn Components Usage
@@ -46,14 +51,14 @@ src/components/fire-scenarios/
 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
   {/* Left Panel */}
   <Card>
-    <Tabs> 
+    <Tabs>
       <TabsList>Traditional FIRE | Coast FIRE | Barista FIRE</TabsList>
       <TabsContent>
         <ScenarioDetails scenario={selected} />
       </TabsContent>
     </Tabs>
   </Card>
-  
+
   {/* Right Panel */}
   <Card>
     <GrowthChart data={chartData} />
@@ -65,20 +70,24 @@ src/components/fire-scenarios/
 ## Implementation Steps
 
 ### Step 1: Install shadcn Tabs
+
 ```bash
 npx shadcn@latest add tabs
 ```
 
 ### Step 2: Create New Components
+
 - `scenario-tabs.tsx` - Tabs wrapper with state management
 - `scenario-details.tsx` - Extract scenario card content from carousel
 
 ### Step 3: Update Main Container
+
 - Replace carousel with grid layout
 - Connect tab state to chart updates
 - Handle responsive design (stack on mobile)
 
 ### Step 4: Clean Up
+
 - Remove `scenario-carousel.tsx`
 - Remove carousel imports from main component
 - Remove unused carousel state management
@@ -86,12 +95,14 @@ npx shadcn@latest add tabs
 ## State Management Changes
 
 ### Current State
+
 ```tsx
 const [selectedIndex, setSelectedIndex] = useState(0);
 const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 ```
 
 ### New State
+
 ```tsx
 const [selectedScenario, setSelectedScenario] = useState("regular-fire");
 // Remove all carousel-related state
@@ -101,6 +112,7 @@ const [selectedScenario, setSelectedScenario] = useState("regular-fire");
 
 **Desktop (lg+):** Side-by-side grid
 **Mobile/Tablet:** Stacked layout
+
 ```tsx
 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
 ```
@@ -111,7 +123,7 @@ const [selectedScenario, setSelectedScenario] = useState("regular-fire");
 ✅ **Better UX** - Clear input → output flow  
 ✅ **Mobile Friendly** - Tabs work better than carousel on mobile  
 ✅ **Faster** - No carousel animation overhead  
-✅ **Accessible** - Tabs have better keyboard navigation  
+✅ **Accessible** - Tabs have better keyboard navigation
 
 ## Implementation Order
 
@@ -136,6 +148,7 @@ const [selectedScenario, setSelectedScenario] = useState("regular-fire");
 ## Rollback Plan
 
 If issues arise:
+
 1. Revert fire-scenarios-section.tsx changes
 2. Restore scenario-carousel.tsx
 3. Remove new tab components

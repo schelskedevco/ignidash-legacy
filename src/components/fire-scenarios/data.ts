@@ -4,17 +4,19 @@ import {
   RegularFireAssumptions,
   CoastFireAssumptions,
   BaristaFireAssumptions,
+  FireType,
+  ScenarioId,
 } from "./types";
 
 export const SCENARIOS: Scenario[] = [
   {
-    id: "regular-fire",
+    id: ScenarioId.REGULAR_FIRE,
     title: "Traditional FIRE",
     subtitle: "Complete Financial Independence",
     content:
       "Save consistently, invest wisely, and retire early to pursue hobbies and passions.",
     icon: Target,
-    fireType: "Regular FIRE",
+    fireType: FireType.REGULAR_FIRE,
     focusArea: "Full Retirement",
     color: "text-green-500",
     bgColor: "bg-green-500/10",
@@ -31,13 +33,13 @@ export const SCENARIOS: Scenario[] = [
     } as RegularFireAssumptions,
   },
   {
-    id: "family-coast",
+    id: ScenarioId.FAMILY_COAST,
     title: "Young Family Planning",
     subtitle: "Coast FIRE with Kids",
     content:
       "Front-load savings before kids, then coast to FIRE while focusing on family.",
     icon: Baby,
-    fireType: "Coast FIRE",
+    fireType: FireType.COAST_FIRE,
     focusArea: "Kids & Family",
     color: "text-blue-500",
     bgColor: "bg-blue-500/10",
@@ -50,20 +52,20 @@ export const SCENARIOS: Scenario[] = [
       expectedReturns: 0.07,
     },
     assumptions: {
-      coastFireTarget: 400000, // Reach by age 30, then coast
-      reducedIncomeAfterKids: 60000,
-      increasedExpensesWithKids: 70000,
-      fullRetirementAge: 55,
+      coastFireTarget: 400000, // Amount that grows to full FIRE by age 55
+      reducedIncomeAfterKids: 50000, // Just enough to cover expenses during coasting
+      increasedExpensesWithKids: 50000, // Expenses during coasting phase
+      fullRetirementAge: 55, // When coast target has grown to full FIRE
     } as CoastFireAssumptions,
   },
   {
-    id: "sabbatical-barista",
+    id: ScenarioId.SABBATICAL_BARISTA,
     title: "Digital Nomad Dreams",
     subtitle: "Barista FIRE with Travel",
     content:
       "Take mini-retirements and work remotely while exploring the world.",
     icon: Plane,
-    fireType: "Barista FIRE",
+    fireType: FireType.BARISTA_FIRE,
     focusArea: "Travel & Sabbaticals",
     color: "text-purple-500",
     bgColor: "bg-purple-500/10",
@@ -76,7 +78,6 @@ export const SCENARIOS: Scenario[] = [
       expectedReturns: 0.07,
     },
     assumptions: {
-      baristaFireTarget: 600000, // $24k/year from portfolio + $36k part-time = $60k total
       partTimeIncome: 36000,
       travelBudget: 15000,
       miniRetirements: 3,

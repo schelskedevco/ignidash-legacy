@@ -1,5 +1,18 @@
 import { Baby, Plane, Target } from "lucide-react";
 
+// Enums for better type safety
+export enum FireType {
+  COAST_FIRE = "Coast FIRE",
+  BARISTA_FIRE = "Barista FIRE",
+  REGULAR_FIRE = "Regular FIRE",
+}
+
+export enum ScenarioId {
+  REGULAR_FIRE = "regular-fire",
+  FAMILY_COAST = "family-coast",
+  SABBATICAL_BARISTA = "sabbatical-barista",
+}
+
 export interface ScenarioInputs {
   age: number;
   annualIncome: number;
@@ -17,7 +30,6 @@ export interface CoastFireAssumptions {
 }
 
 export interface BaristaFireAssumptions {
-  baristaFireTarget: number;
   partTimeIncome: number;
   travelBudget: number;
   miniRetirements: number;
@@ -32,19 +44,38 @@ export type Assumptions =
   | BaristaFireAssumptions
   | RegularFireAssumptions;
 
-export interface Scenario {
-  id: string;
+// Discriminated union for better type safety
+export interface BaseScenario {
+  id: ScenarioId;
   title: string;
   subtitle: string;
   content: string;
   icon: typeof Baby | typeof Plane | typeof Target;
-  fireType: "Coast FIRE" | "Barista FIRE" | "Regular FIRE";
   focusArea: string;
   color: string;
   bgColor: string;
   inputs: ScenarioInputs;
-  assumptions: Assumptions;
 }
+
+export interface CoastFireScenario extends BaseScenario {
+  fireType: FireType.COAST_FIRE;
+  assumptions: CoastFireAssumptions;
+}
+
+export interface BaristaFireScenario extends BaseScenario {
+  fireType: FireType.BARISTA_FIRE;
+  assumptions: BaristaFireAssumptions;
+}
+
+export interface RegularFireScenario extends BaseScenario {
+  fireType: FireType.REGULAR_FIRE;
+  assumptions: RegularFireAssumptions;
+}
+
+export type Scenario =
+  | CoastFireScenario
+  | BaristaFireScenario
+  | RegularFireScenario;
 
 export interface Projections {
   savingsRate: string;

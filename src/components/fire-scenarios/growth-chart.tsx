@@ -15,11 +15,12 @@ import {
   YAxis,
   ReferenceLine,
 } from "recharts";
-import { GrowthDataPoint, Projections } from "./types";
+import { GrowthDataPoint, Projections, Scenario, FireType } from "./types";
 
 interface GrowthChartProps {
   data: GrowthDataPoint[];
   projections: Projections;
+  scenario: Scenario;
 }
 
 const chartConfig = {
@@ -29,8 +30,19 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function GrowthChart({ data, projections }: GrowthChartProps) {
+export function GrowthChart({ data, projections, scenario }: GrowthChartProps) {
   const [isMobile, setIsMobile] = useState(false);
+
+  // Helper to get fullRetirementAge for Coast FIRE
+  const getFullRetirementAge = () => {
+    if (
+      scenario.fireType === FireType.COAST_FIRE &&
+      "fullRetirementAge" in scenario.assumptions
+    ) {
+      return scenario.assumptions.fullRetirementAge;
+    }
+    return null;
+  };
 
   useEffect(() => {
     const checkMobile = () => {
@@ -117,11 +129,28 @@ export function GrowthChart({ data, projections }: GrowthChartProps) {
           strokeDasharray="8 4"
           strokeWidth={3}
           label={{
-            value: `FIRE at ${projections.targetAge}`,
+            value:
+              scenario.fireType === FireType.COAST_FIRE
+                ? `Coast at ${projections.targetAge}`
+                : `FIRE at ${projections.targetAge}`,
             position: "top",
             style: { fontSize: isMobile ? 10 : 12, fill: "#ef4444" },
           }}
         />
+        {scenario.fireType === FireType.COAST_FIRE &&
+          getFullRetirementAge() && (
+            <ReferenceLine
+              x={getFullRetirementAge()!}
+              stroke="#10b981"
+              strokeDasharray="6 3"
+              strokeWidth={2}
+              label={{
+                value: `Full retirement at ${getFullRetirementAge()}`,
+                position: "bottom",
+                style: { fontSize: isMobile ? 10 : 12, fill: "#10b981" },
+              }}
+            />
+          )}
       </AreaChart>
     </ChartContainer>
   );

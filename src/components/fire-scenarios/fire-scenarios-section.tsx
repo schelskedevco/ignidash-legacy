@@ -9,11 +9,15 @@ import { calculateProjections, generateGrowthData } from "./utils";
 import { ScenarioTabs } from "./scenario-tabs";
 import { GrowthChart } from "./growth-chart";
 import { KeyMetrics } from "./key-metrics";
+import { ScenarioId } from "./types";
 
 export function FireScenariosSection() {
-  const [selectedScenario, setSelectedScenario] = useState("regular-fire");
+  const [selectedScenario, setSelectedScenario] = useState(
+    ScenarioId.REGULAR_FIRE
+  );
 
-  const scenario = SCENARIOS.find(s => s.id === selectedScenario) || SCENARIOS[0];
+  const scenario =
+    SCENARIOS.find((s) => s.id === selectedScenario) || SCENARIOS[0];
   const projections = calculateProjections(scenario);
   const growthData = generateGrowthData(scenario, projections);
 
@@ -44,11 +48,14 @@ export function FireScenariosSection() {
 
         {/* Right Panel - Chart and Results */}
         <div className="space-y-6">
-
           <Card className="overflow-hidden">
             <CardContent className="p-4 sm:p-6">
               <div className="w-full overflow-hidden">
-                <GrowthChart data={growthData} projections={projections} />
+                <GrowthChart
+                  data={growthData}
+                  projections={projections}
+                  scenario={scenario}
+                />
               </div>
 
               <Separator className="my-6" />

@@ -19,6 +19,7 @@ function calculateFireNumber(
 }
 
 // Helper function to calculate future value with compound interest
+// Uses beginning-of-year contributions (more realistic for FIRE planning)
 function calculateFutureValue(
   principal: number,
   annualReturn: number,
@@ -26,10 +27,15 @@ function calculateFutureValue(
   annualContribution: number
 ): number {
   if (years === 0) return principal;
+  if (annualReturn === 0) {
+    // Handle zero return rate case
+    return principal + annualContribution * years;
+  }
   return (
     principal * Math.pow(1 + annualReturn, years) +
     annualContribution *
-      ((Math.pow(1 + annualReturn, years) - 1) / annualReturn)
+      ((Math.pow(1 + annualReturn, years) - 1) / annualReturn) *
+      (1 + annualReturn) // Beginning-of-year adjustment
   );
 }
 
@@ -45,7 +51,8 @@ function yearsToReachTarget(
   let portfolio = currentAssets;
 
   while (portfolio < targetAmount && years < maxYears) {
-    portfolio = portfolio * (1 + annualReturn) + annualSavings;
+    // Beginning-of-year contribution, then growth
+    portfolio = (portfolio + annualSavings) * (1 + annualReturn);
     years++;
   }
 
@@ -108,8 +115,8 @@ export function calculateProjections(scenario: Scenario): FireOutputs {
         currentInvestedAssets,
         coastFireNumber,
         annualSavings,
-        expectedReturns,
-        yearsToRetirement
+        expectedReturns
+        // Remove maxYears limit - let it calculate the actual time needed
       );
 
       // What will coast number grow to?
@@ -231,7 +238,7 @@ export function generateGrowthData(
     } else {
       // Post-milestone phase - different for each strategy
       const yearsSinceMilestone = year - milestoneYear;
-      contributions = annualSavings * milestoneYear; // No new contributions after milestone
+      contributions = annualSavings * milestoneYear; // Total contributions up to milestone (no new contributions after)
 
       switch (scenario.fireType) {
         case FireType.COAST_FIRE: {
@@ -265,14 +272,16 @@ export function generateGrowthData(
       }
     }
 
-    const earnings = portfolio - currentInvestedAssets - contributions;
+    // Calculate cumulative earnings (investment gains)
+    const cumulativeEarnings =
+      portfolio - currentInvestedAssets - contributions;
 
     dataPoints.push({
       year: `Year ${year}`,
       age: age + year,
       portfolio: Math.round(portfolio),
       contributions: Math.round(contributions),
-      earnings: Math.round(earnings),
+      earnings: Math.round(cumulativeEarnings),
     });
   }
 

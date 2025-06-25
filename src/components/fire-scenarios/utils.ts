@@ -242,10 +242,32 @@ export function generateGrowthData(
 
       switch (scenario.fireType) {
         case FireType.COAST_FIRE: {
-          // Pure growth, no contributions - use actual portfolio value at milestone
-          portfolio =
-            portfolioAtMilestone *
-            Math.pow(1 + expectedReturns, yearsSinceMilestone);
+          const coastParams = scenario.parameters as CoastFireParameters;
+          const targetRetirementAge = coastParams.targetRetirementAge;
+          const currentAge = age + year;
+
+          if (currentAge < targetRetirementAge) {
+            // Coast phase: pure growth, no contributions, no withdrawals
+            portfolio =
+              portfolioAtMilestone *
+              Math.pow(1 + expectedReturns, yearsSinceMilestone);
+          } else {
+            // Retirement phase: withdrawals begin
+            const yearsToRetirement =
+              targetRetirementAge - (age + milestoneYear);
+            const portfolioAtRetirement =
+              portfolioAtMilestone *
+              Math.pow(1 + expectedReturns, yearsToRetirement);
+            const yearsInRetirement = currentAge - targetRetirementAge;
+
+            // Calculate portfolio value with withdrawals
+            let currentPortfolio = portfolioAtRetirement;
+            for (let i = 0; i < yearsInRetirement; i++) {
+              currentPortfolio =
+                currentPortfolio * (1 + expectedReturns) - annualExpenses;
+            }
+            portfolio = Math.max(0, currentPortfolio);
+          }
           break;
         }
 

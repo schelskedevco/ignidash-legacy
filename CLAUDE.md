@@ -81,6 +81,7 @@ Import with `@/*` alias. Components use Radix UI + CVA patterns.
 ## Development Reminders
 
 - Run linter and formatter after your changes
+- Run npm test to test changes whenever making changes to core util files like utils.ts
 
 ## Resources and References
 

@@ -9,7 +9,7 @@ export function HeroSection() {
     <>
       <h1 className="text-5xl md:text-7xl font-bold font-heading leading-tight mb-6 max-w-4xl mx-auto xl:mx-0">
         <span className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent">
-          <em>Design your life.</em>
+          Design your life.
         </span>
         <br />
         <span className="text-foreground">

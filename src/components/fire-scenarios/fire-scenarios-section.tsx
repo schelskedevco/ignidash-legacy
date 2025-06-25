@@ -54,7 +54,7 @@ export function FireScenariosSection() {
         <div className="space-y-6">
           <Card className="overflow-hidden">
             <CardContent className="p-4 sm:p-6">
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 justify-center xl:justify-start">
                 Your FIRE Projection
                 <TooltipProvider>
                   <Tooltip>

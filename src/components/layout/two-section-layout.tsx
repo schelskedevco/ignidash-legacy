@@ -11,7 +11,6 @@ export function TwoSectionLayout({
   fireScenarios,
   className = "",
 }: TwoSectionLayoutProps) {
-  // Hero section gets the gradient background
   const heroGradientClass = `
     bg-gradient-to-b
     from-background from-0%
@@ -20,7 +19,6 @@ export function TwoSectionLayout({
     to-rose-600/45 dark:to-rose-500/30 to-100%
   `;
 
-  // Fire scenarios section gets solid rose background
   const fireScenariosGradientClass = `bg-rose-600/45 dark:bg-rose-500/30`;
 
   return (
@@ -32,8 +30,8 @@ export function TwoSectionLayout({
             className={`absolute inset-0 ${heroGradientClass}`}
             aria-hidden="true"
           />
-          <div className="relative z-10 px-2 sm:px-4 md:px-6 xl:px-10 3xl:px-20">
-            <div className="w-full">
+          <div className="relative z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center xl:text-left">{heroSection}</div>
             </div>
           </div>

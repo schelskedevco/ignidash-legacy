@@ -32,8 +32,8 @@ export function FireScenariosSection() {
       </div>
 
       {/* Main Grid Layout */}
-      <div className="w-full px-4 sm:px-6 xl:px-12 3xl:px-24">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-6 xl:gap-8 items-stretch">
+      <div className="w-full px-2 sm:px-4 md:px-6 xl:px-10 3xl:px-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-4 md:gap-6 xl:gap-8 items-stretch">
           {/* Left Panel - Financial Inputs */}
           <FinancialInputsCard
             scenarios={SCENARIOS}

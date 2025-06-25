@@ -32,7 +32,7 @@ export function TwoSectionLayout({
             className={`absolute inset-0 ${heroGradientClass}`}
             aria-hidden="true"
           />
-          <div className="relative z-10 px-4 sm:px-6 xl:px-12 3xl:px-24">
+          <div className="relative z-10 px-2 sm:px-4 md:px-6 xl:px-10 3xl:px-20">
             <div className="w-full">
               <div className="text-center xl:text-left">{heroSection}</div>
             </div>
@@ -51,7 +51,7 @@ export function TwoSectionLayout({
             className={`absolute inset-0 ${fireScenariosGradientClass}`}
             aria-hidden="true"
           />
-          <div className="relative z-10 px-4 sm:px-6 xl:px-12 3xl:px-24">
+          <div className="relative z-10 px-2 sm:px-4 md:px-6 xl:px-10 3xl:px-20">
             <div className="w-full">
               <div className="text-center xl:text-left">{fireScenarios}</div>
             </div>

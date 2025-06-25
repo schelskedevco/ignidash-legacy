@@ -26,39 +26,28 @@ export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
         targetAge: regularOutputs.fireAge,
         fireNumber: regularOutputs.fireNumber,
         retirementIncome,
-        savingsRate: regularOutputs.savingsRate,
         monthlySavings: regularOutputs.monthlySavings,
       };
     } else if (scenario.fireType === FireType.COAST_FIRE) {
       const coastOutputs = outputs as CoastFireOutputs;
       const retirementIncome = coastOutputs.portfolioAtRetirement * 0.04;
-      const annualSavings =
-        scenario.inputs.annualIncome - scenario.inputs.annualExpenses;
-      const savingsRate = Math.round(
-        (annualSavings / scenario.inputs.annualIncome) * 100
-      );
       return {
         yearsToTarget: coastOutputs.yearsToCoastFire,
         targetAge: coastOutputs.coastFireAge,
         fireNumber: coastOutputs.coastFireNumber,
         retirementIncome,
-        savingsRate,
         monthlySavings: coastOutputs.monthlySavings,
       };
     } else {
       const baristaOutputs = outputs as BaristaFireOutputs;
       const annualSavings =
         scenario.inputs.annualIncome - scenario.inputs.annualExpenses;
-      const savingsRate = Math.round(
-        (annualSavings / scenario.inputs.annualIncome) * 100
-      );
       const monthlySavings = Math.round(annualSavings / 12);
       return {
         yearsToTarget: baristaOutputs.yearsToBaristaFire,
         targetAge: baristaOutputs.baristaFireAge,
         fireNumber: baristaOutputs.baristaFireNumber,
         retirementIncome: baristaOutputs.investmentIncome,
-        savingsRate,
         monthlySavings,
       };
     }
@@ -102,13 +91,6 @@ export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
           {Math.round(displayValues.retirementIncome / 12).toLocaleString()}
           /month)
         </p>
-      </div>
-
-      <div className="text-center">
-        <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
-          {displayValues.savingsRate}%
-        </p>
-        <p className="text-sm font-medium text-foreground mt-1">savings rate</p>
       </div>
     </div>
   );

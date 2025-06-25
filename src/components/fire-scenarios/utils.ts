@@ -87,7 +87,6 @@ export function calculateProjections(scenario: Scenario): FireOutputs {
   } = inputs;
 
   const annualSavings = annualIncome - annualExpenses;
-  const savingsRate = (annualSavings / annualIncome) * 100;
   const monthlySavings = Math.round(annualSavings / 12);
 
   switch (scenario.fireType) {
@@ -107,7 +106,6 @@ export function calculateProjections(scenario: Scenario): FireOutputs {
         fireAge: age + years,
         yearsToFire: years,
         fireNumber: Math.round(fireNumber),
-        savingsRate: Math.round(savingsRate),
         monthlySavings,
       } as RegularFireOutputs;
     }

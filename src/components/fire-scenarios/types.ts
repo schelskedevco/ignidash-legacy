@@ -76,7 +76,6 @@ export interface RegularFireOutputs {
   fireAge: number;
   yearsToFire: number;
   fireNumber: number;
-  savingsRate: number;
   monthlySavings: number;
 }
 

@@ -26,7 +26,7 @@ export function HeroSection() {
         <Button
           asChild
           size="lg"
-          className="bg-orange-500 hover:bg-orange-600 text-base"
+          className="bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 hover:from-pink-600 hover:via-red-600 hover:to-orange-600 text-white text-base"
         >
           <Link href="/dashboard" className="flex items-center gap-2">
             Create your plan

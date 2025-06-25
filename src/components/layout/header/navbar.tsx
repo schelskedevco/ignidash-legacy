@@ -64,7 +64,10 @@ export function Navbar() {
             <Button asChild variant="ghost">
               <Link href="/dashboard">Sign In</Link>
             </Button>
-            <Button asChild className="bg-orange-500 hover:bg-orange-600">
+            <Button
+              asChild
+              className="bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 hover:from-pink-600 hover:via-red-600 hover:to-orange-600 text-white"
+            >
               <Link href="/dashboard" className="flex items-center gap-2">
                 Get Started
                 <ArrowRight className={BUTTON_ICON_SIZE} />

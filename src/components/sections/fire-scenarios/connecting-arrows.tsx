@@ -15,7 +15,7 @@ export function ConnectingArrows({ count = 3 }: ConnectingArrowsProps) {
             alt="Arrow connecting financial inputs to outputs"
             width={48}
             height={48}
-            className="opacity-60 animate-pulse dark:invert"
+            className={`opacity-60 pulse-arrow-${index} dark:invert`}
           />
         ))}
       </div>

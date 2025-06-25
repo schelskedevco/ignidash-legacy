@@ -142,3 +142,26 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes pulse-cycle {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.pulse-arrow-0 {
+  animation: pulse-cycle 2s ease-in-out infinite;
+}
+
+.pulse-arrow-1 {
+  animation: pulse-cycle 2s ease-in-out infinite 0.67s;
+}
+
+.pulse-arrow-2 {
+  animation: pulse-cycle 2s ease-in-out infinite 1.33s;
+}

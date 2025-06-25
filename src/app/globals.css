@@ -145,27 +145,24 @@
 
 @keyframes arrow-flow {
   0% {
-    transform: translateX(-5px) scale(0.95);
-    opacity: 0.4;
+    transform: translateX(-8px);
   }
   50% {
-    transform: translateX(2px) scale(1.05);
-    opacity: 0.8;
+    transform: translateX(8px);
   }
   100% {
-    transform: translateX(0) scale(1);
-    opacity: 0.6;
+    transform: translateX(-8px);
   }
 }
 
 .arrow-flow-0 {
-  animation: arrow-flow 1s ease-out forwards;
+  animation: arrow-flow 3s ease-in-out infinite;
 }
 
 .arrow-flow-1 {
-  animation: arrow-flow 1s ease-out 0.2s forwards;
+  animation: arrow-flow 3s ease-in-out 1s infinite;
 }
 
 .arrow-flow-2 {
-  animation: arrow-flow 1s ease-out 0.4s forwards;
+  animation: arrow-flow 3s ease-in-out 2s infinite;
 }

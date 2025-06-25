@@ -181,7 +181,7 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
               strokeWidth={2}
               label={{
                 value: `Full retirement at ${getTargetRetirementAge()}`,
-                position: "bottom",
+                position: "top",
                 style: { fontSize: isMobile ? 10 : 12, fill: "#10b981" },
               }}
             />

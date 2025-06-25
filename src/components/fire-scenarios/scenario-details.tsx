@@ -1,6 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import {
   Scenario,
   CoastFireParameters,
@@ -86,34 +87,49 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
             ${scenario.inputs.currentInvestedAssets.toLocaleString()}
           </span>
         </div>
-
-        {/* Coast FIRE Parameters */}
-        {scenario.fireType === FireType.COAST_FIRE &&
-          getCoastFireParameters() && (
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">
-                Target Retirement Age:
-              </span>
-              <span className="font-medium">
-                {getCoastFireParameters()!.targetRetirementAge}
-              </span>
-            </div>
-          )}
-
-        {/* Barista FIRE Parameters */}
-        {scenario.fireType === FireType.BARISTA_FIRE &&
-          getBaristaFireParameters() && (
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">
-                Part-time Monthly Income:
-              </span>
-              <span className="font-medium">
-                $
-                {getBaristaFireParameters()!.partTimeMonthlyIncome.toLocaleString()}
-              </span>
-            </div>
-          )}
       </div>
+
+      {/* FIRE-specific Settings Section */}
+      {(scenario.fireType === FireType.COAST_FIRE ||
+        scenario.fireType === FireType.BARISTA_FIRE) && (
+        <>
+          <Separator />
+          <div className="space-y-3 text-sm">
+            <h4 className="font-semibold text-foreground mb-3">
+              {scenario.fireType === FireType.COAST_FIRE
+                ? "Coast FIRE Settings"
+                : "Barista FIRE Settings"}
+            </h4>
+
+            {/* Coast FIRE Parameters */}
+            {scenario.fireType === FireType.COAST_FIRE &&
+              getCoastFireParameters() && (
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">
+                    Target Retirement Age:
+                  </span>
+                  <span className="font-medium">
+                    {getCoastFireParameters()!.targetRetirementAge}
+                  </span>
+                </div>
+              )}
+
+            {/* Barista FIRE Parameters */}
+            {scenario.fireType === FireType.BARISTA_FIRE &&
+              getBaristaFireParameters() && (
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">
+                    Part-time Monthly Income:
+                  </span>
+                  <span className="font-medium">
+                    $
+                    {getBaristaFireParameters()!.partTimeMonthlyIncome.toLocaleString()}
+                  </span>
+                </div>
+              )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

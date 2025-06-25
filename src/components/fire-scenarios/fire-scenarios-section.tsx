@@ -28,8 +28,9 @@ export function FireScenariosSection() {
           Every FIRE Path, Clearly Mapped
         </h2>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-          Traditional retirement, family planning, or nomadic freedom—see your
-          personalized timeline for any FIRE strategy.
+          From traditional FIRE to sabbaticals and part-time work, your custom
+          path to financial independence starts here. Just enter your
+          data—we&apos;ll do the math.
         </p>
       </div>
 

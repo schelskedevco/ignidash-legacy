@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { Route } from "lucide-react";
+import { SectionHeaderIcon } from "@/components/common/section-header-icon";
 import { SCENARIOS } from "./shared/fire-data";
 import { calculateProjections, generateGrowthData } from "./shared/fire-utils";
 import { FinancialInputsCard } from "./financial-inputs-card/financial-inputs-card";
@@ -21,6 +23,7 @@ export function FireScenariosSection() {
   return (
     <>
       <div className="mb-12 text-center px-4 sm:px-6 lg:px-8">
+        <SectionHeaderIcon icon={Route} />
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-4">
           Every FIRE Path, Clearly Mapped
         </h2>

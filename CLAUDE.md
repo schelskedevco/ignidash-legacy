@@ -90,3 +90,7 @@ Import with `@/*` alias. Components use Radix UI + CVA patterns.
 ## Development Constraints
 
 - Never commit and push unless I tell you to
+
+## Planning Process
+
+- When planning, write your plan to a Markdown file after we finalize the plan so that it can be referenced later.

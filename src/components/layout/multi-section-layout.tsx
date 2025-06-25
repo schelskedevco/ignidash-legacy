@@ -1,16 +1,18 @@
 import { ReactNode } from "react";
 
-interface TwoSectionLayoutProps {
+interface MultiSectionLayoutProps {
   heroSection: ReactNode;
   fireScenarios: ReactNode;
+  aiCopilot: ReactNode;
   className?: string;
 }
 
-export function TwoSectionLayout({
+export function MultiSectionLayout({
   heroSection,
   fireScenarios,
+  aiCopilot,
   className = "",
-}: TwoSectionLayoutProps) {
+}: MultiSectionLayoutProps) {
   const heroGradientClass = `
     bg-gradient-to-b
     from-background from-0%
@@ -62,6 +64,15 @@ export function TwoSectionLayout({
           <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/30 dark:from-black/50 via-black/10 dark:via-black/20 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-px bg-black/20 dark:bg-black/40" />
         </div>
+      </section>
+
+      {/* AI Copilot Section */}
+      <section
+        id="ai-copilot"
+        className="relative"
+        aria-label="AI Copilot Section"
+      >
+        {aiCopilot}
       </section>
     </>
   );

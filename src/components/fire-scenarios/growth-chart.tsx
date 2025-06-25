@@ -35,7 +35,10 @@ interface GrowthChartProps {
 const chartConfig = {
   portfolio: {
     label: "Portfolio Value",
-    color: "hsl(var(--chart-1))",
+    theme: {
+      light: "#000000",
+      dark: "#FFFFFF", // Light gray for dark mode
+    },
   },
 } satisfies ChartConfig;
 
@@ -132,12 +135,12 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
           <linearGradient id="colorPortfolio" x1="0" y1="0" x2="0" y2="1">
             <stop
               offset="5%"
-              stopColor="hsl(var(--chart-1))"
+              stopColor="var(--color-portfolio)"
               stopOpacity={0.6}
             />
             <stop
               offset="95%"
-              stopColor="hsl(var(--chart-1))"
+              stopColor="var(--color-portfolio)"
               stopOpacity={0.1}
             />
           </linearGradient>
@@ -145,7 +148,7 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
         <Area
           type="monotone"
           dataKey="portfolio"
-          stroke="hsl(var(--chart-1))"
+          stroke="var(--color-portfolio)"
           fillOpacity={1}
           fill="url(#colorPortfolio)"
           strokeWidth={isMobile ? 2 : 2.5}

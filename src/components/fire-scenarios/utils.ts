@@ -19,8 +19,9 @@ function calculateFireNumber(
 }
 
 // Helper function to calculate future value with compound interest
-// Uses beginning-of-year contributions (more realistic for FIRE planning)
-function calculateFutureValue(
+// Uses end-of-year contributions (standard assumption where contributions
+// are made throughout the year and don't earn returns until the following year)
+export function calculateFutureValue(
   principal: number,
   annualReturn: number,
   years: number,
@@ -28,35 +29,49 @@ function calculateFutureValue(
 ): number {
   if (years === 0) return principal;
   if (annualReturn === 0) {
-    // Handle zero return rate case
+    // No investment growth, just linear contributions
     return principal + annualContribution * years;
   }
+
+  // End-of-year contribution assumption (standard)
   return (
     principal * Math.pow(1 + annualReturn, years) +
     annualContribution *
-      ((Math.pow(1 + annualReturn, years) - 1) / annualReturn) *
-      (1 + annualReturn) // Beginning-of-year adjustment
+      ((Math.pow(1 + annualReturn, years) - 1) / annualReturn)
   );
 }
 
 // Helper function to calculate years to reach target
-function yearsToReachTarget(
-  currentAssets: number,
-  targetAmount: number,
-  annualSavings: number,
-  annualReturn: number,
-  maxYears: number = 50
+export function yearsToReachTarget(
+  principal: number,
+  target: number,
+  annualContribution: number,
+  annualReturn: number
 ): number {
-  let years = 0;
-  let portfolio = currentAssets;
-
-  while (portfolio < targetAmount && years < maxYears) {
-    // Beginning-of-year contribution, then growth
-    portfolio = (portfolio + annualSavings) * (1 + annualReturn);
-    years++;
+  if (annualContribution === 0) {
+    if (principal <= 0 || annualReturn <= 0) return Infinity;
+    return Math.log(target / principal) / Math.log(1 + annualReturn);
   }
 
-  return years;
+  let low = 0;
+  let high = 100;
+  let mid: number;
+
+  const fv = (n: number) =>
+    principal * Math.pow(1 + annualReturn, n) +
+    annualContribution * ((Math.pow(1 + annualReturn, n) - 1) / annualReturn); // End-of-year assumption
+
+  while (high - low > 0.0001) {
+    mid = (low + high) / 2;
+    const value = fv(mid);
+    if (value < target) {
+      low = mid;
+    } else {
+      high = mid;
+    }
+  }
+
+  return parseFloat(mid!.toFixed(4));
 }
 
 // Calculate FIRE projections

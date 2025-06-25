@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { SCENARIOS } from "./shared/fire-data";
 import { calculateProjections, generateGrowthData } from "./shared/fire-utils";
 import { FinancialInputsCard } from "./financial-inputs-card/financial-inputs-card";
 import { FinancialOutputsCard } from "./financial-outputs-card/financial-outputs-card";
+import { ConnectingArrows } from "./connecting-arrows";
 import { ScenarioId } from "./shared/fire-types";
 
 export function FireScenariosSection() {
@@ -41,16 +41,8 @@ export function FireScenariosSection() {
             onScenarioChange={setSelectedScenario}
           />
 
-          {/* Connecting Arrow */}
-          <div className="hidden lg:flex items-center justify-center">
-            <Image
-              src="/right-arrow-outline-svgrepo-com.svg"
-              alt="Arrow connecting financial inputs to outputs"
-              width={48}
-              height={48}
-              className="opacity-60 animate-pulse dark:invert"
-            />
-          </div>
+          {/* Connecting Arrows */}
+          <ConnectingArrows />
 
           {/* Right Panel - Financial Outputs */}
           <FinancialOutputsCard

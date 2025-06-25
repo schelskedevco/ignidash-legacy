@@ -78,6 +78,7 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
   };
 
   const displayValues = getDisplayValues();
+  const fireAge = Math.round(displayValues.targetAge);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -91,8 +92,14 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
   }, []);
 
   // Filter data points for mobile to reduce clutter
+  // But always ensure the FIRE age point is included
   const chartData = isMobile
-    ? data.filter((_, index) => index % 2 === 0 || index === data.length - 1)
+    ? data.filter((_, index) => {
+        const isEvenIndex = index % 2 === 0;
+        const isLastIndex = index === data.length - 1;
+        const isFireAgePoint = Math.abs(data[index].age - fireAge) <= 1;
+        return isEvenIndex || isLastIndex || isFireAgePoint;
+      })
     : data;
 
   // Responsive configurations
@@ -102,8 +109,6 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
 
   const fontSize = isMobile ? 10 : 12;
   const xAxisInterval = isMobile ? 2 : 1;
-
-  const fireAge = Math.round(displayValues.targetAge);
 
   return (
     <ChartContainer
@@ -165,7 +170,7 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
               scenario.fireType === FireType.COAST_FIRE
                 ? `Coast at ${fireAge}`
                 : `FIRE at ${fireAge}`,
-            position: "top",
+            position: isMobile ? "insideTopLeft" : "top",
             style: { fontSize: isMobile ? 10 : 12, fill: "#ef4444" },
           }}
         />

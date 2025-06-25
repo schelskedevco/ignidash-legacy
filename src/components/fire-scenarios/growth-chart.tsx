@@ -103,6 +103,8 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
   const fontSize = isMobile ? 10 : 12;
   const xAxisInterval = isMobile ? 2 : 1;
 
+  const fireAge = Math.round(displayValues.targetAge);
+
   return (
     <ChartContainer
       config={chartConfig}
@@ -154,20 +156,15 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
           strokeWidth={isMobile ? 2 : 2.5}
         />
         <ReferenceLine
-          y={displayValues.fireNumber}
-          stroke="hsl(var(--destructive))"
-          strokeDasharray="5 5"
-        />
-        <ReferenceLine
-          x={displayValues.targetAge}
+          x={fireAge}
           stroke="#ef4444"
           strokeDasharray="8 4"
-          strokeWidth={3}
+          strokeWidth={1}
           label={{
             value:
               scenario.fireType === FireType.COAST_FIRE
-                ? `Coast at ${displayValues.targetAge}`
-                : `FIRE at ${displayValues.targetAge}`,
+                ? `Coast at ${fireAge}`
+                : `FIRE at ${fireAge}`,
             position: "top",
             style: { fontSize: isMobile ? 10 : 12, fill: "#ef4444" },
           }}

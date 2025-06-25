@@ -18,38 +18,42 @@ interface KeyMetricsProps {
 export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
   // Extract common values based on FIRE type
   const getDisplayValues = () => {
-    if (scenario.fireType === FireType.REGULAR_FIRE) {
-      const regularOutputs = outputs as RegularFireOutputs;
-      const retirementIncome = regularOutputs.fireNumber * 0.04;
-      return {
-        yearsToTarget: regularOutputs.yearsToFire,
-        targetAge: regularOutputs.fireAge,
-        fireNumber: regularOutputs.fireNumber,
-        retirementIncome,
-        monthlySavings: regularOutputs.monthlySavings,
-      };
-    } else if (scenario.fireType === FireType.COAST_FIRE) {
-      const coastOutputs = outputs as CoastFireOutputs;
-      const retirementIncome = coastOutputs.portfolioAtRetirement * 0.04;
-      return {
-        yearsToTarget: coastOutputs.yearsToCoastFire,
-        targetAge: coastOutputs.coastFireAge,
-        fireNumber: coastOutputs.coastFireNumber,
-        retirementIncome,
-        monthlySavings: coastOutputs.monthlySavings,
-      };
-    } else {
-      const baristaOutputs = outputs as BaristaFireOutputs;
-      const annualSavings =
-        scenario.inputs.annualIncome - scenario.inputs.annualExpenses;
-      const monthlySavings = Math.round(annualSavings / 12);
-      return {
-        yearsToTarget: baristaOutputs.yearsToBaristaFire,
-        targetAge: baristaOutputs.baristaFireAge,
-        fireNumber: baristaOutputs.baristaFireNumber,
-        retirementIncome: baristaOutputs.investmentIncome,
-        monthlySavings,
-      };
+    switch (scenario.fireType) {
+      case FireType.REGULAR_FIRE: {
+        const regularOutputs = outputs as RegularFireOutputs;
+        const retirementIncome = regularOutputs.fireNumber * 0.04;
+        return {
+          yearsToTarget: regularOutputs.yearsToFire,
+          targetAge: regularOutputs.fireAge,
+          fireNumber: regularOutputs.fireNumber,
+          retirementIncome,
+          monthlySavings: regularOutputs.monthlySavings,
+        };
+      }
+      case FireType.COAST_FIRE: {
+        const coastOutputs = outputs as CoastFireOutputs;
+        const retirementIncome = coastOutputs.portfolioAtRetirement * 0.04;
+        return {
+          yearsToTarget: coastOutputs.yearsToCoastFire,
+          targetAge: coastOutputs.coastFireAge,
+          fireNumber: coastOutputs.coastFireNumber,
+          retirementIncome,
+          monthlySavings: coastOutputs.monthlySavings,
+        };
+      }
+      case FireType.BARISTA_FIRE: {
+        const baristaOutputs = outputs as BaristaFireOutputs;
+        const annualSavings =
+          scenario.inputs.annualIncome - scenario.inputs.annualExpenses;
+        const monthlySavings = Math.round(annualSavings / 12);
+        return {
+          yearsToTarget: baristaOutputs.yearsToBaristaFire,
+          targetAge: baristaOutputs.baristaFireAge,
+          fireNumber: baristaOutputs.baristaFireNumber,
+          retirementIncome: baristaOutputs.investmentIncome,
+          monthlySavings,
+        };
+      }
     }
   };
 

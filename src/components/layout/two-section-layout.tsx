@@ -1,16 +1,16 @@
 import { ReactNode } from "react";
 
-interface HeaderSectionProps {
+interface TwoSectionLayoutProps {
   heroSection: ReactNode;
   fireScenarios: ReactNode;
   className?: string;
 }
 
-export function HeaderSection({
+export function TwoSectionLayout({
   heroSection,
   fireScenarios,
   className = "",
-}: HeaderSectionProps) {
+}: TwoSectionLayoutProps) {
   // Hero section gets the gradient background (pattern 0)
   const heroGradientClass = `
     bg-gradient-to-b

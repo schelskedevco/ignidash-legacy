@@ -8,7 +8,7 @@ import {
   SheetTrigger,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { ModeToggle } from "@/components/mode-toggle";
+import { ModeToggle } from "./mode-toggle";
 
 const ICON_SIZE = "h-6 w-6";
 const BUTTON_ICON_SIZE = "h-4 w-4";

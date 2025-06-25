@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Flame, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 
@@ -68,8 +69,12 @@ export function Footer() {
             {/* Company Info - Spans 2 columns on desktop */}
             <div className="col-span-2 space-y-4">
               <Link href="/" className="flex items-center gap-2 group">
-                <Flame
-                  className={`${LOGO_ICON_SIZE} text-orange-500 group-hover:text-orange-600 transition-colors`}
+                <Image
+                  src="/flame-icon.svg"
+                  alt="Ignidash flame icon"
+                  className={`${LOGO_ICON_SIZE}`}
+                  width={32}
+                  height={32}
                 />
                 <span className="text-xl font-bold font-heading">Ignidash</span>
               </Link>

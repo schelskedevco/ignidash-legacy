@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Flame, Menu, ArrowRight, ChevronRight } from "lucide-react";
+import { Menu, ArrowRight, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -18,7 +19,13 @@ const SHEET_WIDTH = "w-[400px] sm:w-[540px]";
 function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2">
-      <Flame className={`${LOGO_ICON_SIZE} text-orange-500`} />
+      <Image
+        src="/flame-icon.svg"
+        alt="Ignidash flame icon"
+        className={`${LOGO_ICON_SIZE}`}
+        width={32}
+        height={32}
+      />
       <span className="text-xl font-bold font-heading">Ignidash</span>
     </Link>
   );

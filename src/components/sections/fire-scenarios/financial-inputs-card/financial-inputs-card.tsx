@@ -24,12 +24,12 @@ export function FinancialInputsCard({
           value={selectedScenario}
           onValueChange={(value) => onScenarioChange(value as ScenarioId)}
         >
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="flex w-full gap-2">
             {scenarios.map((scenario) => (
               <TabsTrigger
                 key={scenario.id}
                 value={scenario.id}
-                className="text-xs sm:text-sm"
+                className="flex-1 text-xs sm:text-sm"
               >
                 {scenario.fireType}
               </TabsTrigger>

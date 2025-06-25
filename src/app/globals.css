@@ -112,28 +112,6 @@
   --sidebar-ring: oklch(0.553 0.013 58.071);
 }
 
-@keyframes subtle-pulse {
-  0% {
-    opacity: 0.1;
-    transform: scale(1);
-    filter: blur(0px);
-  }
-  50% {
-    opacity: 0.3;
-    transform: scale(1.8);
-    filter: blur(2px);
-  }
-  100% {
-    opacity: 0.1;
-    transform: scale(1);
-    filter: blur(0px);
-  }
-}
-
-.animate-subtle-pulse {
-  animation: subtle-pulse 3s ease-in-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .animate-bounce {
     animation: none !important;

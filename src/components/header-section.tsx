@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { ChevronDown } from "lucide-react";
 
 interface HeaderSectionProps {
   heroSection: ReactNode;
@@ -27,11 +26,8 @@ export function HeaderSection({
   return (
     <>
       {/* Hero Section */}
-      <section
-        className={`relative overflow-hidden ${className}`}
-        aria-label="Hero Section"
-      >
-        <div className="relative min-h-[600px] sm:min-h-[700px] md:min-h-[800px] py-16 sm:py-20 md:py-24">
+      <section className={`relative ${className}`} aria-label="Hero Section">
+        <div className="relative min-h-[500px] sm:min-h-[550px] md:min-h-[600px] py-12 sm:py-16 md:py-20">
           <div
             className={`absolute inset-0 ${heroGradientClass}`}
             aria-hidden="true"
@@ -39,19 +35,6 @@ export function HeaderSection({
           <div className="relative z-10 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
             <div className="text-center xl:text-left">{heroSection}</div>
           </div>
-          <a
-            href="#fire-scenarios"
-            className="absolute bottom-0 sm:bottom-16 left-0 right-0 flex justify-center translate-y-1/2 m-4 group"
-            aria-label="Scroll to FIRE scenarios section"
-          >
-            <ChevronDown
-              className="h-12 w-12 animate-bounce text-white/70 group-hover:text-white transition-colors"
-              aria-hidden="true"
-            />
-            <span className="sr-only">
-              Scroll down to explore FIRE scenarios
-            </span>
-          </a>
         </div>
       </section>
 
@@ -61,7 +44,7 @@ export function HeaderSection({
         className={`relative overflow-hidden ${className}`}
         aria-label="Fire Scenarios Section"
       >
-        <div className="relative min-h-[600px] sm:min-h-[700px] md:min-h-[800px] py-16 sm:py-20 md:py-24">
+        <div className="relative min-h-[500px] sm:min-h-[550px] md:min-h-[600px] py-12 sm:py-16 md:py-20">
           <div
             className={`absolute inset-0 ${fireScenariosGradientClass}`}
             aria-hidden="true"

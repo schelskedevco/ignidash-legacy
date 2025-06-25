@@ -7,7 +7,7 @@ import {
   CoastFireParameters,
   BaristaFireParameters,
   FireType,
-} from "./types";
+} from "../shared/fire-types";
 
 interface ScenarioDetailsProps {
   scenario: Scenario;

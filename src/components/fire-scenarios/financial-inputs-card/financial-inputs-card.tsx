@@ -3,19 +3,19 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScenarioDetails } from "./scenario-details";
-import { Scenario, ScenarioId } from "./types";
+import { Scenario, ScenarioId } from "../shared/fire-types";
 
-interface ScenarioTabsProps {
+interface FinancialInputsCardProps {
   scenarios: Scenario[];
   selectedScenario: ScenarioId;
   onScenarioChange: (scenarioId: ScenarioId) => void;
 }
 
-export function ScenarioTabs({
+export function FinancialInputsCard({
   scenarios,
   selectedScenario,
   onScenarioChange,
-}: ScenarioTabsProps) {
+}: FinancialInputsCardProps) {
   return (
     <Card>
       <CardContent className="p-6">

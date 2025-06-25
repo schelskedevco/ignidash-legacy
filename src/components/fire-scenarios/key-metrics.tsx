@@ -59,19 +59,19 @@ export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
     <div className="grid grid-cols-2 gap-4 mt-6">
       <div className="text-center">
         <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
-          {displayValues.yearsToTarget}
+          <AnimatedNumber value={displayValues.yearsToTarget} />
         </p>
         <p className="text-sm font-medium text-foreground mt-1">
           years to FIRE
         </p>
         <p className="text-xs text-muted-foreground mt-1">
-          (age {displayValues.targetAge})
+          (age <AnimatedNumber value={Math.round(displayValues.targetAge)} />)
         </p>
       </div>
 
       <div className="text-center">
         <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
-          ${displayValues.fireNumber.toLocaleString()}
+          <AnimatedNumber value={displayValues.fireNumber} prefix="$" />
         </p>
         <p className="text-sm font-medium text-foreground mt-1">FIRE target</p>
         <p className="text-xs text-muted-foreground mt-1">
@@ -81,15 +81,20 @@ export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
 
       <div className="text-center">
         <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
-          $<AnimatedNumber value={Math.round(displayValues.retirementIncome)} />
+          <AnimatedNumber
+            value={Math.round(displayValues.retirementIncome)}
+            prefix="$"
+          />
         </p>
         <p className="text-sm font-medium text-foreground mt-1">
           annual retirement income
         </p>
         <p className="text-xs text-muted-foreground mt-1">
-          ($
-          {Math.round(displayValues.retirementIncome / 12).toLocaleString()}
-          /month)
+          <AnimatedNumber
+            value={Math.round(displayValues.retirementIncome / 12)}
+            prefix="($"
+            suffix="/month)"
+          />
         </p>
       </div>
     </div>

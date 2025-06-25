@@ -112,22 +112,26 @@
   --sidebar-ring: oklch(0.553 0.013 58.071);
 }
 
-@keyframes pulse-slow {
-  0%,
-  100% {
-    opacity: 0.3;
+@keyframes subtle-pulse {
+  0% {
+    opacity: 0.1;
+    transform: scale(1);
+    filter: blur(0px);
   }
   50% {
-    opacity: 0.8;
+    opacity: 0.3;
+    transform: scale(1.8);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(1);
+    filter: blur(0px);
   }
 }
 
-.animate-pulse-slow {
-  animation: pulse-slow 3s ease-in-out infinite;
-}
-
-.bg-gradient-radial {
-  background-image: radial-gradient(circle, var(--tw-gradient-stops));
+.animate-subtle-pulse {
+  animation: subtle-pulse 3s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -141,9 +145,11 @@
     transform: translateY(0);
   }
 
-  .animate-pulse-slow {
+  .animate-subtle-pulse {
     animation: none !important;
-    opacity: 0.5;
+    opacity: 0.2;
+    transform: scale(1);
+    filter: blur(0px);
   }
 }
 

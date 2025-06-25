@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { ChevronDown } from "lucide-react";
 
 interface HeaderSectionProps {
   heroSection: ReactNode;
@@ -38,18 +39,19 @@ export function HeaderSection({
           <div className="relative z-10 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
             <div className="text-center xl:text-left">{heroSection}</div>
           </div>
-          <div className="absolute bottom-0 sm:bottom-16 left-0 right-0 flex justify-center translate-y-1/2 m-4">
-            <div
-              className="relative h-6 w-6 animate-pulse-slow"
-              aria-label="More content below"
-              role="img"
-            >
-              {/* Outer glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-radial from-muted-foreground/40 via-muted-foreground/20 to-transparent" />
-              {/* Inner core */}
-              <div className="absolute inset-2 rounded-full bg-gradient-radial from-muted-foreground/80 to-muted-foreground/60" />
-            </div>
-          </div>
+          <a
+            href="#fire-scenarios"
+            className="absolute bottom-0 sm:bottom-16 left-0 right-0 flex justify-center translate-y-1/2 m-4 group"
+            aria-label="Scroll to FIRE scenarios section"
+          >
+            <ChevronDown
+              className="h-12 w-12 animate-bounce text-white/70 group-hover:text-white transition-colors"
+              aria-hidden="true"
+            />
+            <span className="sr-only">
+              Scroll down to explore FIRE scenarios
+            </span>
+          </a>
         </div>
       </section>
 

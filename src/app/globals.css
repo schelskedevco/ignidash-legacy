@@ -112,6 +112,20 @@
   --sidebar-ring: oklch(0.553 0.013 58.071);
 }
 
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-bounce {
     animation: none !important;
@@ -121,6 +135,11 @@
 
   .animate-bounce:hover {
     transform: translateY(0);
+  }
+
+  .animate-pulse-slow {
+    animation: none !important;
+    opacity: 0.5;
   }
 }
 

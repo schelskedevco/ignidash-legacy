@@ -42,7 +42,7 @@ export function FireScenariosSection() {
           />
 
           {/* Connecting Arrows */}
-          <ConnectingArrows />
+          <ConnectingArrows key={selectedScenario} />
 
           {/* Right Panel - Financial Outputs */}
           <FinancialOutputsCard

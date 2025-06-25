@@ -95,7 +95,7 @@ export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
           $<AnimatedNumber value={Math.round(displayValues.retirementIncome)} />
         </p>
         <p className="text-sm font-medium text-foreground mt-1">
-          /year retirement income
+          annual retirement income
         </p>
         <p className="text-xs text-muted-foreground mt-1">
           ($
@@ -109,9 +109,6 @@ export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
           {displayValues.savingsRate}%
         </p>
         <p className="text-sm font-medium text-foreground mt-1">savings rate</p>
-        <p className="text-xs text-muted-foreground mt-1">
-          ${displayValues.monthlySavings.toLocaleString()} saved monthly
-        </p>
       </div>
     </div>
   );

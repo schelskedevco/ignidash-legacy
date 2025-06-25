@@ -1,5 +1,6 @@
 import { WandSparkles } from "lucide-react";
 import { SectionHeader } from "@/components/common/section-header";
+import { AICopilotDemo } from "./ai-copilot-demo";
 
 export function AICopilotSection() {
   return (
@@ -10,6 +11,11 @@ export function AICopilotSection() {
           title="Your AI Financial Copilot"
           description="Get personalized insights that understand your unique situation. Ask questions, explore scenarios, and make confident decisions about your financial future."
         />
+      </div>
+
+      {/* AI Demo Section */}
+      <div>
+        <AICopilotDemo />
       </div>
     </section>
   );

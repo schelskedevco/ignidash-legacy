@@ -103,9 +103,7 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
     : data;
 
   // Responsive configurations
-  const margin = isMobile
-    ? { top: 10, right: 10, left: 20, bottom: 20 }
-    : { top: 20, right: 20, left: 40, bottom: 40 };
+  const margin = { top: 18, right: 18, left: 18, bottom: 18 };
 
   const fontSize = isMobile ? 10 : 12;
   const xAxisInterval = isMobile ? 2 : 1;
@@ -170,7 +168,7 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
               scenario.fireType === FireType.COAST_FIRE
                 ? `Coast at ${fireAge}`
                 : `FIRE at ${fireAge}`,
-            position: isMobile ? "insideTopLeft" : "top",
+            position: "top",
             style: { fontSize: isMobile ? 10 : 12, fill: "#ef4444" },
           }}
         />

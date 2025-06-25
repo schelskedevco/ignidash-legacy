@@ -71,7 +71,7 @@ export function yearsToReachTarget(
     }
   }
 
-  return parseFloat(mid!.toFixed(4));
+  return parseFloat(mid!.toFixed(1));
 }
 
 // Calculate FIRE projections

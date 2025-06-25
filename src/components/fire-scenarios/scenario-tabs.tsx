@@ -19,6 +19,7 @@ export function ScenarioTabs({
   return (
     <Card>
       <CardContent className="p-6">
+        <h2 className="text-xl font-semibold mb-4">Your Financial Profile</h2>
         <Tabs
           value={selectedScenario}
           onValueChange={(value) => onScenarioChange(value as ScenarioId)}

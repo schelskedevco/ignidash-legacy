@@ -46,6 +46,9 @@ export function FireScenariosSection() {
         <div className="space-y-6">
           <Card className="overflow-hidden">
             <CardContent className="p-4 sm:p-6">
+              <h2 className="text-xl font-semibold mb-4">
+                Your FIRE Projection
+              </h2>
               <div className="w-full overflow-hidden">
                 <GrowthChart
                   data={growthData}

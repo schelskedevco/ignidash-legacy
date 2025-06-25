@@ -50,7 +50,7 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
 
       {/* Title and description */}
       <div className="space-y-2">
-        <h3 className="text-2xl font-semibold tracking-tight">
+        <h3 className="text-2xl font-semibold font-heading tracking-tight">
           {scenario.title}
         </h3>
         <p className="text-lg text-muted-foreground">{scenario.subtitle}</p>
@@ -62,7 +62,9 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
 
       {/* Financial inputs */}
       <div className="space-y-3 text-sm">
-        <h4 className="font-semibold text-foreground mb-3">Financial Inputs</h4>
+        <h4 className="font-semibold font-heading text-foreground mb-3">
+          Financial Inputs
+        </h4>
         <div className="flex justify-between">
           <span className="text-muted-foreground">Current Age:</span>
           <span className="font-medium">{scenario.inputs.age}</span>
@@ -95,7 +97,7 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
         <>
           <Separator />
           <div className="space-y-3 text-sm">
-            <h4 className="font-semibold text-foreground mb-3">
+            <h4 className="font-semibold font-heading text-foreground mb-3">
               {scenario.fireType === FireType.COAST_FIRE
                 ? "Coast FIRE Settings"
                 : "Barista FIRE Settings"}

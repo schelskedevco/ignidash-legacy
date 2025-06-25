@@ -19,7 +19,7 @@ function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2">
       <Flame className={`${LOGO_ICON_SIZE} text-orange-500`} />
-      <span className="text-xl font-bold">Ignidash</span>
+      <span className="text-xl font-bold font-heading">Ignidash</span>
     </Link>
   );
 }

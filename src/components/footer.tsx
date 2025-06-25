@@ -71,7 +71,7 @@ export function Footer() {
                 <Flame
                   className={`${LOGO_ICON_SIZE} text-orange-500 group-hover:text-orange-600 transition-colors`}
                 />
-                <span className="text-xl font-bold">Ignidash</span>
+                <span className="text-xl font-bold font-heading">Ignidash</span>
               </Link>
               <p className="text-sm text-muted-foreground max-w-xs">
                 Design your life. Plan your FIRE journey. Get AI-powered
@@ -106,7 +106,7 @@ export function Footer() {
             {/* Footer Sections */}
             {footerSections.map((section) => (
               <div key={section.title} className="space-y-3">
-                <h3 className="text-sm font-semibold tracking-wider uppercase">
+                <h3 className="text-sm font-semibold font-heading tracking-wider uppercase">
                   {section.title}
                 </h3>
                 <nav aria-label={`${section.title} links`}>

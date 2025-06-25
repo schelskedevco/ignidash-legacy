@@ -31,7 +31,7 @@ export function FireScenariosSection() {
   return (
     <>
       <div className="mb-12 text-center">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-4">
           Every FIRE Path, Clearly Mapped
         </h2>
         <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-4">
@@ -54,7 +54,7 @@ export function FireScenariosSection() {
         <div className="space-y-6">
           <Card className="overflow-hidden">
             <CardContent className="p-4 sm:p-6">
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 justify-center xl:justify-start">
+              <h2 className="text-xl font-semibold font-heading mb-4 flex items-center gap-2 justify-center xl:justify-start">
                 Your FIRE Projection
                 <TooltipProvider>
                   <Tooltip>

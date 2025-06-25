@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Route } from "lucide-react";
-import { SectionHeaderIcon } from "@/components/common/section-header-icon";
+import { SectionHeader } from "@/components/common/section-header";
 import { SCENARIOS } from "./shared/fire-data";
 import { calculateProjections, generateGrowthData } from "./shared/fire-utils";
 import { FinancialInputsCard } from "./financial-inputs-card/financial-inputs-card";
@@ -22,17 +22,11 @@ export function FireScenariosSection() {
 
   return (
     <>
-      <div className="mb-12 text-center px-4 sm:px-6 lg:px-8">
-        <SectionHeaderIcon icon={Route} />
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-4">
-          Every FIRE Path, Clearly Mapped
-        </h2>
-        <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
-          From traditional FIRE to sabbaticals and part-time work, your custom
-          path to financial independence starts here. Just enter your
-          data—we&apos;ll do the math.
-        </p>
-      </div>
+      <SectionHeader
+        icon={Route}
+        title="Every FIRE Path, Clearly Mapped"
+        description="From traditional FIRE to sabbaticals and part-time work, your custom path to financial independence starts here. Just enter your data—we'll do the math."
+      />
 
       {/* Main Grid Layout */}
       <div className="w-full px-2 sm:px-4 md:px-6 xl:px-10 3xl:px-20">

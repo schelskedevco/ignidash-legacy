@@ -133,12 +133,12 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
             <stop
               offset="5%"
               stopColor="hsl(var(--chart-1))"
-              stopOpacity={0.3}
+              stopOpacity={0.6}
             />
             <stop
               offset="95%"
               stopColor="hsl(var(--chart-1))"
-              stopOpacity={0}
+              stopOpacity={0.1}
             />
           </linearGradient>
         </defs>
@@ -148,7 +148,7 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
           stroke="hsl(var(--chart-1))"
           fillOpacity={1}
           fill="url(#colorPortfolio)"
-          strokeWidth={isMobile ? 1.5 : 2}
+          strokeWidth={isMobile ? 2 : 2.5}
         />
         <ReferenceLine
           y={displayValues.fireNumber}

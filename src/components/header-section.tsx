@@ -42,9 +42,15 @@ export function HeaderSection({
           <a
             href="#fire-scenarios"
             className="absolute bottom-0 sm:bottom-16 left-0 right-0 flex justify-center translate-y-1/2 m-4 group"
-            aria-label="Scroll to FIRE scenarios"
+            aria-label="Scroll to FIRE scenarios section"
           >
-            <ChevronDown className="h-12 w-12 animate-bounce text-white/70 group-hover:text-white transition-colors" />
+            <ChevronDown
+              className="h-12 w-12 animate-bounce text-white/70 group-hover:text-white transition-colors"
+              aria-hidden="true"
+            />
+            <span className="sr-only">
+              Scroll down to explore FIRE scenarios
+            </span>
           </a>
         </div>
       </section>

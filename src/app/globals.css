@@ -112,6 +112,18 @@
   --sidebar-ring: oklch(0.553 0.013 58.071);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-bounce {
+    animation: none !important;
+    transform: translateY(2px);
+    transition: transform 0.2s ease;
+  }
+
+  .animate-bounce:hover {
+    transform: translateY(0);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

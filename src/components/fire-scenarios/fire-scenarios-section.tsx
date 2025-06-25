@@ -25,15 +25,11 @@ export function FireScenariosSection() {
     <>
       <div className="mb-12 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Model Any Life You Can Imagine
+          Every FIRE Path, Clearly Mapped
         </h2>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-          Whether you dream of early parenthood, world travel, or pursuing your
-          passion — Ignidash helps you design a financial plan that fits your
-          unique life goals.
-        </p>
-        <p className="text-sm text-muted-foreground mt-2">
-          *Calculations assume 7% annual returns and 4% safe withdrawal rate
+          Traditional retirement, family planning, or nomadic freedom—see your
+          personalized timeline for any FIRE strategy.
         </p>
       </div>
 

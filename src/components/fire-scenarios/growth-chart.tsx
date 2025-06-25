@@ -156,7 +156,7 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
           stroke="var(--color-portfolio)"
           fillOpacity={1}
           fill="url(#colorPortfolio)"
-          strokeWidth={isMobile ? 2 : 2.5}
+          strokeWidth={1}
         />
         <ReferenceLine
           x={fireAge}
@@ -178,7 +178,7 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
               x={getTargetRetirementAge()!}
               stroke="#10b981"
               strokeDasharray="6 3"
-              strokeWidth={2}
+              strokeWidth={1}
               label={{
                 value: `Full retirement at ${getTargetRetirementAge()}`,
                 position: "top",

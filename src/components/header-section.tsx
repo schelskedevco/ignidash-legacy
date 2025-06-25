@@ -40,10 +40,15 @@ export function HeaderSection({
           </div>
           <div className="absolute bottom-0 sm:bottom-16 left-0 right-0 flex justify-center translate-y-1/2 m-4">
             <div
-              className="h-2 w-2 rounded-full bg-muted-foreground animate-pulse-slow"
+              className="relative h-6 w-6 animate-pulse-slow"
               aria-label="More content below"
               role="img"
-            />
+            >
+              {/* Outer glow */}
+              <div className="absolute inset-0 rounded-full bg-gradient-radial from-muted-foreground/40 via-muted-foreground/20 to-transparent" />
+              {/* Inner core */}
+              <div className="absolute inset-2 rounded-full bg-gradient-radial from-muted-foreground/80 to-muted-foreground/60" />
+            </div>
           </div>
         </div>
       </section>

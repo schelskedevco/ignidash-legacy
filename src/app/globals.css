@@ -118,12 +118,16 @@
     opacity: 0.3;
   }
   50% {
-    opacity: 0.6;
+    opacity: 0.8;
   }
 }
 
 .animate-pulse-slow {
   animation: pulse-slow 3s ease-in-out infinite;
+}
+
+.bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
 @media (prefers-reduced-motion: reduce) {

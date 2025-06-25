@@ -39,7 +39,7 @@ export function HeaderSection({
           <div className="relative z-10 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
             <div className="text-center xl:text-left">{heroSection}</div>
           </div>
-          <div className="absolute bottom-16 left-0 right-0 flex justify-center translate-y-1/2 m-4">
+          <div className="absolute bottom-0 sm:bottom-16 left-0 right-0 flex justify-center translate-y-1/2 m-4">
             <ChevronDown className="h-12 w-12 animate-bounce text-white/70" />
           </div>
         </div>

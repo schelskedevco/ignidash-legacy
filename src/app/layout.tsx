@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description:
     "Plan your path to Financial Independence with AI-powered insights. Model different FIRE strategies, plan life events, and share your journey.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/flame-icon.svg",
   },
 };
 

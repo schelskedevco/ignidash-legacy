@@ -6,18 +6,40 @@ interface AnimatedNumberProps {
   value: number;
   prefix?: string;
   suffix?: string;
+  duration?: number;
 }
 
 export function AnimatedNumber({
   value,
   prefix = "",
   suffix = "",
+  duration = 500,
 }: AnimatedNumberProps) {
   const [displayValue, setDisplayValue] = useState(0);
   const startValueRef = useRef(0);
+  const prefersReducedMotion = useRef(false);
 
   useEffect(() => {
-    const duration = 500;
+    // Check for prefers-reduced-motion
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    prefersReducedMotion.current = mediaQuery.matches;
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      prefersReducedMotion.current = e.matches;
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
+    // If user prefers reduced motion, update immediately
+    if (prefersReducedMotion.current) {
+      setDisplayValue(value);
+      startValueRef.current = value;
+      return;
+    }
+
     const startTime = Date.now();
     const startValue = startValueRef.current;
 
@@ -37,7 +59,7 @@ export function AnimatedNumber({
     };
 
     requestAnimationFrame(animate);
-  }, [value]);
+  }, [value, duration]);
 
   return (
     <>

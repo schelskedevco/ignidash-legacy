@@ -31,10 +31,10 @@ export function FireScenariosSection() {
   return (
     <>
       <div className="mb-12 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
           Every FIRE Path, Clearly Mapped
         </h2>
-        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+        <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-4">
           From traditional FIRE to sabbaticals and part-time work, your custom
           path to financial independence starts here. Just enter your
           data—we&apos;ll do the math.

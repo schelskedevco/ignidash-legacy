@@ -17,7 +17,7 @@ export function FinancialInputsCard({
   onScenarioChange,
 }: FinancialInputsCardProps) {
   return (
-    <Card>
+    <Card className="w-full h-full">
       <CardContent className="p-6">
         <h2 className="text-xl font-semibold mb-4">Your Financial Profile</h2>
         <Tabs

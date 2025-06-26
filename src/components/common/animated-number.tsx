@@ -2,6 +2,25 @@
 
 import { useState, useEffect, useRef } from "react";
 
+// Custom hook to detect reduced motion preference
+function usePrefersReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  return prefersReducedMotion;
+}
+
 interface AnimatedNumberProps {
   value: number;
   prefix?: string;
@@ -17,24 +36,11 @@ export function AnimatedNumber({
 }: AnimatedNumberProps) {
   const [displayValue, setDisplayValue] = useState(0);
   const startValueRef = useRef(0);
-  const prefersReducedMotion = useRef(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const animationFrameRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // Check for prefers-reduced-motion
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    prefersReducedMotion.current = mediaQuery.matches;
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      prefersReducedMotion.current = e.matches;
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  useEffect(() => {
-    // If user prefers reduced motion, update immediately
-    if (prefersReducedMotion.current) {
+    if (prefersReducedMotion || value === startValueRef.current) {
       setDisplayValue(value);
       startValueRef.current = value;
       return;
@@ -52,20 +58,26 @@ export function AnimatedNumber({
       setDisplayValue(current);
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        animationFrameRef.current = requestAnimationFrame(animate);
       } else {
         startValueRef.current = value;
       }
     };
 
-    requestAnimationFrame(animate);
-  }, [value, duration]);
+    animationFrameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [value, duration, prefersReducedMotion]);
 
   return (
-    <>
+    <span aria-live="polite">
       {prefix}
       {Math.round(displayValue).toLocaleString()}
       {suffix}
-    </>
+    </span>
   );
 }

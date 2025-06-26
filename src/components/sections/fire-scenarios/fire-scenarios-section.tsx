@@ -4,6 +4,11 @@ import { useState } from "react";
 import { Route } from "lucide-react";
 import { SectionHeader } from "@/components/common/section-header";
 import { SectionWrapper } from "@/components/common/section-wrapper";
+import { SectionContainer } from "@/components/layout/section-container";
+import { GradientBackground } from "@/components/layout/gradient-background";
+import { ContentWrapper } from "@/components/layout/content-wrapper";
+import { TopFade } from "@/components/layout/top-fade";
+import { BottomShadow } from "@/components/layout/bottom-shadow";
 import { SCENARIOS } from "./shared/fire-data";
 import { calculateProjections, generateGrowthData } from "./shared/fire-utils";
 import { FinancialInputsCard } from "./financial-inputs-card/financial-inputs-card";
@@ -22,33 +27,40 @@ export function FireScenariosSection() {
   const growthData = generateGrowthData(scenario, outputs);
 
   return (
-    <SectionWrapper
-      header={
-        <SectionHeader
-          icon={Route}
-          title="Every FIRE Path, Clearly Mapped"
-          description="Compare early retirement, sabbaticals, part-time transitions, and creative combinations. We'll calculate the timeline and trade-offs for every scenario you want to explore."
-        />
-      }
-    >
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-4 md:gap-6 lg:grid-cols-[1fr_auto_1fr] xl:gap-8">
-        {/* Left Panel - Financial Inputs */}
-        <FinancialInputsCard
-          scenarios={SCENARIOS}
-          selectedScenario={selectedScenario}
-          onScenarioChange={setSelectedScenario}
-        />
+    <SectionContainer id="fire-scenarios" ariaLabel="Fire Scenarios Section">
+      <TopFade />
+      <GradientBackground variant="fireScenarios" />
+      <ContentWrapper variant="full">
+        <SectionWrapper
+          header={
+            <SectionHeader
+              icon={Route}
+              title="Every FIRE Path, Clearly Mapped"
+              description="Compare early retirement, sabbaticals, part-time transitions, and creative combinations. We'll calculate the timeline and trade-offs for every scenario you want to explore."
+            />
+          }
+        >
+          <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-4 md:gap-6 lg:grid-cols-[1fr_auto_1fr] xl:gap-8">
+            {/* Left Panel - Financial Inputs */}
+            <FinancialInputsCard
+              scenarios={SCENARIOS}
+              selectedScenario={selectedScenario}
+              onScenarioChange={setSelectedScenario}
+            />
 
-        {/* Connecting Arrows */}
-        <ConnectingArrows selectedScenario={selectedScenario} />
+            {/* Connecting Arrows */}
+            <ConnectingArrows selectedScenario={selectedScenario} />
 
-        {/* Right Panel - Financial Outputs */}
-        <FinancialOutputsCard
-          scenario={scenario}
-          outputs={outputs}
-          growthData={growthData}
-        />
-      </div>
-    </SectionWrapper>
+            {/* Right Panel - Financial Outputs */}
+            <FinancialOutputsCard
+              scenario={scenario}
+              outputs={outputs}
+              growthData={growthData}
+            />
+          </div>
+        </SectionWrapper>
+      </ContentWrapper>
+      <BottomShadow />
+    </SectionContainer>
   );
 }

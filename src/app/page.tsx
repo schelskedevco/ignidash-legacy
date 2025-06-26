@@ -10,12 +10,12 @@ export default function Home() {
   return (
     <div className="bg-background min-h-screen">
       <Navbar />
-      <MultiSectionLayout
-        heroSection={<HeroSection />}
-        fireScenarios={<FireScenariosSection />}
-        lifeModules={<LifeModulesSection />}
-        aiCopilot={<AICopilotSection />}
-      />
+      <MultiSectionLayout>
+        <HeroSection />
+        <FireScenariosSection />
+        <LifeModulesSection />
+        <AICopilotSection />
+      </MultiSectionLayout>
       <Footer />
     </div>
   );

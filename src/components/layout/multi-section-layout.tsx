@@ -20,7 +20,7 @@ export function MultiSectionLayout({
     from-background from-0%
     via-rose-100/50 via-70%
     to-rose-200/60 to-100%
-    dark:via-rose-500/25 dark:to-rose-500/35
+    dark:via-rose-400/40 dark:to-rose-400/50
   `;
 
   // Improved gradient: soft continuation to deeper rose
@@ -29,7 +29,7 @@ export function MultiSectionLayout({
     from-rose-200/60 from-0%
     via-rose-300/70 via-70%
     to-rose-500/70 to-100%
-    dark:from-rose-500/35 dark:via-rose-600/50 dark:to-rose-700/60
+    dark:from-rose-400/50 dark:via-rose-500/60 dark:to-rose-500/70
   `;
 
   return (

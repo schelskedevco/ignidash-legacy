@@ -24,7 +24,7 @@ export function HeroSection() {
         className={`text-muted-foreground mx-auto mb-8 ${MAX_WIDTHS.contentSm} text-xl leading-relaxed md:text-2xl xl:mx-0`}
       >
         Explore retirement timelines, run what-if projections, and get
-        AI-powered insights — all tailored to your values and goals.
+        AI-powered insights — all built around the life you want to live.
       </p>
 
       <div className="flex flex-col justify-center gap-4 sm:flex-row xl:justify-start">

@@ -126,7 +126,7 @@ export function AICopilotDemo() {
         className={`mx-auto w-full ${MAX_WIDTHS.content} ${SPACING.elementSpacing} flex min-h-[480px] flex-col`}
       >
         {/* Controls */}
-        <div className="mb-4 flex justify-center">
+        <div className="mb-4 flex items-center justify-center gap-4">
           <Button
             variant="outline"
             size="sm"
@@ -146,6 +146,11 @@ export function AICopilotDemo() {
               </>
             )}
           </Button>
+
+          {/* Progress indicator */}
+          <div className="text-muted-foreground text-sm">
+            {currentIndex + 1} of {qaData.length}
+          </div>
         </div>
         <AnimatePresence mode="wait">
           <motion.div

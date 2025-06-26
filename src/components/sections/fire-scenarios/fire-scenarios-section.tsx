@@ -13,8 +13,8 @@ import { SCENARIOS } from "./shared/fire-data";
 import { calculateProjections, generateGrowthData } from "./shared/fire-utils";
 import { FinancialInputsCard } from "./financial-inputs-card/financial-inputs-card";
 import { FinancialOutputsCard } from "./financial-outputs-card/financial-outputs-card";
-import { ConnectingArrows } from "./connecting-arrows";
 import { ScenarioId } from "./shared/fire-types";
+import { ConnectingWire } from "./connecting-wire";
 
 export function FireScenariosSection() {
   const [selectedScenario, setSelectedScenario] = useState(
@@ -40,7 +40,7 @@ export function FireScenariosSection() {
             />
           }
         >
-          <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-4 md:gap-6 lg:grid-cols-[1fr_auto_1fr] xl:gap-8">
+          <div className="mx-auto flex max-w-7xl flex-col items-stretch gap-4 md:gap-6 lg:flex-row xl:gap-8">
             {/* Left Panel - Financial Inputs */}
             <FinancialInputsCard
               scenarios={SCENARIOS}
@@ -48,8 +48,7 @@ export function FireScenariosSection() {
               onScenarioChange={setSelectedScenario}
             />
 
-            {/* Connecting Arrows */}
-            <ConnectingArrows selectedScenario={selectedScenario} />
+            <ConnectingWire />
 
             {/* Right Panel - Financial Outputs */}
             <FinancialOutputsCard

@@ -1,6 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { ICON_SIZES, COMPONENT_SIZES } from "@/lib/design-constants";
+import { ICON_SIZES, BORDER_RADIUS } from "@/lib/design-constants";
 
 interface ScenarioHeaderProps {
   icon: LucideIcon;
@@ -20,30 +20,29 @@ export function ScenarioHeader({
   iconColor,
 }: ScenarioHeaderProps) {
   return (
-    <header className="flex items-start gap-3 sm:gap-4">
-      {/* Icon container with proper aspect ratio */}
-      <div
-        className={`shrink-0 rounded-lg p-2 sm:p-3 ${bgColor}`}
-        role="img"
-        aria-label={`${title} icon`}
-      >
-        <Icon className={`${ICON_SIZES.lg} sm:${ICON_SIZES.xl} ${iconColor}`} />
+    <header className="grid gap-3 md:grid-cols-[auto,1fr]">
+      <div className={`shrink-0 ${BORDER_RADIUS.card} p-2 sm:p-3 ${bgColor}`}>
+        <Icon
+          className={`${ICON_SIZES.lg} sm:${ICON_SIZES.xl} ${iconColor}`}
+          aria-hidden="true"
+        />
+        <span className="sr-only">{`${title} icon`}</span>
       </div>
 
-      {/* Content section with proper hierarchy */}
-      <div className="min-w-0 flex-1">
-        <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center">
-          <h3 className="font-heading text-base leading-tight font-semibold tracking-tight sm:text-lg">
+      {/* Content Container */}
+      <div className="space-y-1 text-left">
+        {/* Title and Badge Container */}
+        <div className="flex flex-wrap items-center gap-2">
+          <h3 className="font-heading text-left text-lg font-semibold tracking-tight">
             {title}
           </h3>
-          <Badge
-            variant="secondary"
-            className={`${COMPONENT_SIZES.badge.sm} w-fit font-medium`}
-          >
+          <Badge variant="secondary" className="font-medium">
             {focusArea}
           </Badge>
         </div>
-        <p className="text-muted-foreground text-xs leading-relaxed sm:text-sm">
+
+        {/* Description */}
+        <p className="text-muted-foreground text-left text-sm leading-relaxed">
           {description}
         </p>
       </div>

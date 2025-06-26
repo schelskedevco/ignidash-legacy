@@ -117,7 +117,7 @@ export function AICopilotDemo() {
     >
       {/* Content container */}
       <div
-        className={`mx-auto w-full ${MAX_WIDTHS.content} ${SPACING.elementSpacing}`}
+        className={`mx-auto w-full ${MAX_WIDTHS.content} ${SPACING.elementSpacing} flex min-h-[480px] flex-col`}
       >
         {/* Controls */}
         <div className="mb-4 flex justify-center">

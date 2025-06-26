@@ -4,6 +4,7 @@ import { SPACING, MAX_WIDTHS } from "@/lib/design-constants";
 interface MultiSectionLayoutProps {
   heroSection: ReactNode;
   fireScenarios: ReactNode;
+  lifeModules: ReactNode;
   aiCopilot: ReactNode;
   className?: string;
 }
@@ -11,6 +12,7 @@ interface MultiSectionLayoutProps {
 export function MultiSectionLayout({
   heroSection,
   fireScenarios,
+  lifeModules,
   aiCopilot,
   className = "",
 }: MultiSectionLayoutProps) {
@@ -30,6 +32,15 @@ export function MultiSectionLayout({
     via-rose-300/70 via-70%
     to-rose-500/70 to-100%
     dark:from-rose-400/50 dark:via-rose-500/60 dark:to-rose-500/70
+  `;
+
+  // AI Copilot gradient: purple to indigo
+  const aiCopilotGradientClass = `
+    bg-gradient-to-b
+    from-background from-0%
+    via-purple-100/50 via-70%
+    to-indigo-200/60 to-100%
+    dark:via-purple-400/40 dark:to-indigo-400/50
   `;
 
   return (
@@ -86,13 +97,46 @@ export function MultiSectionLayout({
         </div>
       </section>
 
+      {/* Life Modules Section */}
+      <section
+        id="life-modules"
+        className={`relative overflow-hidden ${className}`}
+        aria-label="Life Modules Section"
+      >
+        <div
+          className={`relative min-h-[500px] sm:min-h-[550px] md:min-h-[600px] ${SPACING.sectionVertical}`}
+        >
+          <div className="relative z-10">
+            <div
+              className={`mx-auto ${MAX_WIDTHS.container} ${SPACING.container}`}
+            >
+              <div className="text-center xl:text-left">{lifeModules}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* AI Copilot Section */}
       <section
         id="ai-copilot"
-        className="relative"
+        className={`relative ${className}`}
         aria-label="AI Copilot Section"
       >
-        <div className={`relative ${SPACING.sectionVertical}`}>{aiCopilot}</div>
+        <div
+          className={`relative min-h-[500px] sm:min-h-[550px] md:min-h-[600px] ${SPACING.sectionVertical}`}
+        >
+          <div
+            className={`absolute inset-0 ${aiCopilotGradientClass}`}
+            aria-hidden="true"
+          />
+          <div className="relative z-10">
+            <div
+              className={`mx-auto ${MAX_WIDTHS.container} ${SPACING.container}`}
+            >
+              <div className="text-center xl:text-left">{aiCopilot}</div>
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );

@@ -9,34 +9,34 @@ import { ICON_SIZES, SPACING, MAX_WIDTHS } from "@/lib/design-constants";
 
 const qaData = [
   {
-    question:
-      "I'm nervous about the Trump tariffs and all this market volatility. Should I move to cash for a while?",
+    question: "Is putting 20% into Tesla and Ethereum smart?",
     answer:
-      "Your current plan already accounts for ups and downs — including ones like this. If you moved to cash now, you'd risk missing the recovery, which often starts before the news cycle calms down. Based on your timeline, staying invested gives you the best shot at retiring by 46. Reacting now could cost you years.",
+      "You're already 85% in VTSAX, which includes Tesla — but not Ethereum. Adding crypto and concentrated stocks increases volatility without improving your odds of hitting FIRE by 45. If you want to speculate, keep it to a small fun money bucket so your core plan stays on course.",
   },
   {
-    question:
-      "I'm thinking about putting 20% of my portfolio into Tesla and Ethereum — they've been doing really well. Is that smart?",
+    question: "Should I move to cash for a bit?",
     answer:
-      "It's tempting, but your plan depends on steady, diversified growth. A core like VTSAX gives you broad, low-cost exposure to the U.S. stock market. Most active managers—even professionals—fail to outperform index funds after fees. If you want to take a swing, keep it small so your FIRE goals stay on track.",
+      "Your current plan already accounts for volatility. You've got a $50K emergency fund and a 90% stock allocation — that's aggressive but reasonable for your timeline. Selling now would delay your FIRE date by 2–3 years. Staying invested keeps you on track for 46.",
   },
   {
-    question:
-      "If I keep saving $2,800 a month, how much would going part-time at 40 delay my retirement?",
+    question: "Can I stop saving at 38 and still hit FIRE by 43?",
     answer:
-      "Based on your current trajectory, going part-time at 40 would reduce your savings rate by 50% and delay your FIRE age from 45 to 48. You'd still retire early — just with more balance along the way.",
+      "At your current $270K balance and $2,800/month savings, you're on track to hit $1.1M by 43. If you stop saving at 38, you'd fall short — around $840K — which won't cover your $48K annual spend. A smaller reduction in savings would keep the plan safer.",
   },
   {
-    question:
-      "What happens if I have a second child in 2027 and keep sending both kids to daycare?",
+    question: "Should I YOLO into NVIDIA?",
     answer:
-      "That would add roughly $24,000/year in expenses through 2031, pushing your retirement age from 46 to 49. If you increase savings by $600/month starting now, you could still retire at 46.",
+      "You already own NVIDIA inside VTSAX — it's one of your top holdings. Going overweight on a single stock adds risk and could push your FIRE age past 50 if it underperforms. Staying diversified gives you better odds of long-term success.",
   },
   {
-    question:
-      "Right now I have $270K invested. Can I still reach FIRE by 43 if I stop saving at 38?",
+    question: "Is it dumb to just keep throwing everything into VTSAX?",
     answer:
-      "With your current investment balance and projected returns, stopping at 38 still gets you to FIRE by 43 — but just barely. A market downturn could push that back a year or more. Keeping even a small contribution going would give you a better buffer.",
+      "Not at all. VTSAX gives you broad U.S. market exposure with ultra-low fees. Most active strategies underperform it over time — and your current allocation is already beating your target trajectory. Boring is working.",
+  },
+  {
+    question: "Should I change my asset allocation as I get closer to FIRE?",
+    answer:
+      "You're 90% stocks, 10% bonds right now — aggressive, but fine given your age and timeline. As you get within 5 years of retiring, gradually shifting to 70/30 can reduce sequence of returns risk without losing too much growth. We'll adjust the glide path based on how flexible you want to be post-FIRE.",
   },
 ];
 

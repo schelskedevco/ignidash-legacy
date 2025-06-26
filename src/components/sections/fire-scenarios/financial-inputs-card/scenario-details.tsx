@@ -2,6 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { AnimatedNumber } from "@/components/common/animated-number";
 import {
   Scenario,
   CoastFireParameters,
@@ -68,18 +69,20 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
         </h4>
         <div className="flex justify-between">
           <span className="text-muted-foreground">Current Age:</span>
-          <span className="font-medium">{scenario.inputs.age}</span>
+          <span className="font-medium">
+            <AnimatedNumber value={scenario.inputs.age} />
+          </span>
         </div>
         <div className="flex justify-between">
           <span className="text-muted-foreground">Annual Income:</span>
           <span className="font-medium">
-            ${scenario.inputs.annualIncome.toLocaleString()}
+            <AnimatedNumber value={scenario.inputs.annualIncome} prefix="$" />
           </span>
         </div>
         <div className="flex justify-between">
           <span className="text-muted-foreground">Annual Expenses:</span>
           <span className="font-medium">
-            ${scenario.inputs.annualExpenses.toLocaleString()}
+            <AnimatedNumber value={scenario.inputs.annualExpenses} prefix="$" />
           </span>
         </div>
         <div className="flex justify-between">
@@ -87,7 +90,10 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
             Current Invested Assets:
           </span>
           <span className="font-medium">
-            ${scenario.inputs.currentInvestedAssets.toLocaleString()}
+            <AnimatedNumber
+              value={scenario.inputs.currentInvestedAssets}
+              prefix="$"
+            />
           </span>
         </div>
       </div>
@@ -112,7 +118,9 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
                     Target Retirement Age:
                   </span>
                   <span className="font-medium">
-                    {getCoastFireParameters()!.targetRetirementAge}
+                    <AnimatedNumber
+                      value={getCoastFireParameters()!.targetRetirementAge}
+                    />
                   </span>
                 </div>
               )}
@@ -125,8 +133,10 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
                     Part-time Monthly Income:
                   </span>
                   <span className="font-medium">
-                    $
-                    {getBaristaFireParameters()!.partTimeMonthlyIncome.toLocaleString()}
+                    <AnimatedNumber
+                      value={getBaristaFireParameters()!.partTimeMonthlyIncome}
+                      prefix="$"
+                    />
                   </span>
                 </div>
               )}

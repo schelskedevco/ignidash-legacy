@@ -10,15 +10,21 @@ import { ICON_SIZES, SPACING, MAX_WIDTHS } from "@/lib/design-constants";
 const qaData = [
   {
     question:
-      "If I keep saving $2,800 a month, how much would going part-time at 40 delay my retirement?",
+      "I'm nervous about the Trump tariffs and all this market volatility. Should I move to cash for a while?",
     answer:
-      "Based on your current trajectory, going part-time at 40 would reduce your savings rate by 50% and delay your FIRE age from 45 to 48. You'd still retire early — just with more balance along the way.",
+      "Your current plan already accounts for ups and downs — including ones like this. If you moved to cash now, you'd risk missing the recovery, which often starts before the news cycle calms down. Based on your timeline, staying invested gives you the best shot at retiring by 46. Reacting now could cost you years.",
   },
   {
     question:
-      "Can I afford to take a year off if I pause investing but keep my current lifestyle?",
+      "I'm thinking about putting 20% of my portfolio into Tesla and Ethereum — they've been doing really well. Is that smart?",
     answer:
-      "Yes — your portfolio is far enough ahead that a one-year pause would only set you back about 7 months. Just make sure you resume saving at your current rate afterward.",
+      "It's tempting, but your plan depends on steady, diversified growth. A core like VTSAX gives you broad, low-cost exposure to the U.S. stock market. Most active managers—even professionals—fail to outperform index funds after fees. If you want to take a swing, keep it small so your FIRE goals stay on track.",
+  },
+  {
+    question:
+      "If I keep saving $2,800 a month, how much would going part-time at 40 delay my retirement?",
+    answer:
+      "Based on your current trajectory, going part-time at 40 would reduce your savings rate by 50% and delay your FIRE age from 45 to 48. You'd still retire early — just with more balance along the way.",
   },
   {
     question:

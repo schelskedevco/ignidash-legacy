@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import {
   Scenario,
@@ -8,7 +7,7 @@ import {
   BaristaFireParameters,
   FireType,
 } from "../shared/fire-types";
-import { ICON_SIZES } from "@/lib/design-constants";
+import { SPACING } from "@/lib/design-constants";
 import {
   User,
   DollarSign,
@@ -18,6 +17,7 @@ import {
   Coffee,
 } from "lucide-react";
 import { FinancialInputDataRow } from "./financial-input-data-row";
+import { ScenarioHeader } from "./scenario-header";
 
 interface ScenarioDetailsProps {
   scenario: Scenario;
@@ -42,30 +42,15 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Header with icon and badges */}
-      <div className="flex items-center justify-between">
-        <div className={`rounded-lg p-3 ${scenario.bgColor}`}>
-          <Icon className={`${ICON_SIZES.xl} ${scenario.color}`} />
-        </div>
-        <div className="flex gap-2">
-          <Badge variant="outline" className="text-xs font-semibold">
-            {scenario.fireType}
-          </Badge>
-          <Badge variant="secondary" className="text-xs font-semibold">
-            {scenario.focusArea}
-          </Badge>
-        </div>
-      </div>
-
-      {/* Title and description */}
-      <div className="space-y-2">
-        <h3 className="font-heading text-2xl font-semibold tracking-tight">
-          {scenario.title}
-        </h3>
-        <p className="text-muted-foreground text-lg">{scenario.subtitle}</p>
-        <p className="text-base leading-relaxed">{scenario.content}</p>
-      </div>
+    <div className={SPACING.elementSpacing}>
+      <ScenarioHeader
+        icon={Icon}
+        title={scenario.subtitle}
+        description={scenario.content}
+        focusArea={scenario.focusArea}
+        bgColor={scenario.bgColor}
+        iconColor={scenario.color}
+      />
 
       {/* Separator */}
       <div className="bg-border h-px" />

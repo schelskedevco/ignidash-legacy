@@ -72,7 +72,7 @@ export function MultiSectionLayout({
         className="relative"
         aria-label="AI Copilot Section"
       >
-        {aiCopilot}
+        <div className="relative py-12 sm:py-16 md:py-20">{aiCopilot}</div>
       </section>
     </>
   );

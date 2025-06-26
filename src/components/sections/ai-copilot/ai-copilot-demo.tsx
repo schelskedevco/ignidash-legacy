@@ -93,7 +93,7 @@ export function AICopilotDemo() {
   }, [showAnswer, isComplete]);
 
   return (
-    <div className="min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
       {/* Content container */}
       <div className="w-full max-w-4xl mx-auto space-y-4 sm:space-y-6 lg:space-y-8">
         <AnimatePresence mode="wait">

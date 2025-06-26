@@ -15,9 +15,10 @@ export function ConnectingWire() {
             </linearGradient>
           </defs>
           <path
-            d="M0,50 C80,30 220,70 300,50"
+            d="M0,50 H120 V70 H180 V30 H300"
             stroke="url(#wireGradientH)"
             strokeWidth="3"
+            strokeLinejoin="round"
             fill="none"
             strokeDasharray="12 6"
           >
@@ -45,9 +46,10 @@ export function ConnectingWire() {
             </linearGradient>
           </defs>
           <path
-            d="M50,0 C70,50 30,100 50,150 C70,200 30,250 50,300"
+            d="M50,0 V120 H30 V180 H70 V300"
             stroke="url(#wireGradientV)"
             strokeWidth="3"
+            strokeLinejoin="round"
             fill="none"
             strokeDasharray="12 6"
           >

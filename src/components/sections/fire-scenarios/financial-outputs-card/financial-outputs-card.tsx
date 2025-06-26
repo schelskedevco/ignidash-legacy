@@ -25,7 +25,7 @@ export function FinancialOutputsCard({
   growthData,
 }: FinancialOutputsCardProps) {
   return (
-    <Card className="w-full h-full overflow-hidden">
+    <Card className="w-full h-full overflow-hidden transition-all duration-300 hover:shadow-sm hover:border-primary/30">
       <CardContent className="p-4 sm:p-6">
         <h2 className="text-xl font-semibold font-heading mb-4 flex items-center gap-2 justify-center xl:justify-start">
           Your FIRE Projection

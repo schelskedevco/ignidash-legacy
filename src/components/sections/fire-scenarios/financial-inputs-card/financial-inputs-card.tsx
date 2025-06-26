@@ -17,7 +17,7 @@ export function FinancialInputsCard({
   onScenarioChange,
 }: FinancialInputsCardProps) {
   return (
-    <Card className="w-full h-full">
+    <Card className="w-full h-full transition-all duration-300 hover:shadow-sm hover:border-primary/30">
       <CardContent className="p-6">
         <h2 className="text-xl font-semibold mb-4">Your Financial Profile</h2>
         <Tabs

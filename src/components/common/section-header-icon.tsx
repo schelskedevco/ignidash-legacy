@@ -1,4 +1,5 @@
 import { LucideIcon } from "lucide-react";
+import { ICON_SIZES } from "@/lib/design-constants";
 
 interface SectionHeaderIconProps {
   icon: LucideIcon;
@@ -11,9 +12,9 @@ export function SectionHeaderIcon({
 }: SectionHeaderIconProps) {
   return (
     <div
-      className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-rose-100 dark:bg-rose-300 mb-6 ${className}`}
+      className={`mb-6 inline-flex ${ICON_SIZES["3xl"]} items-center justify-center rounded-full bg-rose-100 dark:bg-rose-300 ${className}`}
     >
-      <Icon className="h-8 w-8 text-rose-600" />
+      <Icon className={`${ICON_SIZES.xl} text-rose-600`} />
     </div>
   );
 }

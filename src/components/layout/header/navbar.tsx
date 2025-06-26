@@ -10,23 +10,29 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { ModeToggle } from "./mode-toggle";
+import {
+  ICON_SIZES,
+  BUTTON_ICON_SIZES,
+  LOGO_SIZES,
+  MAX_WIDTHS,
+  SPACING,
+  FOCUS_STATES,
+  GRADIENTS,
+} from "@/lib/design-constants";
 
-const ICON_SIZE = "h-6 w-6";
-const BUTTON_ICON_SIZE = "h-4 w-4";
-const LOGO_ICON_SIZE = "h-8 w-8";
 const SHEET_WIDTH = "w-[400px] sm:w-[540px]";
 
 function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-2">
+    <Link href="/" className={`flex items-center gap-2 ${FOCUS_STATES.link}`}>
       <Image
         src="/flame-icon.svg"
         alt="Ignidash flame icon"
-        className={`${LOGO_ICON_SIZE}`}
+        className={LOGO_SIZES.md}
         width={32}
         height={32}
       />
-      <span className="text-xl font-bold font-heading">Ignidash</span>
+      <span className="font-heading text-xl font-bold">Ignidash</span>
     </Link>
   );
 }
@@ -41,54 +47,56 @@ function NavLink({
   return (
     <Link
       href={href}
-      className="flex items-center justify-between p-4 text-base font-medium group"
+      className={`group flex items-center justify-between p-4 text-base font-medium ${FOCUS_STATES.link}`}
     >
-      <span className="group-hover:text-orange-500 transition-colors">
+      <span className="transition-colors group-hover:text-orange-500">
         {children}
       </span>
-      <ChevronRight className={`${ICON_SIZE} text-muted-foreground`} />
+      <ChevronRight className={`${ICON_SIZES.lg} text-muted-foreground`} />
     </Link>
   );
 }
 
 export function Navbar() {
   return (
-    <nav className="border-b bg-background sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+    <nav className="bg-background sticky top-0 z-50 border-b">
+      <div className={`mx-auto ${MAX_WIDTHS.container}`}>
+        <div
+          className={`flex h-16 items-center justify-between ${SPACING.container}`}
+        >
           <Logo />
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-4">
-            <ModeToggle iconSize={ICON_SIZE} />
+          <div className="hidden items-center gap-4 md:flex">
+            <ModeToggle iconSize={ICON_SIZES.lg} />
             <Button asChild variant="ghost">
               <Link href="/dashboard">Sign In</Link>
             </Button>
             <Button
               asChild
-              className="bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 hover:from-pink-600 hover:via-red-600 hover:to-orange-600 text-white"
+              className={`${GRADIENTS.primaryReverse} text-white hover:from-pink-600 hover:via-red-600 hover:to-orange-600`}
             >
               <Link href="/dashboard" className="flex items-center gap-2">
                 Get Started
-                <ArrowRight className={BUTTON_ICON_SIZE} />
+                <ArrowRight className={BUTTON_ICON_SIZES.md} />
               </Link>
             </Button>
           </div>
 
           {/* Mobile Navigation */}
-          <div className="flex md:hidden items-center gap-2">
-            <ModeToggle iconSize={ICON_SIZE} />
+          <div className="flex items-center gap-2 md:hidden">
+            <ModeToggle iconSize={ICON_SIZES.lg} />
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" aria-label="Open menu">
-                  <Menu className={ICON_SIZE} />
+                  <Menu className={ICON_SIZES.lg} />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className={SHEET_WIDTH}>
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
 
                 {/* Mobile Header */}
-                <div className="flex items-center justify-between h-16 px-4 border-b">
+                <div className="flex h-16 items-center justify-between border-b px-4">
                   <Logo />
                 </div>
 

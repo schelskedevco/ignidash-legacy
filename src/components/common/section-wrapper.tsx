@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { SPACING } from "@/lib/design-constants";
 
 interface SectionWrapperProps {
   header: ReactNode;
@@ -11,9 +12,7 @@ export function SectionWrapper({ header, children }: SectionWrapperProps) {
       {header}
 
       {/* Main Grid Layout */}
-      <div className="w-full px-2 sm:px-4 md:px-6 xl:px-10 3xl:px-20">
-        {children}
-      </div>
+      <div className={`w-full ${SPACING.sectionHorizontal}`}>{children}</div>
     </>
   );
 }

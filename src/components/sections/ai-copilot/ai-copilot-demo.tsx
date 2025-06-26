@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Play, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { ICON_SIZES, SPACING, MAX_WIDTHS } from "@/lib/design-constants";
 
 const qaData = [
   {
@@ -111,11 +112,15 @@ export function AICopilotDemo() {
   }, [showAnswer, isComplete, isPaused]);
 
   return (
-    <div className="ai-copilot-demo flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div
+      className={`ai-copilot-demo flex flex-col items-center justify-center ${SPACING.container}`}
+    >
       {/* Content container */}
-      <div className="w-full max-w-4xl mx-auto space-y-4 sm:space-y-6 lg:space-y-8">
+      <div
+        className={`mx-auto w-full ${MAX_WIDTHS.content} ${SPACING.elementSpacing}`}
+      >
         {/* Controls */}
-        <div className="flex justify-center mb-4">
+        <div className="mb-4 flex justify-center">
           <Button
             variant="outline"
             size="sm"
@@ -125,12 +130,12 @@ export function AICopilotDemo() {
           >
             {isPaused ? (
               <>
-                <Play className="h-4 w-4" />
+                <Play className={ICON_SIZES.sm} />
                 Resume
               </>
             ) : (
               <>
-                <Pause className="h-4 w-4" />
+                <Pause className={ICON_SIZES.sm} />
                 Pause
               </>
             )}
@@ -147,14 +152,14 @@ export function AICopilotDemo() {
               prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -20 }
             }
             transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
-            className="space-y-4 sm:space-y-6 lg:space-y-8"
+            className={SPACING.elementSpacing}
           >
             {/* User Question */}
             <div className="text-left">
-              <span className="text-sm sm:text-base text-muted-foreground mb-2 font-semibold uppercase tracking-wide block">
+              <span className="text-muted-foreground mb-2 block text-sm font-semibold tracking-wide uppercase sm:text-base">
                 You ask:
               </span>
-              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground leading-relaxed break-words">
+              <p className="text-foreground text-lg leading-relaxed font-medium break-words sm:text-xl md:text-2xl lg:text-3xl">
                 &ldquo;{currentQA.question}&rdquo;
               </p>
             </div>
@@ -172,14 +177,14 @@ export function AICopilotDemo() {
                 role="region"
                 aria-live="polite"
               >
-                <span className="text-sm sm:text-base text-muted-foreground mb-2 font-semibold uppercase tracking-wide block">
+                <span className="text-muted-foreground mb-2 block text-sm font-semibold tracking-wide uppercase sm:text-base">
                   AI Copilot:
                 </span>
-                <p className="text-lg sm:text-xl md:text-2xl text-foreground/90 leading-relaxed break-words">
+                <p className="text-foreground/90 text-lg leading-relaxed break-words sm:text-xl md:text-2xl">
                   {displayedText}
                   {!isComplete && (
                     <span
-                      className="inline-block w-[2px] h-5 bg-primary ml-1 animate-pulse"
+                      className="bg-primary ml-1 inline-block h-5 w-[2px] animate-pulse"
                       aria-hidden="true"
                     />
                   )}

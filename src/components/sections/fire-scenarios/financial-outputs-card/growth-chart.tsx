@@ -111,7 +111,7 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
   return (
     <ChartContainer
       config={chartConfig}
-      className="h-[250px] sm:h-[320px] md:h-[400px] w-full max-w-full"
+      className="h-[250px] w-full max-w-full sm:h-[320px] md:h-[400px]"
     >
       <AreaChart data={chartData} margin={margin}>
         <CartesianGrid strokeDasharray="3 3" className="stroke-muted/20" />

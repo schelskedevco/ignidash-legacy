@@ -8,6 +8,7 @@ import {
   BaristaFireParameters,
   FireType,
 } from "../shared/fire-types";
+import { ICON_SIZES } from "@/lib/design-constants";
 
 interface ScenarioDetailsProps {
   scenario: Scenario;
@@ -35,8 +36,8 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
     <div className="space-y-6">
       {/* Header with icon and badges */}
       <div className="flex items-center justify-between">
-        <div className={`p-3 rounded-lg ${scenario.bgColor}`}>
-          <Icon className={`h-8 w-8 ${scenario.color}`} />
+        <div className={`rounded-lg p-3 ${scenario.bgColor}`}>
+          <Icon className={`${ICON_SIZES.xl} ${scenario.color}`} />
         </div>
         <div className="flex gap-2">
           <Badge variant="outline" className="text-xs font-semibold">
@@ -50,19 +51,19 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
 
       {/* Title and description */}
       <div className="space-y-2">
-        <h3 className="text-2xl font-semibold font-heading tracking-tight">
+        <h3 className="font-heading text-2xl font-semibold tracking-tight">
           {scenario.title}
         </h3>
-        <p className="text-lg text-muted-foreground">{scenario.subtitle}</p>
+        <p className="text-muted-foreground text-lg">{scenario.subtitle}</p>
         <p className="text-base leading-relaxed">{scenario.content}</p>
       </div>
 
       {/* Separator */}
-      <div className="h-px bg-border" />
+      <div className="bg-border h-px" />
 
       {/* Financial inputs */}
       <div className="space-y-3 text-sm">
-        <h4 className="font-semibold font-heading text-foreground mb-3">
+        <h4 className="font-heading text-foreground mb-3 font-semibold">
           Financial Inputs
         </h4>
         <div className="flex justify-between">
@@ -97,7 +98,7 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
         <>
           <Separator />
           <div className="space-y-3 text-sm">
-            <h4 className="font-semibold font-heading text-foreground mb-3">
+            <h4 className="font-heading text-foreground mb-3 font-semibold">
               {scenario.fireType === FireType.COAST_FIRE
                 ? "Coast FIRE Settings"
                 : "Barista FIRE Settings"}

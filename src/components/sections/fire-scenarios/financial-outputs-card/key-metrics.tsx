@@ -60,40 +60,40 @@ export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
   const displayValues = getDisplayValues();
 
   return (
-    <div className="grid grid-cols-2 gap-4 mt-6">
+    <div className="mt-6 grid grid-cols-2 gap-4">
       <div className="text-center">
-        <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
+        <p className="text-foreground text-xl font-bold tabular-nums lg:text-2xl xl:text-3xl">
           <AnimatedNumber value={displayValues.yearsToTarget} />
         </p>
-        <p className="text-sm font-medium text-foreground mt-1">
+        <p className="text-foreground mt-1 text-sm font-medium">
           years to FIRE
         </p>
-        <p className="text-xs text-muted-foreground mt-1">
+        <p className="text-muted-foreground mt-1 text-xs">
           (age <AnimatedNumber value={Math.round(displayValues.targetAge)} />)
         </p>
       </div>
 
       <div className="text-center">
-        <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
+        <p className="text-foreground text-xl font-bold tabular-nums lg:text-2xl xl:text-3xl">
           <AnimatedNumber value={displayValues.fireNumber} prefix="$" />
         </p>
-        <p className="text-sm font-medium text-foreground mt-1">FIRE target</p>
-        <p className="text-xs text-muted-foreground mt-1">
+        <p className="text-foreground mt-1 text-sm font-medium">FIRE target</p>
+        <p className="text-muted-foreground mt-1 text-xs">
           Total portfolio needed
         </p>
       </div>
 
       <div className="text-center">
-        <p className="text-xl lg:text-2xl xl:text-3xl font-bold text-foreground tabular-nums">
+        <p className="text-foreground text-xl font-bold tabular-nums lg:text-2xl xl:text-3xl">
           <AnimatedNumber
             value={Math.round(displayValues.retirementIncome)}
             prefix="$"
           />
         </p>
-        <p className="text-sm font-medium text-foreground mt-1">
+        <p className="text-foreground mt-1 text-sm font-medium">
           annual retirement income
         </p>
-        <p className="text-xs text-muted-foreground mt-1">
+        <p className="text-muted-foreground mt-1 text-xs">
           <AnimatedNumber
             value={Math.round(displayValues.retirementIncome / 12)}
             prefix="($"

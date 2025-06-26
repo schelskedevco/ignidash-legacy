@@ -1,36 +1,41 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const BUTTON_ICON_SIZE = "h-4 w-4";
+import {
+  BUTTON_ICON_SIZES,
+  MAX_WIDTHS,
+  GRADIENTS,
+} from "@/lib/design-constants";
 
 export function HeroSection() {
   return (
     <>
-      <h1 className="text-5xl md:text-7xl font-bold font-heading leading-tight mb-6 max-w-4xl mx-auto xl:mx-0">
-        <span className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent">
-          Design your life.
-        </span>
+      <h1
+        className={`font-heading mx-auto mb-6 ${MAX_WIDTHS.content} text-5xl leading-tight font-bold md:text-7xl xl:mx-0`}
+      >
+        <span className={GRADIENTS.text}>Design your life.</span>
         <br />
         <span className="text-foreground">
           Then plan your FIRE journey around it.
         </span>
       </h1>
 
-      <p className="text-xl md:text-2xl text-muted-foreground max-w-sm md:max-w-3xl mx-auto xl:mx-0 leading-relaxed mb-8">
+      <p
+        className={`text-muted-foreground mx-auto mb-8 ${MAX_WIDTHS.contentSm} text-xl leading-relaxed md:text-2xl xl:mx-0`}
+      >
         Explore retirement timelines, run what-if projections, and get
         AI-powered insights — all tailored to your values and goals.
       </p>
 
-      <div className="flex flex-col sm:flex-row gap-4 justify-center xl:justify-start">
+      <div className="flex flex-col justify-center gap-4 sm:flex-row xl:justify-start">
         <Button
           asChild
           size="lg"
-          className="bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 hover:from-pink-600 hover:via-red-600 hover:to-orange-600 text-white text-base"
+          className={`${GRADIENTS.primaryReverse} text-base text-white hover:from-pink-600 hover:via-red-600 hover:to-orange-600`}
         >
           <Link href="/dashboard" className="flex items-center gap-2">
             Create your plan
-            <ArrowRight className={BUTTON_ICON_SIZE} />
+            <ArrowRight className={BUTTON_ICON_SIZES.md} />
           </Link>
         </Button>
         <Button asChild size="lg" variant="outline" className="text-base">

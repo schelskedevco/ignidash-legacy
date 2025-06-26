@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { SPACING, MAX_WIDTHS } from "@/lib/design-constants";
 
 interface MultiSectionLayoutProps {
   heroSection: ReactNode;
@@ -27,13 +28,17 @@ export function MultiSectionLayout({
     <>
       {/* Hero Section */}
       <section className={`relative ${className}`} aria-label="Hero Section">
-        <div className="relative min-h-[500px] sm:min-h-[550px] md:min-h-[600px] py-12 sm:py-16 md:py-20">
+        <div
+          className={`relative min-h-[500px] sm:min-h-[550px] md:min-h-[600px] ${SPACING.sectionVertical}`}
+        >
           <div
             className={`absolute inset-0 ${heroGradientClass}`}
             aria-hidden="true"
           />
           <div className="relative z-10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+              className={`mx-auto ${MAX_WIDTHS.container} ${SPACING.container}`}
+            >
               <div className="text-center xl:text-left">{heroSection}</div>
             </div>
           </div>
@@ -46,12 +51,14 @@ export function MultiSectionLayout({
         className={`relative overflow-hidden ${className}`}
         aria-label="Fire Scenarios Section"
       >
-        <div className="relative min-h-[500px] sm:min-h-[550px] md:min-h-[600px] py-12 sm:py-16 md:py-20">
+        <div
+          className={`relative min-h-[500px] sm:min-h-[550px] md:min-h-[600px] ${SPACING.sectionVertical}`}
+        >
           <div
             className={`absolute inset-0 ${fireScenariosGradientClass}`}
             aria-hidden="true"
           />
-          <div className="relative z-10 px-2 sm:px-4 md:px-6 xl:px-10 3xl:px-20">
+          <div className={`relative z-10 ${SPACING.sectionHorizontal}`}>
             <div className="w-full">
               <div className="text-center xl:text-left">{fireScenarios}</div>
             </div>
@@ -59,10 +66,10 @@ export function MultiSectionLayout({
         </div>
 
         {/* Enhanced bottom shadow */}
-        <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-          <div className="h-24 bg-gradient-to-t from-black/20 dark:from-black/40 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/30 dark:from-black/50 via-black/10 dark:via-black/20 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-black/20 dark:bg-black/40" />
+        <div className="pointer-events-none absolute right-0 bottom-0 left-0">
+          <div className="h-24 bg-gradient-to-t from-black/20 to-transparent dark:from-black/40" />
+          <div className="absolute right-0 bottom-0 left-0 h-12 bg-gradient-to-t from-black/30 via-black/10 to-transparent dark:from-black/50 dark:via-black/20" />
+          <div className="absolute right-0 bottom-0 left-0 h-px bg-black/20 dark:bg-black/40" />
         </div>
       </section>
 
@@ -72,7 +79,7 @@ export function MultiSectionLayout({
         className="relative"
         aria-label="AI Copilot Section"
       >
-        <div className="relative py-12 sm:py-16 md:py-20">{aiCopilot}</div>
+        <div className={`relative ${SPACING.sectionVertical}`}>{aiCopilot}</div>
       </section>
     </>
   );

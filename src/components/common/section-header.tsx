@@ -1,5 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { SectionHeaderIcon } from "./section-header-icon";
+import { SPACING } from "@/lib/design-constants";
 
 interface SectionHeaderProps {
   icon: LucideIcon;
@@ -15,12 +16,12 @@ export function SectionHeader({
   className = "",
 }: SectionHeaderProps) {
   return (
-    <div className={`mb-12 text-center px-4 sm:px-6 lg:px-8 ${className}`}>
+    <div className={`mb-12 text-center ${SPACING.container} ${className}`}>
       <SectionHeaderIcon icon={icon} />
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-4">
+      <h2 className="font-heading mb-4 text-2xl font-bold sm:text-3xl md:text-4xl">
         {title}
       </h2>
-      <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
+      <p className="text-muted-foreground mx-auto max-w-3xl text-base sm:text-lg">
         {description}
       </p>
     </div>

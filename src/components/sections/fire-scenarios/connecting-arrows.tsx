@@ -21,13 +21,13 @@ export function ConnectingArrows({
   }, [selectedScenario]);
 
   return (
-    <div className="hidden lg:flex items-center justify-center">
+    <div className="hidden items-center justify-center lg:flex">
       <div className="flex flex-col gap-2">
         {Array.from({ length: count }).map((_, index) => (
           <div
             key={index}
-            className={`transition-all duration-300 hover:opacity-100 hover:scale-125 cursor-pointer ${
-              isAnimating ? "opacity-100 scale-125" : "opacity-60"
+            className={`cursor-pointer transition-all duration-300 hover:scale-125 hover:opacity-100 ${
+              isAnimating ? "scale-125 opacity-100" : "opacity-60"
             }`}
           >
             <Image

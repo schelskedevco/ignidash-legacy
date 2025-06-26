@@ -48,7 +48,7 @@ src/components/fire-scenarios/
 ## New Layout Structure
 
 ```tsx
-<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
   {/* Left Panel */}
   <Card>
     <Tabs>

@@ -31,7 +31,7 @@ export function FireScenariosSection() {
         />
       }
     >
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-4 md:gap-6 xl:gap-8 items-stretch">
+      <div className="grid grid-cols-1 items-stretch gap-4 md:gap-6 lg:grid-cols-[1fr_auto_1fr] xl:gap-8">
         {/* Left Panel - Financial Inputs */}
         <FinancialInputsCard
           scenarios={SCENARIOS}

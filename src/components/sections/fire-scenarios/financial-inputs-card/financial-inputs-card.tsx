@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScenarioDetails } from "./scenario-details";
 import { Scenario, ScenarioId } from "../shared/fire-types";
+import { SPACING } from "@/lib/design-constants";
 
 interface FinancialInputsCardProps {
   scenarios: Scenario[];
@@ -17,9 +18,9 @@ export function FinancialInputsCard({
   onScenarioChange,
 }: FinancialInputsCardProps) {
   return (
-    <Card className="w-full h-full transition-all duration-300 hover:shadow-sm hover:border-primary/30">
-      <CardContent className="p-6">
-        <h2 className="text-xl font-semibold mb-4">Your Financial Profile</h2>
+    <Card className="hover:border-primary/30 h-full w-full transition-all duration-300 hover:shadow-sm">
+      <CardContent className={SPACING.cardPadding}>
+        <h2 className="mb-4 text-xl font-semibold">Your Financial Profile</h2>
         <Tabs
           value={selectedScenario}
           onValueChange={(value) => onScenarioChange(value as ScenarioId)}

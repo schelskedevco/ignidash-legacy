@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       <Navbar />
       <MultiSectionLayout
         heroSection={<HeroSection />}

@@ -94,3 +94,7 @@ Import with `@/*` alias. Components use Radix UI + CVA patterns.
 ## Planning Process
 
 - When planning, write your plan to a Markdown file after we finalize the plan so that it can be referenced later.
+
+## Development Notes
+
+- Remember to reference tailwind-guidelines.md when creating new Tailwind components

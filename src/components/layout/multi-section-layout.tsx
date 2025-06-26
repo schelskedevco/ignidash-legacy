@@ -14,15 +14,23 @@ export function MultiSectionLayout({
   aiCopilot,
   className = "",
 }: MultiSectionLayoutProps) {
+  // Improved gradient: background to light rose
   const heroGradientClass = `
     bg-gradient-to-b
     from-background from-0%
-    via-background via-70%
-    via-rose-600/30 dark:via-rose-500/20 via-85%
-    to-rose-600/45 dark:to-rose-500/30 to-100%
+    via-rose-100/40 via-70%
+    to-rose-200/50 to-100%
+    dark:via-rose-500/20 dark:to-rose-500/30
   `;
 
-  const fireScenariosGradientClass = `bg-rose-600/45 dark:bg-rose-500/30`;
+  // Improved gradient: soft continuation to deeper rose
+  const fireScenariosGradientClass = `
+    bg-gradient-to-b
+    from-rose-200/50 from-0%
+    via-rose-300/60 via-70%
+    to-rose-500/60 to-100%
+    dark:from-rose-500/30 dark:via-rose-600/40 dark:to-rose-700/50
+  `;
 
   return (
     <>
@@ -54,10 +62,15 @@ export function MultiSectionLayout({
         <div
           className={`relative min-h-[500px] sm:min-h-[550px] md:min-h-[600px] ${SPACING.sectionVertical}`}
         >
+          {/* Soft top fade for seamless visual continuity */}
+          <div className="from-background/60 dark:from-background/40 absolute top-0 right-0 left-0 h-24 bg-gradient-to-b via-transparent to-transparent" />
+
+          {/* Main gradient background */}
           <div
             className={`absolute inset-0 ${fireScenariosGradientClass}`}
             aria-hidden="true"
           />
+
           <div className={`relative z-10 ${SPACING.sectionHorizontal}`}>
             <div className="w-full">
               <div className="text-center xl:text-left">{fireScenarios}</div>

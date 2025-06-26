@@ -18,18 +18,18 @@ export function MultiSectionLayout({
   const heroGradientClass = `
     bg-gradient-to-b
     from-background from-0%
-    via-rose-100/40 via-70%
-    to-rose-200/50 to-100%
-    dark:via-rose-500/20 dark:to-rose-500/30
+    via-rose-100/50 via-70%
+    to-rose-200/60 to-100%
+    dark:via-rose-500/25 dark:to-rose-500/35
   `;
 
   // Improved gradient: soft continuation to deeper rose
   const fireScenariosGradientClass = `
     bg-gradient-to-b
-    from-rose-200/50 from-0%
-    via-rose-300/60 via-70%
-    to-rose-500/60 to-100%
-    dark:from-rose-500/30 dark:via-rose-600/40 dark:to-rose-700/50
+    from-rose-200/60 from-0%
+    via-rose-300/70 via-70%
+    to-rose-500/70 to-100%
+    dark:from-rose-500/35 dark:via-rose-600/50 dark:to-rose-700/60
   `;
 
   return (
@@ -80,9 +80,9 @@ export function MultiSectionLayout({
 
         {/* Enhanced bottom shadow */}
         <div className="pointer-events-none absolute right-0 bottom-0 left-0">
-          <div className="h-24 bg-gradient-to-t from-black/20 to-transparent dark:from-black/40" />
-          <div className="absolute right-0 bottom-0 left-0 h-12 bg-gradient-to-t from-black/30 via-black/10 to-transparent dark:from-black/50 dark:via-black/20" />
-          <div className="absolute right-0 bottom-0 left-0 h-px bg-black/20 dark:bg-black/40" />
+          <div className="h-24 bg-gradient-to-t from-black/10 to-transparent dark:from-black/20" />
+          <div className="absolute right-0 bottom-0 left-0 h-12 bg-gradient-to-t from-black/15 via-black/5 to-transparent dark:from-black/25 dark:via-black/10" />
+          <div className="absolute right-0 bottom-0 left-0 h-px bg-black/10 dark:bg-black/20" />
         </div>
       </section>
 

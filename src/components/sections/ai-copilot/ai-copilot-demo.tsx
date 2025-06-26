@@ -74,9 +74,7 @@ export function AICopilotDemo() {
       setShowAnswer(true);
     }, 500);
 
-    return () => {
-      clearTimeout(questionDelay);
-    };
+    return () => clearTimeout(questionDelay);
   }, [currentIndex]);
 
   useEffect(() => {
@@ -86,9 +84,7 @@ export function AICopilotDemo() {
         setCurrentIndex((prev) => (prev + 1) % qaData.length);
       }, 5500);
 
-      return () => {
-        clearTimeout(cycleDelay);
-      };
+      return () => clearTimeout(cycleDelay);
     }
   }, [showAnswer, isComplete]);
 
@@ -107,10 +103,10 @@ export function AICopilotDemo() {
           >
             {/* User Question */}
             <div className="text-left">
-              <p className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2">
+              <h2 className="text-sm sm:text-base text-muted-foreground mb-2 font-semibold uppercase tracking-wide">
                 You ask:
-              </p>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-foreground/90 leading-relaxed break-words">
+              </h2>
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground leading-relaxed break-words">
                 &ldquo;{currentQA.question}&rdquo;
               </p>
             </div>
@@ -122,14 +118,19 @@ export function AICopilotDemo() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
                 className="text-left"
+                role="region"
+                aria-live="polite"
               >
-                <p className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2">
+                <h3 className="text-sm sm:text-base text-muted-foreground mb-2 font-semibold uppercase tracking-wide">
                   AI Copilot:
-                </p>
-                <p className="text-base sm:text-lg md:text-xl text-foreground/80 leading-relaxed break-words">
+                </h3>
+                <p className="text-lg sm:text-xl md:text-2xl text-foreground/90 leading-relaxed break-words">
                   {displayedText}
                   {!isComplete && (
-                    <span className="inline-block w-[2px] h-4 sm:h-5 bg-primary ml-1 animate-pulse" />
+                    <span
+                      className="inline-block w-[2px] h-5 bg-primary ml-1 animate-pulse"
+                      aria-hidden="true"
+                    />
                   )}
                 </p>
               </motion.div>

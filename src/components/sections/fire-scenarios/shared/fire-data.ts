@@ -34,12 +34,11 @@ const createBaristaFireScenario = (
 export const SCENARIOS: Scenario[] = [
   createRegularFireScenario({
     id: ScenarioId.REGULAR_FIRE,
-    title: "Traditional FIRE",
-    subtitle: "Complete Financial Independence",
+    subtitle: "Complete Independence",
     content:
-      "Save consistently, invest wisely, and retire early to pursue hobbies and passions.",
+      "Build enough wealth to never work again. Focus entirely on passion projects, hobbies, and the people you love.",
     icon: Target,
-    focusArea: "Full Retirement",
+    focusArea: "Full Freedom",
     color: "text-green-500",
     bgColor: "bg-green-500/10",
     inputs: {
@@ -53,12 +52,11 @@ export const SCENARIOS: Scenario[] = [
   }),
   createCoastFireScenario({
     id: ScenarioId.FAMILY_COAST,
-    title: "Young Family Planning",
-    subtitle: "Coast FIRE with Kids",
+    subtitle: "Family-First Freedom",
     content:
-      "Front-load savings before kids, then coast to FIRE while focusing on family.",
+      "Save aggressively now, then shift focus to raising kids without financial stress. Let your investments grow while you parent.",
     icon: Baby,
-    focusArea: "Kids & Family",
+    focusArea: "Parenting Priority",
     color: "text-blue-500",
     bgColor: "bg-blue-500/10",
     inputs: {
@@ -75,12 +73,11 @@ export const SCENARIOS: Scenario[] = [
   }),
   createBaristaFireScenario({
     id: ScenarioId.SABBATICAL_BARISTA,
-    title: "Digital Nomad Dreams",
-    subtitle: "Barista FIRE with Travel",
+    subtitle: "Work-Optional Explorer",
     content:
-      "Take mini-retirements and work remotely while exploring the world.",
+      "Blend part-time work with extended travel. Create a flexible lifestyle that balances income, freedom, and exploration.",
     icon: Plane,
-    focusArea: "Travel & Sabbaticals",
+    focusArea: "Flexible Adventure",
     color: "text-purple-500",
     bgColor: "bg-purple-500/10",
     inputs: {

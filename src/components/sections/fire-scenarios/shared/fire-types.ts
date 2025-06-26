@@ -41,7 +41,6 @@ export type StrategyParameters =
 // Discriminated union for better type safety
 export interface BaseScenario {
   id: ScenarioId;
-  title: string;
   subtitle: string;
   content: string;
   icon: typeof Baby | typeof Plane | typeof Target;

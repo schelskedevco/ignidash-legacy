@@ -1,22 +1,20 @@
 import { WandSparkles } from "lucide-react";
 import { SectionHeader } from "@/components/common/section-header";
+import { SectionWrapper } from "@/components/common/section-wrapper";
 import { AICopilotDemo } from "./ai-copilot-demo";
 
 export function AICopilotSection() {
   return (
-    <section className="py-24 sm:py-32 md:py-40 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionWrapper
+      header={
         <SectionHeader
           icon={WandSparkles}
           title="Your AI Financial Copilot"
           description="Get personalized insights that understand your unique situation. Ask questions, explore scenarios, and make confident decisions about your financial future."
         />
-      </div>
-
-      {/* AI Demo Section */}
-      <div>
-        <AICopilotDemo />
-      </div>
-    </section>
+      }
+    >
+      <AICopilotDemo />
+    </SectionWrapper>
   );
 }

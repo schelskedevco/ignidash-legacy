@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Route } from "lucide-react";
 import { SectionHeader } from "@/components/common/section-header";
+import { SectionWrapper } from "@/components/common/section-wrapper";
 import { SCENARIOS } from "./shared/fire-data";
 import { calculateProjections, generateGrowthData } from "./shared/fire-utils";
 import { FinancialInputsCard } from "./financial-inputs-card/financial-inputs-card";
@@ -21,34 +22,33 @@ export function FireScenariosSection() {
   const growthData = generateGrowthData(scenario, outputs);
 
   return (
-    <>
-      <SectionHeader
-        icon={Route}
-        title="Every FIRE Path, Clearly Mapped"
-        description="From traditional FIRE to sabbaticals and part-time work, your custom path to financial independence starts here. Just enter your data—we'll do the math."
-      />
+    <SectionWrapper
+      header={
+        <SectionHeader
+          icon={Route}
+          title="Every FIRE Path, Clearly Mapped"
+          description="From traditional FIRE to sabbaticals and part-time work, your custom path to financial independence starts here. Just enter your data—we'll do the math."
+        />
+      }
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-4 md:gap-6 xl:gap-8 items-stretch">
+        {/* Left Panel - Financial Inputs */}
+        <FinancialInputsCard
+          scenarios={SCENARIOS}
+          selectedScenario={selectedScenario}
+          onScenarioChange={setSelectedScenario}
+        />
 
-      {/* Main Grid Layout */}
-      <div className="w-full px-2 sm:px-4 md:px-6 xl:px-10 3xl:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-4 md:gap-6 xl:gap-8 items-stretch">
-          {/* Left Panel - Financial Inputs */}
-          <FinancialInputsCard
-            scenarios={SCENARIOS}
-            selectedScenario={selectedScenario}
-            onScenarioChange={setSelectedScenario}
-          />
+        {/* Connecting Arrows */}
+        <ConnectingArrows selectedScenario={selectedScenario} />
 
-          {/* Connecting Arrows */}
-          <ConnectingArrows selectedScenario={selectedScenario} />
-
-          {/* Right Panel - Financial Outputs */}
-          <FinancialOutputsCard
-            scenario={scenario}
-            outputs={outputs}
-            growthData={growthData}
-          />
-        </div>
+        {/* Right Panel - Financial Outputs */}
+        <FinancialOutputsCard
+          scenario={scenario}
+          outputs={outputs}
+          growthData={growthData}
+        />
       </div>
-    </>
+    </SectionWrapper>
   );
 }

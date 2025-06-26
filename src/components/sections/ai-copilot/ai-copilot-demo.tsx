@@ -93,13 +93,9 @@ export function AICopilotDemo() {
   }, [showAnswer, isComplete]);
 
   return (
-    <div className="relative min-h-[500px] flex items-center justify-center px-4 overflow-hidden">
-      {/* Ambient glow effect */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-[800px] h-[400px] rounded-full blur-[100px] opacity-20 bg-gradient-radial from-primary/30 via-primary/10 to-transparent dark:from-orange-500/20 dark:via-amber-500/10 dark:to-transparent animate-pulse" />
-      </div>
-
-      <div className="relative z-10 max-w-4xl mx-auto space-y-8">
+    <div className="min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+      {/* Content container */}
+      <div className="w-full max-w-4xl mx-auto space-y-4 sm:space-y-6 lg:space-y-8">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -107,12 +103,14 @@ export function AICopilotDemo() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
-            className="space-y-8"
+            className="space-y-4 sm:space-y-6 lg:space-y-8"
           >
             {/* User Question */}
             <div className="text-left">
-              <p className="text-sm text-muted-foreground mb-2">You ask:</p>
-              <p className="text-lg md:text-xl lg:text-2xl font-medium text-foreground/90 leading-relaxed">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2">
+                You ask:
+              </p>
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-foreground/90 leading-relaxed break-words">
                 &ldquo;{currentQA.question}&rdquo;
               </p>
             </div>
@@ -125,13 +123,13 @@ export function AICopilotDemo() {
                 transition={{ duration: 0.3 }}
                 className="text-left"
               >
-                <p className="text-sm text-muted-foreground mb-2">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2">
                   AI Copilot:
                 </p>
-                <p className="text-lg md:text-xl text-foreground/80 leading-relaxed max-w-3xl">
+                <p className="text-base sm:text-lg md:text-xl text-foreground/80 leading-relaxed break-words">
                   {displayedText}
                   {!isComplete && (
-                    <span className="inline-block w-[2px] h-5 bg-primary ml-1 animate-pulse" />
+                    <span className="inline-block w-[2px] h-4 sm:h-5 bg-primary ml-1 animate-pulse" />
                   )}
                 </p>
               </motion.div>

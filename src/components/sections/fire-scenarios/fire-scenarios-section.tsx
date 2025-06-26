@@ -27,7 +27,7 @@ export function FireScenariosSection() {
         <SectionHeader
           icon={Route}
           title="Every FIRE Path, Clearly Mapped"
-          description="Compare early retirement, sabbaticals, part-time transitions, and creative combinations—we'll calculate the timeline and trade-offs for every scenario you want to explore."
+          description="Compare early retirement, sabbaticals, part-time transitions, and creative combinations. We'll calculate the timeline and trade-offs for every scenario you want to explore."
         />
       }
     >

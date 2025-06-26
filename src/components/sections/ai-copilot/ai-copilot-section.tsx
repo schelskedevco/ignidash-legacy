@@ -9,8 +9,8 @@ export function AICopilotSection() {
       header={
         <SectionHeader
           icon={WandSparkles}
-          title="Your AI Financial Copilot"
-          description="Get personalized insights that understand your unique situation. Ask questions, explore scenarios, and make confident decisions about your financial future."
+          title="Your AI Retirement Advisor"
+          description="Get wisdom inspired by the best minds in financial independence, personalized to your exact situation."
         />
       }
     >

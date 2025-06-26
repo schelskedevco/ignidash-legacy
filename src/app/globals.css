@@ -132,6 +132,18 @@
     transform: scale(1);
     filter: blur(0px);
   }
+
+  /* AI Copilot Demo Motion Reduction */
+  .ai-copilot-demo * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .ai-copilot-auto-pause {
+    /* Automatically pause cycling for users with motion sensitivity */
+    animation-play-state: paused !important;
+  }
 }
 
 @layer base {

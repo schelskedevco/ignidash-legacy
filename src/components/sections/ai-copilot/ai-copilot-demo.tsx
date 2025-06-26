@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Play, Pause } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 const qaData = [
   {
@@ -63,11 +66,30 @@ function useTypewriter(text: string, speed: number = 30) {
 export function AICopilotDemo() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const currentQA = qaData[currentIndex];
   const { displayedText, isComplete } = useTypewriter(
     showAnswer ? currentQA.answer : "",
     12
   );
+
+  // Check for reduced motion preference
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    setIsPaused(mediaQuery.matches); // Auto-pause for reduced motion users
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      setPrefersReducedMotion(event.matches);
+      if (event.matches) {
+        setIsPaused(true); // Auto-pause when reduced motion is enabled
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   useEffect(() => {
     const questionDelay = setTimeout(() => {
@@ -78,52 +100,81 @@ export function AICopilotDemo() {
   }, [currentIndex]);
 
   useEffect(() => {
-    if (showAnswer && isComplete) {
+    if (showAnswer && isComplete && !isPaused) {
       const cycleDelay = setTimeout(() => {
         setShowAnswer(false);
         setCurrentIndex((prev) => (prev + 1) % qaData.length);
-      }, 5500);
+      }, 7000);
 
       return () => clearTimeout(cycleDelay);
     }
-  }, [showAnswer, isComplete]);
+  }, [showAnswer, isComplete, isPaused]);
 
   return (
-    <div className="flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="ai-copilot-demo flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
       {/* Content container */}
       <div className="w-full max-w-4xl mx-auto space-y-4 sm:space-y-6 lg:space-y-8">
+        {/* Controls */}
+        <div className="flex justify-center mb-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsPaused(!isPaused)}
+            aria-label={isPaused ? "Resume demo" : "Pause demo"}
+            className="flex items-center gap-2"
+          >
+            {isPaused ? (
+              <>
+                <Play className="h-4 w-4" />
+                Resume
+              </>
+            ) : (
+              <>
+                <Pause className="h-4 w-4" />
+                Pause
+              </>
+            )}
+          </Button>
+        </div>
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, y: 20 }}
+            initial={
+              prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }
+            }
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
+            exit={
+              prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -20 }
+            }
+            transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
             className="space-y-4 sm:space-y-6 lg:space-y-8"
           >
             {/* User Question */}
             <div className="text-left">
-              <h2 className="text-sm sm:text-base text-muted-foreground mb-2 font-semibold uppercase tracking-wide">
+              <span className="text-sm sm:text-base text-muted-foreground mb-2 font-semibold uppercase tracking-wide block">
                 You ask:
-              </h2>
+              </span>
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground leading-relaxed break-words">
                 &ldquo;{currentQA.question}&rdquo;
               </p>
             </div>
 
+            {/* Divider */}
+            {showAnswer && <Separator className="my-4 sm:my-6" />}
+
             {/* AI Response */}
             {showAnswer && (
               <motion.div
-                initial={{ opacity: 0 }}
+                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: prefersReducedMotion ? 0.01 : 0.3 }}
                 className="text-left"
                 role="region"
                 aria-live="polite"
               >
-                <h3 className="text-sm sm:text-base text-muted-foreground mb-2 font-semibold uppercase tracking-wide">
+                <span className="text-sm sm:text-base text-muted-foreground mb-2 font-semibold uppercase tracking-wide block">
                   AI Copilot:
-                </h3>
+                </span>
                 <p className="text-lg sm:text-xl md:text-2xl text-foreground/90 leading-relaxed break-words">
                   {displayedText}
                   {!isComplete && (

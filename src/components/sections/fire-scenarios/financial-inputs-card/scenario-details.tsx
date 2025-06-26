@@ -2,7 +2,6 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { AnimatedNumber } from "@/components/common/animated-number";
 import {
   Scenario,
   CoastFireParameters,
@@ -10,6 +9,15 @@ import {
   FireType,
 } from "../shared/fire-types";
 import { ICON_SIZES } from "@/lib/design-constants";
+import {
+  User,
+  DollarSign,
+  ShoppingCart,
+  TrendingUp,
+  Calendar,
+  Coffee,
+} from "lucide-react";
+import { FinancialInputDataRow } from "./financial-input-data-row";
 
 interface ScenarioDetailsProps {
   scenario: Scenario;
@@ -67,35 +75,29 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
         <h4 className="font-heading text-foreground mb-3 font-semibold">
           Financial Inputs
         </h4>
-        <div className="flex justify-between">
-          <span className="text-muted-foreground">Current Age:</span>
-          <span className="font-medium">
-            <AnimatedNumber value={scenario.inputs.age} />
-          </span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-muted-foreground">Annual Income:</span>
-          <span className="font-medium">
-            <AnimatedNumber value={scenario.inputs.annualIncome} prefix="$" />
-          </span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-muted-foreground">Annual Expenses:</span>
-          <span className="font-medium">
-            <AnimatedNumber value={scenario.inputs.annualExpenses} prefix="$" />
-          </span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-muted-foreground">
-            Current Invested Assets:
-          </span>
-          <span className="font-medium">
-            <AnimatedNumber
-              value={scenario.inputs.currentInvestedAssets}
-              prefix="$"
-            />
-          </span>
-        </div>
+        <FinancialInputDataRow
+          icon={User}
+          label="Current Age"
+          value={scenario.inputs.age}
+        />
+        <FinancialInputDataRow
+          icon={DollarSign}
+          label="Annual Income"
+          value={scenario.inputs.annualIncome}
+          prefix="$"
+        />
+        <FinancialInputDataRow
+          icon={ShoppingCart}
+          label="Annual Expenses"
+          value={scenario.inputs.annualExpenses}
+          prefix="$"
+        />
+        <FinancialInputDataRow
+          icon={TrendingUp}
+          label="Current Invested Assets"
+          value={scenario.inputs.currentInvestedAssets}
+          prefix="$"
+        />
       </div>
 
       {/* FIRE-specific Settings Section */}
@@ -113,32 +115,22 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
             {/* Coast FIRE Parameters */}
             {scenario.fireType === FireType.COAST_FIRE &&
               getCoastFireParameters() && (
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    Target Retirement Age:
-                  </span>
-                  <span className="font-medium">
-                    <AnimatedNumber
-                      value={getCoastFireParameters()!.targetRetirementAge}
-                    />
-                  </span>
-                </div>
+                <FinancialInputDataRow
+                  icon={Calendar}
+                  label="Target Retirement Age"
+                  value={getCoastFireParameters()!.targetRetirementAge}
+                />
               )}
 
             {/* Barista FIRE Parameters */}
             {scenario.fireType === FireType.BARISTA_FIRE &&
               getBaristaFireParameters() && (
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    Part-time Monthly Income:
-                  </span>
-                  <span className="font-medium">
-                    <AnimatedNumber
-                      value={getBaristaFireParameters()!.partTimeMonthlyIncome}
-                      prefix="$"
-                    />
-                  </span>
-                </div>
+                <FinancialInputDataRow
+                  icon={Coffee}
+                  label="Part-time Monthly Income"
+                  value={getBaristaFireParameters()!.partTimeMonthlyIncome}
+                  prefix="$"
+                />
               )}
           </div>
         </>

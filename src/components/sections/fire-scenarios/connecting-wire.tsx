@@ -1,3 +1,7 @@
+"use client";
+
+import { useTheme } from "next-themes";
+
 interface ConnectingWireProps {
   variant?: "step" | "tight" | "wide" | "flip" | "lean";
   direction?: "normal" | "reverse";
@@ -7,6 +11,8 @@ export function ConnectingWire({
   variant = "step",
   direction = "normal",
 }: ConnectingWireProps) {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   // Shape breakdown: [left, middle, right] all must sum to 120
   const shape: Record<string, [number, number, number]> = {
     step: [30, 30, 60],
@@ -58,8 +64,14 @@ export function ConnectingWire({
               x2="1"
               y2="0"
             >
-              <stop offset="0%" stopColor="#9333EA" />
-              <stop offset="100%" stopColor="#F472B6" />
+              <stop
+                offset="0%"
+                stopColor={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"}
+              />
+              <stop
+                offset="100%"
+                stopColor={isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)"}
+              />
             </linearGradient>
           </defs>
           <path
@@ -95,8 +107,14 @@ export function ConnectingWire({
               x2="0"
               y2="1"
             >
-              <stop offset="0%" stopColor="#9333EA" />
-              <stop offset="100%" stopColor="#F472B6" />
+              <stop
+                offset="0%"
+                stopColor={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"}
+              />
+              <stop
+                offset="100%"
+                stopColor={isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)"}
+              />
             </linearGradient>
           </defs>
           <path

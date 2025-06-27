@@ -20,8 +20,8 @@ const VIEWBOX_HEIGHT = 120;
 const WIRE_END_X = 180; // Where wires extend to
 
 const getWireColors = (isDark: boolean) => ({
-  gradientStart: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)",
-  gradientEnd: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)",
+  gradientStart: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)",
+  gradientEnd: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
   sparkFill: isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)",
 });
 

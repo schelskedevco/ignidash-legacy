@@ -17,9 +17,6 @@ export function FinancialInputsCard({
   return (
     <Card className="hover:border-primary/30 w-full transition-all duration-300 hover:shadow-sm">
       <CardContent>
-        <h2 className="font-heading mb-4 text-xl font-semibold">
-          Your Financial Profile
-        </h2>
         <Tabs
           value={selectedScenario}
           onValueChange={(value) => onScenarioChange(value as ScenarioId)}

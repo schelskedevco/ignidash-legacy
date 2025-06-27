@@ -61,7 +61,7 @@ export function ConnectingWire({
   return (
     <div className={`relative flex items-center justify-center ${className}`}>
       {/* Horizontal wire for lg+ screens */}
-      <div className="hidden h-20 w-20 items-center justify-center lg:flex">
+      <div className="hidden h-16 w-20 items-center justify-center lg:flex">
         <svg
           viewBox={`0 0 ${total} 80`}
           className="h-full w-full"
@@ -104,7 +104,7 @@ export function ConnectingWire({
       </div>
 
       {/* Vertical wire for smaller screens */}
-      <div className="flex h-20 w-20 items-center justify-center lg:hidden">
+      <div className="flex h-20 w-16 items-center justify-center lg:hidden">
         <svg
           viewBox={`0 0 80 ${total}`}
           className="h-full w-full"

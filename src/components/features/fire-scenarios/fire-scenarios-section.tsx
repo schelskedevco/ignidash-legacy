@@ -43,20 +43,12 @@ export function FireScenariosSection() {
           onScenarioChange={setSelectedScenario}
         />
 
-        <div className="flex flex-row justify-center gap-2 lg:flex-col lg:gap-4">
-          <ConnectingWire
-            className="hidden sm:flex"
-            variant="step"
-            direction="normal"
-          />
+        <div className="flex flex-row justify-center lg:flex-col">
+          <ConnectingWire variant="step" direction="normal" />
           <ConnectingWire variant="tight" direction="reverse" />
           <ConnectingWire variant="flip" direction="normal" />
           <ConnectingWire variant="wide" direction="reverse" />
-          <ConnectingWire
-            className="hidden sm:flex"
-            variant="lean"
-            direction="normal"
-          />
+          <ConnectingWire variant="lean" direction="normal" />
         </div>
 
         {/* Right Panel - Financial Outputs */}

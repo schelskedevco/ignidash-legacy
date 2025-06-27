@@ -22,6 +22,8 @@ export function FireScenariosSection() {
   const outputs = calculateProjections(scenario);
   const growthData = generateGrowthData(scenario, outputs);
 
+  const hiddenWire = "hidden sm:flex";
+
   return (
     <ProductPageSection
       id="fire-scenarios"
@@ -44,11 +46,23 @@ export function FireScenariosSection() {
         />
 
         <div className="flex flex-row justify-center lg:flex-col">
-          <ConnectingWire variant="step" direction="normal" />
-          <ConnectingWire variant="tight" direction="reverse" />
-          <ConnectingWire variant="flip" direction="normal" />
-          <ConnectingWire variant="wide" direction="reverse" />
-          <ConnectingWire variant="lean" direction="normal" />
+          <ConnectingWire
+            className={hiddenWire}
+            idx={0}
+            variant="flip"
+            direction="normal"
+          />
+          <ConnectingWire idx={1} variant="step" direction="normal" />
+          <ConnectingWire idx={2} variant="tight" direction="reverse" />
+          <ConnectingWire idx={3} variant="flip" direction="normal" />
+          <ConnectingWire idx={4} variant="wide" direction="reverse" />
+          <ConnectingWire idx={5} variant="lean" direction="normal" />
+          <ConnectingWire
+            className={hiddenWire}
+            idx={6}
+            variant="flip"
+            direction="normal"
+          />
         </div>
 
         {/* Right Panel - Financial Outputs */}

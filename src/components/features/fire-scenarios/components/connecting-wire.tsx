@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 
 interface ConnectingWireProps {
   className?: string;
+  idx: number;
   variant?: "step" | "tight" | "wide" | "flip" | "lean";
   direction?: "normal" | "reverse";
 }
 
 export function ConnectingWire({
   className = "",
+  idx,
   variant = "step",
   direction = "normal",
 }: ConnectingWireProps) {
@@ -69,7 +71,7 @@ export function ConnectingWire({
         >
           <defs>
             <linearGradient
-              id={`wireGradientH-${variant}-${direction}`}
+              id={`wireGradientH-${variant}-${direction}-${idx.toString()}`}
               x1="0"
               y1="0"
               x2="1"
@@ -87,7 +89,7 @@ export function ConnectingWire({
           </defs>
           <path
             d={horizontalPath}
-            stroke={`url(#wireGradientH-${variant}-${direction})`}
+            stroke={`url(#wireGradientH-${variant}-${direction}-${idx.toString()})`}
             strokeWidth="3"
             strokeLinejoin="round"
             fill="none"
@@ -112,7 +114,7 @@ export function ConnectingWire({
         >
           <defs>
             <linearGradient
-              id={`wireGradientV-${variant}-${direction}`}
+              id={`wireGradientV-${variant}-${direction}-${idx.toString()}`}
               x1="0"
               y1="0"
               x2="0"
@@ -130,7 +132,7 @@ export function ConnectingWire({
           </defs>
           <path
             d={verticalPath}
-            stroke={`url(#wireGradientV-${variant}-${direction})`}
+            stroke={`url(#wireGradientV-${variant}-${direction}-${idx.toString()})`}
             strokeWidth="3"
             strokeLinejoin="round"
             fill="none"

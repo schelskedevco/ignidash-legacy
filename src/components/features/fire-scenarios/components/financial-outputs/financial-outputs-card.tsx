@@ -24,7 +24,7 @@ export function FinancialOutputsCard({
   growthData,
 }: FinancialOutputsCardProps) {
   return (
-    <Card className="hover:border-primary/30 h-full w-full overflow-hidden transition-all duration-300 hover:shadow-sm">
+    <Card className="hover:border-primary/30 h-full w-full transition-all duration-300 hover:shadow-sm">
       <CardContent className={SPACING.cardPadding}>
         <h2 className="font-heading mb-4 flex items-center justify-center gap-2 text-xl font-semibold xl:justify-start">
           Your FIRE Projection

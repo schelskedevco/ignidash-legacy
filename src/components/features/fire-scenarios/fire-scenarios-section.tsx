@@ -4,8 +4,6 @@ import { useState } from "react";
 import { Route } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
-import { GradientBackground } from "@/components/layout/effects/gradient-background";
-import { TopFade } from "@/components/layout/effects/top-fade";
 import { BottomShadow } from "@/components/layout/effects/bottom-shadow";
 import { SCENARIOS } from "./lib/fire-data";
 import { calculateProjections, generateGrowthData } from "./lib/fire-utils";
@@ -28,12 +26,7 @@ export function FireScenariosSection() {
     <ProductPageSection
       id="fire-scenarios"
       ariaLabel="Fire Scenarios Section"
-      topBackgroundComponents={
-        <>
-          <TopFade />
-          <GradientBackground variant="warmRose" />
-        </>
-      }
+      gradientVariant="warmRose"
       bottomBackgroundComponents={<BottomShadow />}
     >
       <ProductPageSectionHeader

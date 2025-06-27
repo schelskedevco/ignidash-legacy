@@ -1,11 +1,16 @@
 import { ReactNode } from "react";
-import { SPACING, MAX_WIDTHS } from "@/lib/design-constants";
+import {
+  SPACING,
+  MAX_WIDTHS,
+  BackgroundGradient,
+} from "@/lib/design-constants";
+import { GradientBackground } from "@/components/layout/effects/gradient-background";
 
 interface ProductPageSectionProps {
   id?: string;
   children: ReactNode;
   ariaLabel: string;
-  topBackgroundComponents?: ReactNode;
+  gradientVariant?: BackgroundGradient;
   bottomBackgroundComponents?: ReactNode;
   textAlign?: "center" | "left" | "responsive";
   spacing?: "default" | "large" | "small";
@@ -15,7 +20,7 @@ export function ProductPageSection({
   id,
   children,
   ariaLabel,
-  topBackgroundComponents,
+  gradientVariant,
   bottomBackgroundComponents,
   textAlign = "responsive",
   spacing = "large",
@@ -35,7 +40,7 @@ export function ProductPageSection({
   return (
     <section id={id} aria-label={ariaLabel}>
       <div className={`relative ${spacingClass}`}>
-        <div aria-hidden="true">{topBackgroundComponents}</div>
+        {gradientVariant && <GradientBackground variant={gradientVariant} />}
 
         {/* Main content */}
         <div className="relative z-10">

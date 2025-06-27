@@ -61,6 +61,31 @@ export const GRADIENTS = {
   text: "bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent",
 } as const;
 
+// Background gradient variants for sections
+export const BACKGROUND_GRADIENTS = {
+  subtleRose: `
+    bg-gradient-to-b
+    from-background from-0%
+    via-rose-100/50 via-70%
+    to-rose-200/60 to-100%
+    dark:via-rose-400/40 dark:to-rose-400/50
+  `,
+  warmRose: `
+    bg-gradient-to-b
+    from-rose-200/60 from-0%
+    via-rose-300/70 via-70%
+    to-rose-500/70 to-100%
+    dark:from-rose-400/50 dark:via-rose-500/60 dark:to-rose-500/70
+  `,
+  coolPurple: `
+    bg-gradient-to-b
+    from-background from-0%
+    via-purple-100/50 via-70%
+    to-indigo-200/60 to-100%
+    dark:via-purple-400/40 dark:to-indigo-400/50
+  `,
+} as const;
+
 // Focus states for accessibility
 export const FOCUS_STATES = {
   button:
@@ -131,3 +156,4 @@ export type ButtonIconSize = keyof typeof BUTTON_ICON_SIZES;
 export type LogoSize = keyof typeof LOGO_SIZES;
 export type ComponentSize = "sm" | "md" | "lg";
 export type SemanticColor = keyof typeof SEMANTIC_COLORS;
+export type BackgroundGradient = keyof typeof BACKGROUND_GRADIENTS;

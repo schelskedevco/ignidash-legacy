@@ -18,7 +18,7 @@ export function ProductPageSectionHeader({
     <div className={`mb-12 text-center ${SPACING.container} ${className}`}>
       {/* Icon container */}
       <div
-        className={`mb-6 inline-flex ${ICON_SIZES["3xl"]} items-center justify-center rounded-full bg-rose-100 dark:bg-rose-300 border-2 border-rose-200 dark:border-rose-400`}
+        className={`mb-6 inline-flex ${ICON_SIZES["3xl"]} items-center justify-center rounded-full border-2 border-rose-200 bg-rose-100 dark:border-rose-400 dark:bg-rose-300`}
       >
         <Icon className={`${ICON_SIZES.xl} text-rose-600`} />
       </div>

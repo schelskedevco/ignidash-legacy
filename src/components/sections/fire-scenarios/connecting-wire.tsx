@@ -2,9 +2,9 @@ export function ConnectingWire() {
   return (
     <div className="relative flex items-center justify-center">
       {/* Horizontal wire for lg+ screens */}
-      <div className="hidden h-32 w-24 items-center justify-center lg:flex">
+      <div className="hidden h-20 w-20 items-center justify-center lg:flex">
         <svg
-          viewBox="0 0 150 100"
+          viewBox="0 0 120 80"
           className="h-full w-full"
           preserveAspectRatio="xMidYMid meet"
         >
@@ -15,7 +15,7 @@ export function ConnectingWire() {
             </linearGradient>
           </defs>
           <path
-            d="M0,50 H60 V70 H90 V30 H150"
+            d="M0,40 H30 V55 H60 V25 H120"
             stroke="url(#wireGradientH)"
             strokeWidth="3"
             strokeLinejoin="round"
@@ -33,9 +33,9 @@ export function ConnectingWire() {
       </div>
 
       {/* Vertical wire for smaller screens */}
-      <div className="flex h-24 w-20 items-center justify-center lg:hidden">
+      <div className="flex h-20 w-16 items-center justify-center lg:hidden">
         <svg
-          viewBox="0 0 100 150"
+          viewBox="0 0 80 120"
           className="h-full w-full"
           preserveAspectRatio="xMidYMid meet"
         >
@@ -46,7 +46,7 @@ export function ConnectingWire() {
             </linearGradient>
           </defs>
           <path
-            d="M50,0 V60 H30 V90 H70 V150"
+            d="M40,0 V30 H25 V60 H55 V120"
             stroke="url(#wireGradientV)"
             strokeWidth="3"
             strokeLinejoin="round"

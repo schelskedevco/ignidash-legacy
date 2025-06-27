@@ -81,6 +81,9 @@ export const MAX_WIDTHS = {
   xs: "max-w-xs",
 } as const;
 
+// Sheet width for mobile navigation - full width responsive
+export const SHEET_WIDTH = "w-full";
+
 // Type exports for TypeScript support
 export type IconSize = keyof typeof ICON_SIZES;
 export type BackgroundGradient = keyof typeof BACKGROUND_GRADIENTS;

@@ -1,12 +1,10 @@
-"use client";
-
 import { Separator } from "@/components/ui/separator";
 import {
   Scenario,
   CoastFireParameters,
   BaristaFireParameters,
   FireType,
-} from "../shared/fire-types";
+} from "../../lib/fire-types";
 import { SPACING } from "@/lib/design-constants";
 import {
   User,

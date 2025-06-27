@@ -1,5 +1,3 @@
-"use client";
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -12,7 +10,7 @@ import { ICON_SIZES } from "@/lib/design-constants";
 import { Info } from "lucide-react";
 import { GrowthChart } from "./growth-chart";
 import { KeyMetrics } from "./key-metrics";
-import { Scenario, FireOutputs, GrowthDataPoint } from "../shared/fire-types";
+import { Scenario, FireOutputs, GrowthDataPoint } from "../../lib/fire-types";
 
 interface FinancialOutputsCardProps {
   scenario: Scenario;

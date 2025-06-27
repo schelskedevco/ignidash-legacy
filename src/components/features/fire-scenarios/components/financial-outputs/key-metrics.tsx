@@ -1,5 +1,3 @@
-"use client";
-
 import {
   FireOutputs,
   Scenario,
@@ -7,7 +5,7 @@ import {
   RegularFireOutputs,
   CoastFireOutputs,
   BaristaFireOutputs,
-} from "../shared/fire-types";
+} from "../../lib/fire-types";
 import { AnimatedNumber } from "@/components/common/animated-number";
 
 interface KeyMetricsProps {

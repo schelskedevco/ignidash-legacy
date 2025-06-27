@@ -16,7 +16,6 @@ import { SCENARIOS } from "../fire-data";
 // Test data factories
 const createRegularFireScenario = (overrides = {}): RegularFireScenario => ({
   id: ScenarioId.REGULAR_FIRE,
-  title: "Test Regular FIRE",
   subtitle: "Test Subtitle",
   content: "Test content",
   icon: Target,
@@ -38,7 +37,6 @@ const createRegularFireScenario = (overrides = {}): RegularFireScenario => ({
 
 const createCoastFireScenario = (overrides = {}): CoastFireScenario => ({
   id: ScenarioId.FAMILY_COAST,
-  title: "Test Coast FIRE",
   subtitle: "Test Subtitle",
   content: "Test content",
   icon: Baby,
@@ -62,7 +60,6 @@ const createCoastFireScenario = (overrides = {}): CoastFireScenario => ({
 
 const createBaristaFireScenario = (overrides = {}): BaristaFireScenario => ({
   id: ScenarioId.SABBATICAL_BARISTA,
-  title: "Test Barista FIRE",
   subtitle: "Test Subtitle",
   content: "Test content",
   icon: Plane,

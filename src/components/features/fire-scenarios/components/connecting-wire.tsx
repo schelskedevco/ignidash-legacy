@@ -10,6 +10,97 @@ interface ConnectingWireProps {
   direction?: "normal" | "reverse";
 }
 
+// Helper function to get color values based on theme
+const getWireColors = (isDark: boolean) => ({
+  gradientStart: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)",
+  gradientEnd: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)",
+  sparkFill: isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)",
+});
+
+// Common SVG definitions component
+function WireSvgDefs({
+  variant,
+  direction,
+  idx,
+  colors,
+  isVertical = false,
+}: {
+  variant: string;
+  direction: string;
+  idx: number;
+  colors: ReturnType<typeof getWireColors>;
+  isVertical?: boolean;
+}) {
+  const gradientId = `wireGradient${isVertical ? "V" : "H"}-${variant}-${direction}-${idx}`;
+  const sparkGlowId = `sparkGlow${isVertical ? "V" : ""}-${idx}`;
+
+  return (
+    <defs>
+      <linearGradient
+        id={gradientId}
+        x1="0"
+        y1="0"
+        x2={isVertical ? "0" : "1"}
+        y2={isVertical ? "1" : "0"}
+      >
+        <stop offset="0%" stopColor={colors.gradientStart} />
+        <stop offset="100%" stopColor={colors.gradientEnd} />
+      </linearGradient>
+      <filter id={sparkGlowId}>
+        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+        <feMerge>
+          <feMergeNode in="coloredBlur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+  );
+}
+
+// Common spark animation component
+function SparkAnimation({
+  idx,
+  sparkDuration,
+  sparkDelay,
+  colors,
+  isVertical = false,
+}: {
+  idx: number;
+  sparkDuration: number;
+  sparkDelay: number;
+  colors: ReturnType<typeof getWireColors>;
+  isVertical?: boolean;
+}) {
+  const pathId = `path${isVertical ? "V" : "H"}-${idx}`;
+  const sparkGlowId = `sparkGlow${isVertical ? "V" : ""}-${idx}`;
+
+  return (
+    <circle r="3" fill={colors.sparkFill} filter={`url(#${sparkGlowId})`}>
+      <animateMotion
+        dur={`${sparkDuration}s`}
+        repeatCount="indefinite"
+        begin={`${sparkDelay}s`}
+      >
+        <mpath href={`#${pathId}`} />
+      </animateMotion>
+      <animate
+        attributeName="opacity"
+        values="0;0;1;1;0"
+        dur={`${sparkDuration}s`}
+        repeatCount="indefinite"
+        begin={`${sparkDelay}s`}
+      />
+      <animate
+        attributeName="r"
+        values="2;3;4;3;2"
+        dur={`${sparkDuration}s`}
+        repeatCount="indefinite"
+        begin={`${sparkDelay}s`}
+      />
+    </circle>
+  );
+}
+
 export function ConnectingWire({
   className = "",
   idx,
@@ -25,6 +116,7 @@ export function ConnectingWire({
 
   // Use a consistent value during SSR and initial client render
   const isDark = mounted ? resolvedTheme === "dark" : false;
+  const colors = getWireColors(isDark);
 
   // Shape breakdown: [left, middle, right] all must sum to 120
   const shape: Record<string, [number, number, number]> = {
@@ -73,38 +165,18 @@ export function ConnectingWire({
           className="h-full w-full"
           preserveAspectRatio="xMidYMid meet"
         >
-          <defs>
-            <linearGradient
-              id={`wireGradientH-${variant}-${direction}-${idx.toString()}`}
-              x1="0"
-              y1="0"
-              x2="1"
-              y2="0"
-            >
-              <stop
-                offset="0%"
-                stopColor={isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)"}
-              />
-              <stop
-                offset="100%"
-                stopColor={isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)"}
-              />
-            </linearGradient>
-
-            {/* Glow filter for spark */}
-            <filter id={`sparkGlow-${idx}`}>
-              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
+          <WireSvgDefs
+            variant={variant}
+            direction={direction}
+            idx={idx}
+            colors={colors}
+            isVertical={false}
+          />
 
           <path
             id={`pathH-${idx}`}
             d={horizontalPath}
-            stroke={`url(#wireGradientH-${variant}-${direction}-${idx.toString()})`}
+            stroke={`url(#wireGradientH-${variant}-${direction}-${idx})`}
             strokeWidth="3"
             strokeLinejoin="round"
             strokeLinecap="round"
@@ -119,34 +191,13 @@ export function ConnectingWire({
             />
           </path>
 
-          {/* Electric spark */}
-          <circle
-            r="3"
-            fill={isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)"}
-            filter={`url(#sparkGlow-${idx})`}
-          >
-            <animateMotion
-              dur={`${sparkDuration}s`}
-              repeatCount="indefinite"
-              begin={`${sparkDelay}s`}
-            >
-              <mpath href={`#pathH-${idx}`} />
-            </animateMotion>
-            <animate
-              attributeName="opacity"
-              values="0;0;1;1;0"
-              dur={`${sparkDuration}s`}
-              repeatCount="indefinite"
-              begin={`${sparkDelay}s`}
-            />
-            <animate
-              attributeName="r"
-              values="2;3;4;3;2"
-              dur={`${sparkDuration}s`}
-              repeatCount="indefinite"
-              begin={`${sparkDelay}s`}
-            />
-          </circle>
+          <SparkAnimation
+            idx={idx}
+            sparkDuration={sparkDuration}
+            sparkDelay={sparkDelay}
+            colors={colors}
+            isVertical={false}
+          />
         </svg>
       </div>
 
@@ -157,37 +208,18 @@ export function ConnectingWire({
           className="h-full w-full"
           preserveAspectRatio="xMidYMid meet"
         >
-          <defs>
-            <linearGradient
-              id={`wireGradientV-${variant}-${direction}-${idx.toString()}`}
-              x1="0"
-              y1="0"
-              x2="0"
-              y2="1"
-            >
-              <stop
-                offset="0%"
-                stopColor={isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)"}
-              />
-              <stop
-                offset="100%"
-                stopColor={isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)"}
-              />
-            </linearGradient>
-
-            <filter id={`sparkGlowV-${idx}`}>
-              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
+          <WireSvgDefs
+            variant={variant}
+            direction={direction}
+            idx={idx}
+            colors={colors}
+            isVertical={true}
+          />
 
           <path
             id={`pathV-${idx}`}
             d={verticalPath}
-            stroke={`url(#wireGradientV-${variant}-${direction}-${idx.toString()})`}
+            stroke={`url(#wireGradientV-${variant}-${direction}-${idx})`}
             strokeWidth="3"
             strokeLinejoin="round"
             strokeLinecap="round"
@@ -202,34 +234,13 @@ export function ConnectingWire({
             />
           </path>
 
-          {/* Electric spark */}
-          <circle
-            r="3"
-            fill={isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)"}
-            filter={`url(#sparkGlowV-${idx})`}
-          >
-            <animateMotion
-              dur={`${sparkDuration}s`}
-              repeatCount="indefinite"
-              begin={`${sparkDelay}s`}
-            >
-              <mpath href={`#pathV-${idx}`} />
-            </animateMotion>
-            <animate
-              attributeName="opacity"
-              values="0;0;1;1;0"
-              dur={`${sparkDuration}s`}
-              repeatCount="indefinite"
-              begin={`${sparkDelay}s`}
-            />
-            <animate
-              attributeName="r"
-              values="2;3;4;3;2"
-              dur={`${sparkDuration}s`}
-              repeatCount="indefinite"
-              begin={`${sparkDelay}s`}
-            />
-          </circle>
+          <SparkAnimation
+            idx={idx}
+            sparkDuration={sparkDuration}
+            sparkDelay={sparkDelay}
+            colors={colors}
+            isVertical={true}
+          />
         </svg>
       </div>
     </div>

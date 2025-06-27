@@ -1,76 +1,78 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 
 interface ConnectingWireProps {
   className?: string;
-  idx: number;
-  direction?: "normal" | "reverse";
+  placement: "top" | "bottom";
 }
 
-// Helper function to get color values based on theme
+// Constants for consistent calculations
+const WIRE_COUNT = 4;
+const WIRE_SPACING = -20; // Negative for stacking effect
+const BASE_VERTICAL_OFFSET = 80; // Base Y position for vertical segment
+const VERTICAL_RISE_STEP = 20; // Height difference between wires
+const VIEWBOX_X = -70; // Account for negative wire positions
+const VIEWBOX_Y = 0;
+const VIEWBOX_WIDTH = 250; // Extended to show wires reaching out
+const VIEWBOX_HEIGHT = 120;
+const WIRE_END_X = 180; // Where wires extend to
+
 const getWireColors = (isDark: boolean) => ({
   gradientStart: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)",
   gradientEnd: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)",
   sparkFill: isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)",
 });
 
-// Common SVG definitions component
 function WireSvgDefs({
-  direction,
-  idx,
+  placement,
   colors,
-  isVertical = false,
 }: {
-  direction: string;
-  idx: number;
+  placement: string;
   colors: ReturnType<typeof getWireColors>;
-  isVertical?: boolean;
 }) {
-  const gradientId = `wireGradient${isVertical ? "V" : "H"}-${direction}-${idx}`;
-  const sparkGlowId = `sparkGlow${isVertical ? "V" : ""}-${idx}`;
+  const uniqueId = `wire-${placement}`;
 
   return (
     <defs>
-      <linearGradient
-        id={gradientId}
-        x1="0"
-        y1="0"
-        x2={isVertical ? "0" : "1"}
-        y2={isVertical ? "1" : "0"}
-      >
+      {/* Single gradient for all wires in this theme */}
+      <linearGradient id={`${uniqueId}-gradient`} x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor={colors.gradientStart} />
         <stop offset="100%" stopColor={colors.gradientEnd} />
       </linearGradient>
-      <filter id={sparkGlowId}>
-        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-        <feMerge>
-          <feMergeNode in="coloredBlur" />
-          <feMergeNode in="SourceGraphic" />
-        </feMerge>
-      </filter>
+
+      {/* Individual spark glows for each wire */}
+      {Array.from({ length: WIRE_COUNT }).map((_, i) => {
+        const sparkGlowId = `${uniqueId}-sparkGlow-${i}`;
+
+        return (
+          <filter key={i} id={sparkGlowId}>
+            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        );
+      })}
     </defs>
   );
 }
 
-// Common spark animation component
 function SparkAnimation({
-  idx,
+  pathId,
   sparkDuration,
   sparkDelay,
   colors,
-  isVertical = false,
+  sparkGlowId,
 }: {
-  idx: number;
+  pathId: string;
   sparkDuration: number;
   sparkDelay: number;
   colors: ReturnType<typeof getWireColors>;
-  isVertical?: boolean;
+  sparkGlowId: string;
 }) {
-  const pathId = `path${isVertical ? "V" : "H"}-${idx}`;
-  const sparkGlowId = `sparkGlow${isVertical ? "V" : ""}-${idx}`;
-
   return (
     <circle r="3" fill={colors.sparkFill} filter={`url(#${sparkGlowId})`}>
       <animateMotion
@@ -100,8 +102,7 @@ function SparkAnimation({
 
 export function ConnectingWire({
   className = "",
-  idx,
-  direction = "normal",
+  placement,
 }: ConnectingWireProps) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -110,122 +111,70 @@ export function ConnectingWire({
     setMounted(true);
   }, []);
 
-  // Use a consistent value during SSR and initial client render
   const isDark = mounted ? resolvedTheme === "dark" : false;
   const colors = getWireColors(isDark);
-
-  const [left, middle, right] = [40, 40, 40];
-  const total = left + middle + right;
-
-  // Directional vertical values
-  const yStart = 40;
-  const yDown = direction === "reverse" ? 25 : 55;
-  const yUp = direction === "reverse" ? 55 : 25;
-
-  // Horizontal path (lg+)
-  const x1 = left;
-  const x2 = left + middle;
-  const x3 = total;
-
-  const horizontalPath = `M0,${yStart} H${x1} V${yDown} H${x2} V${yUp} H${x3}`;
-
-  // Vertical path (mobile)
-  const y1 = left;
-  const y2 = left + middle;
-  const y3 = total;
-
-  const xDown = direction === "reverse" ? 25 : 55;
-  const xUp = direction === "reverse" ? 55 : 25;
-
-  const verticalPath = `M40,0 V${y1} H${xDown} V${y2} H${xUp} V${y3}`;
-
-  // Randomize spark timing based on idx
-  const sparkDelay = (idx * 0.3) % 2;
-  const sparkDuration = 2.5 + (idx % 3) * 0.5; // 2.5s to 4s
+  const uniqueId = `wire-${placement}`;
 
   return (
-    <div className={`relative flex items-center justify-center ${className}`}>
-      {/* Horizontal wire for lg+ screens */}
-      <div className="hidden h-16 w-20 items-center justify-center lg:flex">
+    <div className={`relative hidden sm:flex ${className}`}>
+      <div className="z-40 hidden h-20 w-36 overflow-visible lg:flex">
         <svg
-          viewBox={`0 0 ${total} 80`}
-          className="h-full w-full"
+          viewBox={`${VIEWBOX_X} ${VIEWBOX_Y} ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
+          className="h-full w-full overflow-visible"
           preserveAspectRatio="xMidYMid meet"
+          role="img"
+          aria-hidden="true"
         >
-          <WireSvgDefs
-            direction={direction}
-            idx={idx}
-            colors={colors}
-            isVertical={false}
-          />
+          <WireSvgDefs placement={placement} colors={colors} />
 
-          <path
-            id={`pathH-${idx}`}
-            d={horizontalPath}
-            stroke={`url(#wireGradientH-${direction}-${idx})`}
-            strokeWidth="3"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            fill="none"
-            strokeDasharray="12 6"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              values="0;-36"
-              dur="1s"
-              repeatCount="indefinite"
-            />
-          </path>
+          {Array.from({ length: WIRE_COUNT }).map((_, i) => {
+            const wireX = i * WIRE_SPACING;
+            const verticalLength =
+              BASE_VERTICAL_OFFSET - i * VERTICAL_RISE_STEP;
+            const pathId = `${uniqueId}-path-${i}`;
+            const gradientId = `${uniqueId}-gradient`;
+            const sparkGlowId = `${uniqueId}-sparkGlow-${i}`;
 
-          <SparkAnimation
-            idx={idx}
-            sparkDuration={sparkDuration}
-            sparkDelay={sparkDelay}
-            colors={colors}
-            isVertical={false}
-          />
-        </svg>
-      </div>
+            // Generate path based on placement
+            let pathData: string;
+            if (placement === "top") {
+              // Start from bottom (VIEWBOX_HEIGHT), go up, then right
+              const endY = VIEWBOX_HEIGHT - verticalLength;
+              pathData = `M ${wireX},${VIEWBOX_HEIGHT} L ${wireX},${endY} L ${WIRE_END_X},${endY}`;
+            } else {
+              // Start from top (0), go down, then right
+              pathData = `M ${wireX},0 L ${wireX},${verticalLength} L ${WIRE_END_X},${verticalLength}`;
+            }
 
-      {/* Vertical wire for smaller screens */}
-      <div className="flex h-20 w-16 items-center justify-center lg:hidden">
-        <svg
-          viewBox={`0 0 80 ${total}`}
-          className="h-full w-full"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <WireSvgDefs
-            direction={direction}
-            idx={idx}
-            colors={colors}
-            isVertical={true}
-          />
-
-          <path
-            id={`pathV-${idx}`}
-            d={verticalPath}
-            stroke={`url(#wireGradientV-${direction}-${idx})`}
-            strokeWidth="3"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            fill="none"
-            strokeDasharray="12 6"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              values="0;-36"
-              dur="1s"
-              repeatCount="indefinite"
-            />
-          </path>
-
-          <SparkAnimation
-            idx={idx}
-            sparkDuration={sparkDuration}
-            sparkDelay={sparkDelay}
-            colors={colors}
-            isVertical={true}
-          />
+            return (
+              <React.Fragment key={i}>
+                <path
+                  id={pathId}
+                  d={pathData}
+                  stroke={`url(#${gradientId})`}
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                  strokeDasharray="12 6"
+                >
+                  <animate
+                    attributeName="stroke-dashoffset"
+                    values="0;-36"
+                    dur="1s"
+                    repeatCount="indefinite"
+                  />
+                </path>
+                <SparkAnimation
+                  pathId={pathId}
+                  sparkDuration={2}
+                  sparkDelay={i * 0.5}
+                  colors={colors}
+                  sparkGlowId={sparkGlowId}
+                />
+              </React.Fragment>
+            );
+          })}
         </svg>
       </div>
     </div>

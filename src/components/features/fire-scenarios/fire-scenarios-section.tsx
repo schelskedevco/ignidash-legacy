@@ -35,21 +35,17 @@ export function FireScenariosSection() {
         title="Every FIRE Path, Clearly Mapped"
         description="Compare early retirement, sabbaticals, part-time transitions, and creative combinations. We'll calculate the timeline and trade-offs for every scenario you want to explore."
       />
-      <div className="flex flex-col items-center justify-center gap-4 sm:gap-0 lg:flex-row">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {/* Left Panel - Financial Inputs */}
-        <FinancialInputsCard
-          scenarios={SCENARIOS}
-          selectedScenario={selectedScenario}
-          onScenarioChange={setSelectedScenario}
-        />
 
-        <div className="hidden flex-row justify-center sm:flex lg:flex-col">
-          <ConnectingWire idx={0} direction="reverse" />
-          <ConnectingWire idx={1} />
-          <ConnectingWire idx={2} direction="reverse" />
-          <ConnectingWire idx={3} />
-          <ConnectingWire idx={4} direction="reverse" />
-          <ConnectingWire idx={5} />
+        <div className="flex flex-col items-end">
+          <ConnectingWire placement="top" />
+          <FinancialInputsCard
+            scenarios={SCENARIOS}
+            selectedScenario={selectedScenario}
+            onScenarioChange={setSelectedScenario}
+          />
+          <ConnectingWire placement="bottom" />
         </div>
 
         {/* Right Panel - Financial Outputs */}

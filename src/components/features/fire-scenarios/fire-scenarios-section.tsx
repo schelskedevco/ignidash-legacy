@@ -31,7 +31,7 @@ export function FireScenariosSection() {
       topBackgroundComponents={
         <>
           <TopFade />
-          <GradientBackground variant="fireScenarios" />
+          <GradientBackground variant="warmRose" />
         </>
       }
       bottomBackgroundComponents={<BottomShadow />}

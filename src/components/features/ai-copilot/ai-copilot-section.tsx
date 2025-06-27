@@ -9,7 +9,7 @@ export function AICopilotSection() {
     <ProductPageSection
       id="ai-copilot"
       ariaLabel="AI Copilot Section"
-      topBackgroundComponents={<GradientBackground variant="aiCopilot" />}
+      topBackgroundComponents={<GradientBackground variant="coolPurple" />}
     >
       <ProductPageSectionHeader
         icon={WandSparkles}

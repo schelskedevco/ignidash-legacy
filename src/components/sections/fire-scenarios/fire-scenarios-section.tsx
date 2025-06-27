@@ -40,7 +40,7 @@ export function FireScenariosSection() {
             />
           }
         >
-          <div className="mx-auto flex max-w-7xl flex-col items-stretch lg:flex-row">
+          <div className="mx-auto flex max-w-7xl flex-col items-center lg:flex-row">
             {/* Left Panel - Financial Inputs */}
             <FinancialInputsCard
               scenarios={SCENARIOS}

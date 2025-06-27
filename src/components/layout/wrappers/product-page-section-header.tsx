@@ -16,15 +16,19 @@ export function ProductPageSectionHeader({
 }: ProductPageSectionHeaderProps) {
   return (
     <div className={`mb-12 text-center ${SPACING.container} ${className}`}>
-      {/* Inline section header icon */}
+      {/* Icon container */}
       <div
         className={`mb-6 inline-flex ${ICON_SIZES["3xl"]} items-center justify-center rounded-full bg-rose-100 dark:bg-rose-300`}
       >
         <Icon className={`${ICON_SIZES.xl} text-rose-600`} />
       </div>
+
+      {/* Title */}
       <h2 className="font-heading mb-4 text-2xl font-bold sm:text-3xl md:text-4xl">
         {title}
       </h2>
+
+      {/* Description */}
       <p className="text-muted-foreground mx-auto max-w-3xl text-base sm:text-lg">
         {description}
       </p>

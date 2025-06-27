@@ -29,17 +29,19 @@ export function FireScenariosSection() {
       id="fire-scenarios"
       ariaLabel="Fire Scenarios Section"
       contentVariant="full"
-      topFade={<TopFade />}
-      background={<GradientBackground variant="fireScenarios" />}
-      bottomShadow={<BottomShadow />}
-      header={
-        <ProductPageSectionHeader
-          icon={Route}
-          title="Every FIRE Path, Clearly Mapped"
-          description="Compare early retirement, sabbaticals, part-time transitions, and creative combinations. We'll calculate the timeline and trade-offs for every scenario you want to explore."
-        />
+      topBackgroundComponents={
+        <>
+          <TopFade />
+          <GradientBackground variant="fireScenarios" />
+        </>
       }
+      bottomBackgroundComponents={<BottomShadow />}
     >
+      <ProductPageSectionHeader
+        icon={Route}
+        title="Every FIRE Path, Clearly Mapped"
+        description="Compare early retirement, sabbaticals, part-time transitions, and creative combinations. We'll calculate the timeline and trade-offs for every scenario you want to explore."
+      />
       <div className="mx-auto flex max-w-7xl flex-col items-center lg:flex-row">
         {/* Left Panel - Financial Inputs */}
         <FinancialInputsCard

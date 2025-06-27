@@ -9,15 +9,13 @@ export function AICopilotSection() {
     <ProductPageSection
       id="ai-copilot"
       ariaLabel="AI Copilot Section"
-      background={<GradientBackground variant="aiCopilot" />}
-      header={
-        <ProductPageSectionHeader
-          icon={WandSparkles}
-          title="Your AI Retirement Advisor"
-          description="Get wisdom inspired by the best minds in financial independence, personalized to your exact situation."
-        />
-      }
+      topBackgroundComponents={<GradientBackground variant="aiCopilot" />}
     >
+      <ProductPageSectionHeader
+        icon={WandSparkles}
+        title="Your AI Retirement Advisor"
+        description="Get wisdom inspired by the best minds in financial independence, personalized to your exact situation."
+      />
       <AICopilotDemo />
     </ProductPageSection>
   );

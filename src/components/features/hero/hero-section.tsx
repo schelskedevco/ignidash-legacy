@@ -13,7 +13,7 @@ export function HeroSection() {
   return (
     <ProductPageSection
       ariaLabel="Hero Section"
-      background={<GradientBackground variant="hero" />}
+      topBackgroundComponents={<GradientBackground variant="hero" />}
     >
       <h1
         className={`font-heading mx-auto mb-6 ${MAX_WIDTHS.content} text-5xl leading-tight font-bold md:text-7xl xl:mx-0`}

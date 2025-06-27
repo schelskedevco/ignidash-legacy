@@ -45,7 +45,6 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
         icon={Icon}
         title={scenario.subtitle}
         description={scenario.content}
-        focusArea={scenario.focusArea}
         bgColor={scenario.bgColor}
         iconColor={scenario.color}
       />

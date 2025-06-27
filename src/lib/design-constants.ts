@@ -144,8 +144,7 @@ export const SEMANTIC_COLORS = {
 // Max width patterns
 export const MAX_WIDTHS = {
   container: "max-w-7xl",
-  content: "max-w-4xl",
-  contentSm: "max-w-sm md:max-w-3xl",
+  content: "max-w-sm md:max-w-2xl lg:max-w-3xl",
   prose: "max-w-prose",
   xs: "max-w-xs",
 } as const;

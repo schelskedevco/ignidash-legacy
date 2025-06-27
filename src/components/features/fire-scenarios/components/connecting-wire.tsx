@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 interface ConnectingWireProps {
   className?: string;
   idx: number;
-  variant?: "step" | "tight" | "wide" | "flip" | "lean";
   direction?: "normal" | "reverse";
 }
 
@@ -19,19 +18,17 @@ const getWireColors = (isDark: boolean) => ({
 
 // Common SVG definitions component
 function WireSvgDefs({
-  variant,
   direction,
   idx,
   colors,
   isVertical = false,
 }: {
-  variant: string;
   direction: string;
   idx: number;
   colors: ReturnType<typeof getWireColors>;
   isVertical?: boolean;
 }) {
-  const gradientId = `wireGradient${isVertical ? "V" : "H"}-${variant}-${direction}-${idx}`;
+  const gradientId = `wireGradient${isVertical ? "V" : "H"}-${direction}-${idx}`;
   const sparkGlowId = `sparkGlow${isVertical ? "V" : ""}-${idx}`;
 
   return (
@@ -104,7 +101,6 @@ function SparkAnimation({
 export function ConnectingWire({
   className = "",
   idx,
-  variant = "step",
   direction = "normal",
 }: ConnectingWireProps) {
   const { resolvedTheme } = useTheme();
@@ -118,16 +114,7 @@ export function ConnectingWire({
   const isDark = mounted ? resolvedTheme === "dark" : false;
   const colors = getWireColors(isDark);
 
-  // Shape breakdown: [left, middle, right] all must sum to 120
-  const shape: Record<string, [number, number, number]> = {
-    step: [30, 30, 60],
-    tight: [20, 50, 50],
-    wide: [40, 10, 70],
-    flip: [50, 40, 30],
-    lean: [60, 20, 40],
-  };
-
-  const [left, middle, right] = shape[variant] || shape.step;
+  const [left, middle, right] = [40, 40, 40];
   const total = left + middle + right;
 
   // Directional vertical values
@@ -166,7 +153,6 @@ export function ConnectingWire({
           preserveAspectRatio="xMidYMid meet"
         >
           <WireSvgDefs
-            variant={variant}
             direction={direction}
             idx={idx}
             colors={colors}
@@ -176,7 +162,7 @@ export function ConnectingWire({
           <path
             id={`pathH-${idx}`}
             d={horizontalPath}
-            stroke={`url(#wireGradientH-${variant}-${direction}-${idx})`}
+            stroke={`url(#wireGradientH-${direction}-${idx})`}
             strokeWidth="3"
             strokeLinejoin="round"
             strokeLinecap="round"
@@ -209,7 +195,6 @@ export function ConnectingWire({
           preserveAspectRatio="xMidYMid meet"
         >
           <WireSvgDefs
-            variant={variant}
             direction={direction}
             idx={idx}
             colors={colors}
@@ -219,7 +204,7 @@ export function ConnectingWire({
           <path
             id={`pathV-${idx}`}
             d={verticalPath}
-            stroke={`url(#wireGradientV-${variant}-${direction}-${idx})`}
+            stroke={`url(#wireGradientV-${direction}-${idx})`}
             strokeWidth="3"
             strokeLinejoin="round"
             strokeLinecap="round"

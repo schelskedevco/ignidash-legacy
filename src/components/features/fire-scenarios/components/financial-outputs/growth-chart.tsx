@@ -35,9 +35,13 @@ interface GrowthChartProps {
 const chartConfig = {
   portfolio: {
     label: "Portfolio Value",
+    color: "#fb7185",
+  },
+  referenceLine: {
+    label: "Reference Line",
     theme: {
       light: "#000000",
-      dark: "#FFFFFF", // Light gray for dark mode
+      dark: "#FFFFFF",
     },
   },
 } satisfies ChartConfig;
@@ -160,7 +164,7 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
         />
         <ReferenceLine
           x={fireAge}
-          stroke="#ef4444"
+          stroke="var(--color-referenceLine)"
           strokeDasharray="20 20"
           strokeWidth={1}
           label={{
@@ -169,20 +173,26 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
                 ? `Coast at ${fireAge}`
                 : `FIRE at ${fireAge}`,
             position: "top",
-            style: { fontSize: isMobile ? 10 : 12, fill: "#ef4444" },
+            style: {
+              fontSize: isMobile ? 10 : 12,
+              fill: "var(--color-referenceLine)",
+            },
           }}
         />
         {scenario.fireType === FireType.COAST_FIRE &&
           getTargetRetirementAge() && (
             <ReferenceLine
               x={getTargetRetirementAge()!}
-              stroke="#10b981"
+              stroke="var(--color-referenceLine)"
               strokeDasharray="20 20"
               strokeWidth={1}
               label={{
                 value: `Full retirement at ${getTargetRetirementAge()}`,
                 position: "top",
-                style: { fontSize: isMobile ? 10 : 12, fill: "#10b981" },
+                style: {
+                  fontSize: isMobile ? 10 : 12,
+                  fill: "var(--color-referenceLine)",
+                },
               }}
             />
           )}

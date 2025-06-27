@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Route } from "lucide-react";
-import { SectionHeader } from "@/components/common/section-header";
+import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
 import { GradientBackground } from "@/components/layout/effects/gradient-background";
 import { TopFade } from "@/components/layout/effects/top-fade";
@@ -33,7 +33,7 @@ export function FireScenariosSection() {
       background={<GradientBackground variant="fireScenarios" />}
       bottomShadow={<BottomShadow />}
       header={
-        <SectionHeader
+        <ProductPageSectionHeader
           icon={Route}
           title="Every FIRE Path, Clearly Mapped"
           description="Compare early retirement, sabbaticals, part-time transitions, and creative combinations. We'll calculate the timeline and trade-offs for every scenario you want to explore."

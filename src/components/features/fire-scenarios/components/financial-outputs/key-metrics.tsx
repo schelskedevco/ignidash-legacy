@@ -6,7 +6,7 @@ import {
   CoastFireOutputs,
   BaristaFireOutputs,
 } from "../../lib/fire-types";
-import { AnimatedNumber } from "@/components/common/animated-number";
+import { AnimatedNumber } from "../animated-number";
 
 interface KeyMetricsProps {
   outputs: FireOutputs;

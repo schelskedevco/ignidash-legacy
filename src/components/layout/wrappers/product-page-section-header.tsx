@@ -1,19 +1,19 @@
 import { LucideIcon } from "lucide-react";
 import { SPACING, ICON_SIZES } from "@/lib/design-constants";
 
-interface SectionHeaderProps {
+interface ProductPageSectionHeaderProps {
   icon: LucideIcon;
   title: string;
   description: string;
   className?: string;
 }
 
-export function SectionHeader({
+export function ProductPageSectionHeader({
   icon: Icon,
   title,
   description,
   className = "",
-}: SectionHeaderProps) {
+}: ProductPageSectionHeaderProps) {
   return (
     <div className={`mb-12 text-center ${SPACING.container} ${className}`}>
       {/* Inline section header icon */}

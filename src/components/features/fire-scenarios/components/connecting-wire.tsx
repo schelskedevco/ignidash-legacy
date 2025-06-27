@@ -92,6 +92,7 @@ export function ConnectingWire({
             stroke={`url(#wireGradientH-${variant}-${direction}-${idx.toString()})`}
             strokeWidth="3"
             strokeLinejoin="round"
+            strokeLinecap="round"
             fill="none"
             strokeDasharray="12 6"
           >
@@ -135,6 +136,7 @@ export function ConnectingWire({
             stroke={`url(#wireGradientV-${variant}-${direction}-${idx.toString()})`}
             strokeWidth="3"
             strokeLinejoin="round"
+            strokeLinecap="round"
             fill="none"
             strokeDasharray="12 6"
           >

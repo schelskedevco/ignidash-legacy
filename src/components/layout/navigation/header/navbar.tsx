@@ -58,58 +58,60 @@ function NavLink({
 
 export function Navbar() {
   return (
-    <nav
-      className={`bg-background sticky top-0 z-50 mx-auto flex h-16 items-center justify-between border-b ${MAX_WIDTHS.container} ${SPACING.container}`}
-    >
-      <Logo />
+    <nav className="bg-background sticky top-0 z-50 border-b">
+      <div
+        className={`mx-auto flex h-16 items-center justify-between ${MAX_WIDTHS.container} ${SPACING.container}`}
+      >
+        <Logo />
 
-      {/* Desktop Navigation */}
-      <div className="hidden items-center gap-4 md:flex">
-        <ModeToggle iconSize={ICON_SIZES.lg} />
-        <Button asChild variant="ghost">
-          <Link href="/dashboard">Sign In</Link>
-        </Button>
-        <Button
-          asChild
-          className={`${GRADIENTS.primaryReverse} text-white hover:from-pink-600 hover:via-red-600 hover:to-orange-600`}
-        >
-          <Link href="/dashboard" className="flex items-center gap-2">
-            Get Started
-            <ArrowRight className={BUTTON_ICON_SIZE} />
-          </Link>
-        </Button>
-      </div>
+        {/* Desktop Navigation */}
+        <div className="hidden items-center gap-4 md:flex">
+          <ModeToggle iconSize={ICON_SIZES.lg} />
+          <Button asChild variant="ghost">
+            <Link href="/dashboard">Sign In</Link>
+          </Button>
+          <Button
+            asChild
+            className={`${GRADIENTS.primaryReverse} text-white hover:from-pink-600 hover:via-red-600 hover:to-orange-600`}
+          >
+            <Link href="/dashboard" className="flex items-center gap-2">
+              Get Started
+              <ArrowRight className={BUTTON_ICON_SIZE} />
+            </Link>
+          </Button>
+        </div>
 
-      {/* Mobile Navigation */}
-      <div className="flex items-center gap-2 md:hidden">
-        <ModeToggle iconSize={ICON_SIZES.lg} />
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" aria-label="Open menu">
-              <Menu className={ICON_SIZES.lg} />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className={SHEET_WIDTH}>
-            <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+        {/* Mobile Navigation */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ModeToggle iconSize={ICON_SIZES.lg} />
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label="Open menu">
+                <Menu className={ICON_SIZES.lg} />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className={SHEET_WIDTH}>
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
 
-            {/* Mobile Header */}
-            <div className="flex h-16 items-center justify-between border-b px-4">
-              <Logo />
-            </div>
-
-            {/* Navigation Links */}
-            <div className="flex flex-col">
-              <NavLink href="/dashboard">Sign In</NavLink>
-              <div className="mx-2">
-                <Separator />
+              {/* Mobile Header */}
+              <div className="flex h-16 items-center justify-between border-b px-4">
+                <Logo />
               </div>
-              <NavLink href="/dashboard">Get Started</NavLink>
-              <div className="mx-2">
-                <Separator />
+
+              {/* Navigation Links */}
+              <div className="flex flex-col">
+                <NavLink href="/dashboard">Sign In</NavLink>
+                <div className="mx-2">
+                  <Separator />
+                </div>
+                <NavLink href="/dashboard">Get Started</NavLink>
+                <div className="mx-2">
+                  <Separator />
+                </div>
               </div>
-            </div>
-          </SheetContent>
-        </Sheet>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </nav>
   );

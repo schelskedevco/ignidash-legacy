@@ -2,7 +2,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScenarioDetails } from "./scenario-details";
 import { Scenario, ScenarioId } from "../../lib/fire-types";
-import { SPACING } from "@/lib/design-constants";
 
 interface FinancialInputsCardProps {
   scenarios: Scenario[];
@@ -17,7 +16,7 @@ export function FinancialInputsCard({
 }: FinancialInputsCardProps) {
   return (
     <Card className="hover:border-primary/30 w-full transition-all duration-300 hover:shadow-sm">
-      <CardContent className={SPACING.cardPadding}>
+      <CardContent>
         <h2 className="font-heading mb-4 text-xl font-semibold">
           Your Financial Profile
         </h2>

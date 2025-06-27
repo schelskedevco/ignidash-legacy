@@ -60,6 +60,10 @@ export function ConnectingWire({
 
   const verticalPath = `M40,0 V${y1} H${xDown} V${y2} H${xUp} V${y3}`;
 
+  // Randomize spark timing based on idx
+  const sparkDelay = (idx * 0.3) % 2;
+  const sparkDuration = 2.5 + (idx % 3) * 0.5; // 2.5s to 4s
+
   return (
     <div className={`relative flex items-center justify-center ${className}`}>
       {/* Horizontal wire for lg+ screens */}
@@ -86,8 +90,19 @@ export function ConnectingWire({
                 stopColor={isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)"}
               />
             </linearGradient>
+
+            {/* Glow filter for spark */}
+            <filter id={`sparkGlow-${idx}`}>
+              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+              <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
           </defs>
+
           <path
+            id={`pathH-${idx}`}
             d={horizontalPath}
             stroke={`url(#wireGradientH-${variant}-${direction}-${idx.toString()})`}
             strokeWidth="3"
@@ -103,6 +118,35 @@ export function ConnectingWire({
               repeatCount="indefinite"
             />
           </path>
+
+          {/* Electric spark */}
+          <circle
+            r="3"
+            fill={isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)"}
+            filter={`url(#sparkGlow-${idx})`}
+          >
+            <animateMotion
+              dur={`${sparkDuration}s`}
+              repeatCount="indefinite"
+              begin={`${sparkDelay}s`}
+            >
+              <mpath href={`#pathH-${idx}`} />
+            </animateMotion>
+            <animate
+              attributeName="opacity"
+              values="0;0;1;1;0"
+              dur={`${sparkDuration}s`}
+              repeatCount="indefinite"
+              begin={`${sparkDelay}s`}
+            />
+            <animate
+              attributeName="r"
+              values="2;3;4;3;2"
+              dur={`${sparkDuration}s`}
+              repeatCount="indefinite"
+              begin={`${sparkDelay}s`}
+            />
+          </circle>
         </svg>
       </div>
 
@@ -130,8 +174,18 @@ export function ConnectingWire({
                 stopColor={isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)"}
               />
             </linearGradient>
+
+            <filter id={`sparkGlowV-${idx}`}>
+              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+              <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
           </defs>
+
           <path
+            id={`pathV-${idx}`}
             d={verticalPath}
             stroke={`url(#wireGradientV-${variant}-${direction}-${idx.toString()})`}
             strokeWidth="3"
@@ -147,6 +201,35 @@ export function ConnectingWire({
               repeatCount="indefinite"
             />
           </path>
+
+          {/* Electric spark */}
+          <circle
+            r="3"
+            fill={isDark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)"}
+            filter={`url(#sparkGlowV-${idx})`}
+          >
+            <animateMotion
+              dur={`${sparkDuration}s`}
+              repeatCount="indefinite"
+              begin={`${sparkDelay}s`}
+            >
+              <mpath href={`#pathV-${idx}`} />
+            </animateMotion>
+            <animate
+              attributeName="opacity"
+              values="0;0;1;1;0"
+              dur={`${sparkDuration}s`}
+              repeatCount="indefinite"
+              begin={`${sparkDelay}s`}
+            />
+            <animate
+              attributeName="r"
+              values="2;3;4;3;2"
+              dur={`${sparkDuration}s`}
+              repeatCount="indefinite"
+              begin={`${sparkDelay}s`}
+            />
+          </circle>
         </svg>
       </div>
     </div>

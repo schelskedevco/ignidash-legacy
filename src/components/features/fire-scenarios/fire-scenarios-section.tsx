@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Route } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
-import { BottomShadow } from "@/components/layout/effects/bottom-shadow";
 import { SCENARIOS } from "./lib/fire-data";
 import { calculateProjections, generateGrowthData } from "./lib/fire-utils";
 import { FinancialInputsCard } from "./components/financial-inputs/financial-inputs-card";
@@ -27,7 +26,7 @@ export function FireScenariosSection() {
       id="fire-scenarios"
       ariaLabel="Fire Scenarios Section"
       gradientVariant="warmRose"
-      bottomBackgroundComponents={<BottomShadow />}
+      showBottomShadow={true}
     >
       <ProductPageSectionHeader
         icon={Route}

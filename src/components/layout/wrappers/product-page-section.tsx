@@ -5,6 +5,7 @@ import {
   BackgroundGradient,
 } from "@/lib/design-constants";
 import { GradientBackground } from "@/components/layout/effects/gradient-background";
+import { BottomShadow } from "@/components/layout/effects/bottom-shadow";
 
 interface ProductPageSectionProps {
   id?: string;
@@ -14,6 +15,7 @@ interface ProductPageSectionProps {
   bottomBackgroundComponents?: ReactNode;
   textAlign?: "center" | "left" | "responsive";
   spacing?: "default" | "large" | "small";
+  showBottomShadow?: boolean;
 }
 
 export function ProductPageSection({
@@ -21,9 +23,9 @@ export function ProductPageSection({
   children,
   ariaLabel,
   gradientVariant,
-  bottomBackgroundComponents,
   textAlign = "responsive",
   spacing = "large",
+  showBottomShadow = false,
 }: ProductPageSectionProps) {
   const spacingClass = {
     default: SPACING.sectionVertical,
@@ -51,7 +53,9 @@ export function ProductPageSection({
           </div>
         </div>
 
-        <div aria-hidden="true">{bottomBackgroundComponents}</div>
+        {showBottomShadow ? (
+          <div aria-hidden="true">{<BottomShadow />}</div>
+        ) : null}
       </div>
     </section>
   );

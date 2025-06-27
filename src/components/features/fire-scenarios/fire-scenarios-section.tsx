@@ -10,6 +10,7 @@ import { FinancialInputsCard } from "./components/financial-inputs/financial-inp
 import { FinancialOutputsCard } from "./components/financial-outputs/financial-outputs-card";
 import { ScenarioId } from "./lib/fire-types";
 import { ConnectingWire } from "./components/connecting-wire";
+import { MAX_WIDTHS, SPACING, TYPOGRAPHY } from "@/lib/design-constants";
 
 export function FireScenariosSection() {
   const [selectedScenario, setSelectedScenario] = useState(
@@ -24,6 +25,7 @@ export function FireScenariosSection() {
   return (
     <ProductPageSection
       id="fire-scenarios"
+      className={`${MAX_WIDTHS.container} ${SPACING.container} ${SPACING.sectionVerticalLg} ${TYPOGRAPHY.alignment} mx-auto`}
       ariaLabel="Fire Scenarios Section"
       gradientVariant="warmRose"
       showBottomShadow={true}
@@ -33,7 +35,7 @@ export function FireScenariosSection() {
         title="Every FIRE Path, Clearly Mapped"
         description="Compare early retirement, sabbaticals, part-time transitions, and creative combinations. We'll calculate the timeline and trade-offs for every scenario you want to explore."
       />
-      <div className="mx-auto flex max-w-7xl flex-col items-center lg:flex-row">
+      <div className="flex flex-col items-center justify-center lg:flex-row">
         {/* Left Panel - Financial Inputs */}
         <FinancialInputsCard
           scenarios={SCENARIOS}
@@ -42,11 +44,19 @@ export function FireScenariosSection() {
         />
 
         <div className="flex flex-row justify-center gap-2 lg:flex-col lg:gap-4">
-          <ConnectingWire variant="step" direction="normal" />
+          <ConnectingWire
+            className="hidden sm:flex"
+            variant="step"
+            direction="normal"
+          />
           <ConnectingWire variant="tight" direction="reverse" />
           <ConnectingWire variant="flip" direction="normal" />
           <ConnectingWire variant="wide" direction="reverse" />
-          <ConnectingWire variant="lean" direction="normal" />
+          <ConnectingWire
+            className="hidden sm:flex"
+            variant="lean"
+            direction="normal"
+          />
         </div>
 
         {/* Right Panel - Financial Outputs */}

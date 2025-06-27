@@ -12,11 +12,11 @@ import {
 import { ModeToggle } from "./mode-toggle";
 import {
   ICON_SIZES,
-  BUTTON_ICON_SIZES,
-  LOGO_SIZES,
+  BUTTON_ICON_SIZE,
+  LOGO_SIZE,
   MAX_WIDTHS,
   SPACING,
-  FOCUS_STATES,
+  LINK_FOCUS_STATE,
   GRADIENTS,
 } from "@/lib/design-constants";
 
@@ -24,11 +24,11 @@ const SHEET_WIDTH = "w-[400px] sm:w-[540px]";
 
 function Logo() {
   return (
-    <Link href="/" className={`flex items-center gap-2 ${FOCUS_STATES.link}`}>
+    <Link href="/" className={`flex items-center gap-2 ${LINK_FOCUS_STATE}`}>
       <Image
         src="/flame-icon.svg"
         alt="Ignidash flame icon"
-        className={LOGO_SIZES.md}
+        className={LOGO_SIZE}
         width={32}
         height={32}
       />
@@ -47,7 +47,7 @@ function NavLink({
   return (
     <Link
       href={href}
-      className={`group flex items-center justify-between p-4 text-base font-medium ${FOCUS_STATES.link}`}
+      className={`group flex items-center justify-between p-4 text-base font-medium ${LINK_FOCUS_STATE}`}
     >
       <span className="transition-colors group-hover:text-orange-500">
         {children}
@@ -78,7 +78,7 @@ export function Navbar() {
             >
               <Link href="/dashboard" className="flex items-center gap-2">
                 Get Started
-                <ArrowRight className={BUTTON_ICON_SIZES.md} />
+                <ArrowRight className={BUTTON_ICON_SIZE} />
               </Link>
             </Button>
           </div>

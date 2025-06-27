@@ -3,11 +3,13 @@
 import { useTheme } from "next-themes";
 
 interface ConnectingWireProps {
+  className?: string;
   variant?: "step" | "tight" | "wide" | "flip" | "lean";
   direction?: "normal" | "reverse";
 }
 
 export function ConnectingWire({
+  className = "",
   variant = "step",
   direction = "normal",
 }: ConnectingWireProps) {
@@ -49,7 +51,7 @@ export function ConnectingWire({
   const verticalPath = `M40,0 V${y1} H${xDown} V${y2} H${xUp} V${y3}`;
 
   return (
-    <div className="relative flex items-center justify-center">
+    <div className={`relative flex items-center justify-center ${className}`}>
       {/* Horizontal wire for lg+ screens */}
       <div className="hidden h-20 w-20 items-center justify-center lg:flex">
         <svg

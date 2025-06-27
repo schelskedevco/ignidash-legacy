@@ -4,10 +4,10 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import {
-  LOGO_SIZES,
+  LOGO_SIZE,
   SPACING,
   MAX_WIDTHS,
-  FOCUS_STATES,
+  LINK_FOCUS_STATE,
   ICON_SIZES,
 } from "@/lib/design-constants";
 
@@ -75,12 +75,12 @@ export function Footer() {
             <div className="col-span-2 space-y-4">
               <Link
                 href="/"
-                className={`group flex items-center gap-2 ${FOCUS_STATES.link}`}
+                className={`group flex items-center gap-2 ${LINK_FOCUS_STATE}`}
               >
                 <Image
                   src="/flame-icon.svg"
                   alt="Ignidash flame icon"
-                  className={LOGO_SIZES.md}
+                  className={LOGO_SIZE}
                   width={32}
                   height={32}
                 />
@@ -128,7 +128,7 @@ export function Footer() {
                       <li key={link.name}>
                         <Link
                           href={link.href}
-                          className={`text-muted-foreground hover:text-foreground -mx-1 px-1 text-sm transition-colors ${FOCUS_STATES.link}`}
+                          className={`text-muted-foreground hover:text-foreground -mx-1 px-1 text-sm transition-colors ${LINK_FOCUS_STATE}`}
                         >
                           {link.name}
                         </Link>

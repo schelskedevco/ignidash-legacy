@@ -1,6 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { ICON_SIZES, BORDER_RADIUS } from "@/lib/design-constants";
+import { ICON_SIZES, CARD_BORDER_RADIUS } from "@/lib/design-constants";
 
 interface ScenarioHeaderProps {
   icon: LucideIcon;
@@ -21,7 +21,7 @@ export function ScenarioHeader({
 }: ScenarioHeaderProps) {
   return (
     <header className="grid gap-3 md:grid-cols-[auto,1fr]">
-      <div className={`shrink-0 ${BORDER_RADIUS.card} p-2 sm:p-3 ${bgColor}`}>
+      <div className={`shrink-0 ${CARD_BORDER_RADIUS} p-2 sm:p-3 ${bgColor}`}>
         <Icon
           className={`${ICON_SIZES.lg} sm:${ICON_SIZES.xl} ${iconColor}`}
           aria-hidden="true"

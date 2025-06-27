@@ -4,46 +4,49 @@ import { SPACING, MAX_WIDTHS } from "@/lib/design-constants";
 interface ProductPageSectionProps {
   id?: string;
   children: ReactNode;
-  className?: string;
   ariaLabel: string;
-  alignment?: "center" | "left";
   topBackgroundComponents?: ReactNode;
   bottomBackgroundComponents?: ReactNode;
+  textAlign?: "center" | "left" | "responsive";
+  spacing?: "default" | "large" | "small";
 }
 
 export function ProductPageSection({
   id,
   children,
-  className = "",
   ariaLabel,
-  alignment = "center",
   topBackgroundComponents,
   bottomBackgroundComponents,
+  textAlign = "responsive",
+  spacing = "large",
 }: ProductPageSectionProps) {
-  const isCentered = alignment === "center";
+  const spacingClass = {
+    default: SPACING.sectionVertical,
+    large: SPACING.sectionVerticalLg,
+    small: SPACING.sectionVerticalSm,
+  }[spacing];
+
+  const alignmentClass = {
+    center: "text-center",
+    left: "text-left",
+    responsive: "text-center xl:text-left",
+  }[textAlign];
 
   return (
-    <section id={id} className={`relative ${className}`} aria-label={ariaLabel}>
-      <div
-        className={`relative min-h-[500px] sm:min-h-[550px] md:min-h-[600px] ${SPACING.sectionVertical} `}
-      >
-        {topBackgroundComponents}
+    <section id={id} aria-label={ariaLabel}>
+      <div className={`relative ${spacingClass}`}>
+        <div aria-hidden="true">{topBackgroundComponents}</div>
 
         {/* Main content */}
         <div className="relative z-10">
           <div
             className={`mx-auto ${MAX_WIDTHS.container} ${SPACING.container}`}
           >
-            <div
-              className={isCentered ? "text-center xl:text-left" : "text-left"}
-            >
-              {children}
-            </div>
+            <div className={alignmentClass}>{children}</div>
           </div>
         </div>
 
-        {/* Bottom layer */}
-        {bottomBackgroundComponents}
+        <div aria-hidden="true">{bottomBackgroundComponents}</div>
       </div>
     </section>
   );

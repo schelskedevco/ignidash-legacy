@@ -36,6 +36,7 @@ export const SPACING = {
   section: "py-24",
   sectionSm: "py-16",
   sectionVertical: "py-12 sm:py-16 md:py-20",
+  sectionVerticalLg: "py-16 sm:py-20 md:py-24 lg:py-28",
   sectionVerticalSm: "py-6 sm:py-8",
   container: "px-4 sm:px-6 lg:px-8",
   sectionHorizontal: "px-2 sm:px-4 md:px-6 xl:px-10 3xl:px-20",

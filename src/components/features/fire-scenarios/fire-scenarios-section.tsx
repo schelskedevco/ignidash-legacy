@@ -7,7 +7,8 @@ import { ProductPageSection } from "@/components/layout/wrappers/product-page-se
 import { SCENARIOS } from "./lib/fire-data";
 import { calculateProjections, generateGrowthData } from "./lib/fire-utils";
 import { FinancialInputsCard } from "./components/financial-inputs/financial-inputs-card";
-import { FinancialOutputsCard } from "./components/financial-outputs/financial-outputs-card";
+import { FireProjectionChartCard } from "./components/financial-outputs/fire-projection-chart-card";
+import { KeyMetricsCard } from "./components/financial-outputs/key-metrics-card";
 import { ScenarioId } from "./lib/fire-types";
 import { ConnectingWire } from "./components/connecting-wire";
 import { MAX_WIDTHS, SPACING, TYPOGRAPHY } from "@/lib/design-constants";
@@ -38,7 +39,7 @@ export function FireScenariosSection() {
       <div className="grid grid-cols-1 place-items-center gap-4 lg:grid-cols-2">
         {/* Left Panel - Financial Inputs */}
 
-        <div className="flex w-full flex-col items-end">
+        <div className="flex h-full w-full flex-col items-end">
           <ConnectingWire placement="top" />
           <FinancialInputsCard
             scenarios={SCENARIOS}
@@ -49,11 +50,14 @@ export function FireScenariosSection() {
         </div>
 
         {/* Right Panel - Financial Outputs */}
-        <FinancialOutputsCard
-          scenario={scenario}
-          outputs={outputs}
-          growthData={growthData}
-        />
+        <div className="flex h-full w-full flex-col justify-between gap-4">
+          <FireProjectionChartCard
+            scenario={scenario}
+            outputs={outputs}
+            growthData={growthData}
+          />
+          <KeyMetricsCard scenario={scenario} outputs={outputs} />
+        </div>
       </div>
     </ProductPageSection>
   );

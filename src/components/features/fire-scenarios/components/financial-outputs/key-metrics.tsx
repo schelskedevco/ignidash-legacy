@@ -58,12 +58,12 @@ export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
   const displayValues = getDisplayValues();
 
   return (
-    <div className="mt-6 grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-3 gap-2">
       <div className="text-center">
-        <p className="text-foreground text-xl font-bold tabular-nums lg:text-2xl xl:text-3xl">
+        <p className="text-foreground text-lg font-bold tabular-nums lg:text-xl xl:text-2xl">
           <AnimatedNumber value={displayValues.yearsToTarget} />
         </p>
-        <p className="text-foreground mt-1 text-sm font-medium">
+        <p className="text-foreground mt-1 text-xs font-medium">
           years to FIRE
         </p>
         <p className="text-muted-foreground mt-1 text-xs">
@@ -72,23 +72,23 @@ export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
       </div>
 
       <div className="text-center">
-        <p className="text-foreground text-xl font-bold tabular-nums lg:text-2xl xl:text-3xl">
+        <p className="text-foreground text-lg font-bold tabular-nums lg:text-xl xl:text-2xl">
           <AnimatedNumber value={displayValues.fireNumber} prefix="$" />
         </p>
-        <p className="text-foreground mt-1 text-sm font-medium">FIRE target</p>
+        <p className="text-foreground mt-1 text-xs font-medium">FIRE target</p>
         <p className="text-muted-foreground mt-1 text-xs">
           Total portfolio needed
         </p>
       </div>
 
       <div className="text-center">
-        <p className="text-foreground text-xl font-bold tabular-nums lg:text-2xl xl:text-3xl">
+        <p className="text-foreground text-lg font-bold tabular-nums lg:text-xl xl:text-2xl">
           <AnimatedNumber
             value={Math.round(displayValues.retirementIncome)}
             prefix="$"
           />
         </p>
-        <p className="text-foreground mt-1 text-sm font-medium">
+        <p className="text-foreground mt-1 text-xs font-medium">
           annual retirement income
         </p>
         <p className="text-muted-foreground mt-1 text-xs">

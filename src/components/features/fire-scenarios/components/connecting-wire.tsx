@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 interface ConnectingWireProps {
   className?: string;
@@ -13,8 +14,15 @@ export function ConnectingWire({
   variant = "step",
   direction = "normal",
 }: ConnectingWireProps) {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Use a consistent value during SSR and initial client render
+  const isDark = mounted ? resolvedTheme === "dark" : false;
 
   // Shape breakdown: [left, middle, right] all must sum to 120
   const shape: Record<string, [number, number, number]> = {

@@ -6,7 +6,6 @@ interface ProductPageSectionProps {
   children: ReactNode;
   className?: string;
   ariaLabel: string;
-  contentVariant?: "container" | "full";
   alignment?: "center" | "left";
   topBackgroundComponents?: ReactNode;
   bottomBackgroundComponents?: ReactNode;
@@ -17,12 +16,10 @@ export function ProductPageSection({
   children,
   className = "",
   ariaLabel,
-  contentVariant = "container",
   alignment = "center",
   topBackgroundComponents,
   bottomBackgroundComponents,
 }: ProductPageSectionProps) {
-  const isFullWidth = contentVariant === "full";
   const isCentered = alignment === "center";
 
   return (
@@ -35,7 +32,7 @@ export function ProductPageSection({
         {/* Main content */}
         <div className="relative z-10">
           <div
-            className={` ${isFullWidth ? `w-full ${SPACING.sectionHorizontal}` : `mx-auto ${MAX_WIDTHS.container} ${SPACING.container}`}`}
+            className={`mx-auto ${MAX_WIDTHS.container} ${SPACING.container}`}
           >
             <div
               className={isCentered ? "text-center xl:text-left" : "text-left"}

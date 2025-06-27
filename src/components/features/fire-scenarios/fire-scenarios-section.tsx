@@ -28,7 +28,6 @@ export function FireScenariosSection() {
     <ProductPageSection
       id="fire-scenarios"
       ariaLabel="Fire Scenarios Section"
-      contentVariant="full"
       topBackgroundComponents={
         <>
           <TopFade />

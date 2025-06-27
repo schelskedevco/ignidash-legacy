@@ -35,7 +35,7 @@ export function FireScenariosSection() {
         title="Every FIRE Path, Clearly Mapped"
         description="Compare early retirement, sabbaticals, part-time transitions, and creative combinations. We'll calculate the timeline and trade-offs for every scenario you want to explore."
       />
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className="grid grid-cols-1 place-items-center gap-4 lg:grid-cols-2">
         {/* Left Panel - Financial Inputs */}
 
         <div className="flex flex-col items-end">

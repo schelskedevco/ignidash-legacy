@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Menu, ArrowRight, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -57,8 +60,85 @@ function NavLink({
 }
 
 export function Navbar() {
+  const [isVisible, setIsVisible] = useState(true);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const lastScrollY = useRef(0);
+  const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Don't hide navbar if sheet is open
+      if (isSheetOpen) {
+        setIsVisible(true);
+        return;
+      }
+
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollY.current;
+
+      // Always visible on desktop
+      if (window.innerWidth >= 768) {
+        setIsVisible(true);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      // Mobile-only logic below this point
+      // Threshold values
+      const scrollThreshold = 5; // Minimum scroll distance to trigger
+      const upScrollThreshold = 20; // How much upward scroll to show navbar
+
+      // At the very top of the page, always show
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+      }
+      // Scrolling down and past threshold
+      else if (scrollDelta > scrollThreshold && currentScrollY > 100) {
+        setIsVisible(false);
+      }
+      // Scrolling up significantly
+      else if (scrollDelta < -upScrollThreshold) {
+        setIsVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    // Throttle scroll events for better performance
+    const throttledHandleScroll = () => {
+      if (!scrollTimeout.current) {
+        scrollTimeout.current = setTimeout(() => {
+          handleScroll();
+          scrollTimeout.current = null;
+        }, 100);
+      }
+    };
+
+    // Check visibility on resize
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsVisible(true);
+      }
+    };
+
+    window.addEventListener("scroll", throttledHandleScroll, { passive: true });
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", throttledHandleScroll);
+      window.removeEventListener("resize", handleResize);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, [isSheetOpen]);
+
   return (
-    <nav className="bg-background sticky top-0 z-50 border-b">
+    <nav
+      className={`bg-background sticky top-0 z-50 border-b transition-transform duration-300 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div
         className={`mx-auto flex h-16 items-center justify-between ${MAX_WIDTHS.container} ${SPACING.container}`}
       >
@@ -84,7 +164,7 @@ export function Navbar() {
         {/* Mobile Navigation */}
         <div className="flex items-center gap-2 md:hidden">
           <ModeToggle iconSize={ICON_SIZES.lg} />
-          <Sheet>
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Open menu">
                 <Menu className={ICON_SIZES.lg} />

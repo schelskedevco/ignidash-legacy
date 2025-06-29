@@ -74,7 +74,12 @@ function SparkAnimation({
   sparkGlowId: string;
 }) {
   return (
-    <circle r="3" fill={colors.sparkFill} filter={`url(#${sparkGlowId})`}>
+    <circle
+      r="3"
+      fill={colors.sparkFill}
+      filter={`url(#${sparkGlowId})`}
+      opacity="0"
+    >
       <animateMotion
         dur={`${sparkDuration}s`}
         repeatCount="indefinite"

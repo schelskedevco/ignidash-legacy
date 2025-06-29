@@ -1,4 +1,3 @@
-import { Separator } from "@/components/ui/separator";
 import {
   Scenario,
   CoastFireParameters,
@@ -80,43 +79,28 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
           value={scenario.inputs.currentInvestedAssets}
           prefix="$"
         />
+
+        {/* Coast FIRE Parameters */}
+        {scenario.fireType === FireType.COAST_FIRE &&
+          getCoastFireParameters() && (
+            <FinancialInputDataRow
+              icon={Calendar}
+              label="Target Retirement Age"
+              value={getCoastFireParameters()!.targetRetirementAge}
+            />
+          )}
+
+        {/* Barista FIRE Parameters */}
+        {scenario.fireType === FireType.BARISTA_FIRE &&
+          getBaristaFireParameters() && (
+            <FinancialInputDataRow
+              icon={Coffee}
+              label="Part-time Monthly Income"
+              value={getBaristaFireParameters()!.partTimeMonthlyIncome}
+              prefix="$"
+            />
+          )}
       </div>
-
-      {/* FIRE-specific Settings Section */}
-      {(scenario.fireType === FireType.COAST_FIRE ||
-        scenario.fireType === FireType.BARISTA_FIRE) && (
-        <>
-          <Separator />
-          <div className="space-y-3 text-sm">
-            <h4 className="font-heading text-foreground mb-3 font-semibold">
-              {scenario.fireType === FireType.COAST_FIRE
-                ? "Coast FIRE Settings"
-                : "Barista FIRE Settings"}
-            </h4>
-
-            {/* Coast FIRE Parameters */}
-            {scenario.fireType === FireType.COAST_FIRE &&
-              getCoastFireParameters() && (
-                <FinancialInputDataRow
-                  icon={Calendar}
-                  label="Target Retirement Age"
-                  value={getCoastFireParameters()!.targetRetirementAge}
-                />
-              )}
-
-            {/* Barista FIRE Parameters */}
-            {scenario.fireType === FireType.BARISTA_FIRE &&
-              getBaristaFireParameters() && (
-                <FinancialInputDataRow
-                  icon={Coffee}
-                  label="Part-time Monthly Income"
-                  value={getBaristaFireParameters()!.partTimeMonthlyIncome}
-                  prefix="$"
-                />
-              )}
-          </div>
-        </>
-      )}
     </div>
   );
 }

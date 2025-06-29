@@ -39,7 +39,7 @@ export function FireScenariosSection() {
       <div className="grid grid-cols-1 place-items-center gap-4 lg:grid-cols-2">
         {/* Left Panel - Financial Inputs */}
 
-        <div className="flex h-full w-full flex-col items-end">
+        <div className="flex h-full w-full flex-col items-end justify-center">
           <ConnectingWire placement="top" />
           <FinancialInputsCard
             scenarios={SCENARIOS}

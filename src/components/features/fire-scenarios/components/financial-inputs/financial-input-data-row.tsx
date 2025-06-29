@@ -22,7 +22,7 @@ export function FinancialInputDataRow({
         <Icon className="text-muted-foreground/60 h-4 w-4" />
         <span className="text-muted-foreground">{label}:</span>
       </div>
-      <span className="font-medium">
+      <span className="font-heading font-medium">
         <AnimatedNumber value={value} prefix={prefix} suffix={suffix} />
       </span>
     </div>

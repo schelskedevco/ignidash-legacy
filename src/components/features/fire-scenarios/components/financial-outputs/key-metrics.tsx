@@ -60,7 +60,7 @@ export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
   return (
     <div className="grid grid-cols-3 gap-2">
       <div className="text-center">
-        <p className="text-foreground text-lg font-bold tabular-nums lg:text-xl xl:text-2xl">
+        <p className="font-heading text-foreground text-lg font-bold tabular-nums lg:text-xl xl:text-2xl">
           <AnimatedNumber value={displayValues.yearsToTarget} />
         </p>
         <p className="text-foreground mt-1 text-xs font-medium">
@@ -72,7 +72,7 @@ export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
       </div>
 
       <div className="text-center">
-        <p className="text-foreground text-lg font-bold tabular-nums lg:text-xl xl:text-2xl">
+        <p className="font-heading text-foreground text-lg font-bold tabular-nums lg:text-xl xl:text-2xl">
           <AnimatedNumber value={displayValues.fireNumber} prefix="$" />
         </p>
         <p className="text-foreground mt-1 text-xs font-medium">FIRE target</p>
@@ -82,7 +82,7 @@ export function KeyMetrics({ outputs, scenario }: KeyMetricsProps) {
       </div>
 
       <div className="text-center">
-        <p className="text-foreground text-lg font-bold tabular-nums lg:text-xl xl:text-2xl">
+        <p className="font-heading text-foreground text-lg font-bold tabular-nums lg:text-xl xl:text-2xl">
           <AnimatedNumber
             value={Math.round(displayValues.retirementIncome)}
             prefix="$"

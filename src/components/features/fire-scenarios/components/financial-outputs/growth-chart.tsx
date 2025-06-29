@@ -99,35 +99,14 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Filter data points for mobile to reduce clutter
-  // But always ensure the FIRE age point is included
-  const chartData = isMobile
-    ? data.filter((_, index) => {
-        const isEvenIndex = index % 2 === 0;
-        const isLastIndex = index === data.length - 1;
-        const isFireAgePoint = Math.abs(data[index].age - fireAge) <= 1;
-        return isEvenIndex || isLastIndex || isFireAgePoint;
-      })
-    : data;
-
-  const xAxisInterval = isMobile ? 2 : 1;
-
   return (
     <ChartContainer
       config={chartConfig}
       className="h-[250px] w-full max-w-full sm:h-[320px] md:h-[400px]"
     >
-      <AreaChart
-        data={chartData}
-        margin={{ top: 0, right: 8, left: 8, bottom: 0 }}
-      >
+      <AreaChart data={data} margin={{ top: 0, right: 8, left: 8, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" className="stroke-muted/20" />
-        <XAxis
-          dataKey="age"
-          tickLine={false}
-          axisLine={false}
-          interval={xAxisInterval}
-        />
+        <XAxis dataKey="age" tickLine={false} axisLine={false} interval={2} />
         <YAxis tick={true} tickLine={false} axisLine={false} width={0} />
         <ChartTooltip
           content={

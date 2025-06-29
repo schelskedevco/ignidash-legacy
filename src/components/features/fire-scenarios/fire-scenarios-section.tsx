@@ -38,9 +38,14 @@ export function FireScenariosSection() {
       />
       <div className="grid grid-cols-1 place-items-center gap-4 lg:grid-cols-2">
         {/* Left Panel - Financial Inputs */}
-
         <div className="flex h-full w-full flex-col items-end justify-center">
-          <ConnectingWire placement="top" />
+          <div className="flex w-full items-end justify-center lg:justify-between">
+            <p className="text-muted-foreground mb-4 ml-4 text-xs font-medium tracking-wider uppercase">
+              Your Inputs
+            </p>
+
+            <ConnectingWire placement="top" />
+          </div>
           <FinancialInputsCard
             scenarios={SCENARIOS}
             selectedScenario={selectedScenario}
@@ -51,6 +56,9 @@ export function FireScenariosSection() {
 
         {/* Right Panel - Financial Outputs */}
         <div className="flex h-full w-full flex-col justify-between gap-4">
+          <p className="text-muted-foreground ml-4 text-xs font-medium tracking-wider uppercase lg:text-left">
+            Your Projections
+          </p>
           <FireProjectionChartCard
             scenario={scenario}
             outputs={outputs}

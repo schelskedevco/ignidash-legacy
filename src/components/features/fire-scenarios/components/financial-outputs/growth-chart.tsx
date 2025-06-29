@@ -1,6 +1,3 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import {
   ChartConfig,
   ChartContainer,
@@ -47,8 +44,6 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
   // Helper to get target retirement age for Coast FIRE
   const getTargetRetirementAge = () => {
     if (scenario.fireType === FireType.COAST_FIRE) {
@@ -87,17 +82,6 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
 
   const displayValues = getDisplayValues();
   const fireAge = Math.round(displayValues.targetAge);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   return (
     <ChartContainer

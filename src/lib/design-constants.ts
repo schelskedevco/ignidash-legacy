@@ -25,7 +25,7 @@ export const SPACING = {
   sectionVertical: "py-12 sm:py-16 md:py-20",
   sectionVerticalLg: "py-16 sm:py-20 md:py-24 lg:py-28",
   sectionVerticalSm: "py-6 sm:py-8",
-  elementSpacing: "space-y-4 sm:space-y-6 lg:space-y-8",
+  elementSpacing: "space-y-2 sm:space-y-4 lg:space-y-6",
 } as const;
 
 // Card border radius (primary pattern)

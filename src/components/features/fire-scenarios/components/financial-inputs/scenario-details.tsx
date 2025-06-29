@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { FinancialInputDataRow } from "./financial-input-data-row";
 import { ScenarioHeader } from "./scenario-header";
+import { Separator } from "@/components/ui/separator";
 
 interface ScenarioDetailsProps {
   scenario: Scenario;
@@ -49,13 +50,10 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
       />
 
       {/* Separator */}
-      <div className="bg-border h-px" />
+      <Separator />
 
       {/* Financial inputs */}
       <div className="space-y-3 text-sm">
-        <h4 className="font-heading text-foreground mb-3 font-semibold">
-          Financial Inputs
-        </h4>
         <FinancialInputDataRow
           icon={User}
           label="Current Age"

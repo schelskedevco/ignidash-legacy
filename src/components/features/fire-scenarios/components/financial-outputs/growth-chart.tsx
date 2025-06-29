@@ -37,8 +37,8 @@ const chartConfig = {
   referenceLine: {
     label: "Reference Line",
     theme: {
-      light: "#000000",
-      dark: "#FFFFFF",
+      light: "#0c0a09",
+      dark: "#fafaf9",
     },
   },
 } satisfies ChartConfig;

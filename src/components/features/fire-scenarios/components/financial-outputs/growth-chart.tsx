@@ -60,24 +60,28 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
 
   // Get display values based on fire type
   const getDisplayValues = () => {
-    if (scenario.fireType === FireType.REGULAR_FIRE) {
-      const regularOutputs = outputs as RegularFireOutputs;
-      return {
-        fireNumber: regularOutputs.fireNumber,
-        targetAge: regularOutputs.fireAge,
-      };
-    } else if (scenario.fireType === FireType.COAST_FIRE) {
-      const coastOutputs = outputs as CoastFireOutputs;
-      return {
-        fireNumber: coastOutputs.coastFireNumber,
-        targetAge: coastOutputs.coastFireAge,
-      };
-    } else {
-      const baristaOutputs = outputs as BaristaFireOutputs;
-      return {
-        fireNumber: baristaOutputs.baristaFireNumber,
-        targetAge: baristaOutputs.baristaFireAge,
-      };
+    switch (scenario.fireType) {
+      case FireType.REGULAR_FIRE: {
+        const regularOutputs = outputs as RegularFireOutputs;
+        return {
+          fireNumber: regularOutputs.fireNumber,
+          targetAge: regularOutputs.fireAge,
+        };
+      }
+      case FireType.COAST_FIRE: {
+        const coastOutputs = outputs as CoastFireOutputs;
+        return {
+          fireNumber: coastOutputs.coastFireNumber,
+          targetAge: coastOutputs.coastFireAge,
+        };
+      }
+      case FireType.BARISTA_FIRE: {
+        const baristaOutputs = outputs as BaristaFireOutputs;
+        return {
+          fireNumber: baristaOutputs.baristaFireNumber,
+          targetAge: baristaOutputs.baristaFireAge,
+        };
+      }
     }
   };
 
@@ -106,10 +110,6 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
       })
     : data;
 
-  // Responsive configurations
-  const margin = { top: 18, right: 18, left: 18, bottom: 18 };
-
-  const fontSize = isMobile ? 10 : 12;
   const xAxisInterval = isMobile ? 2 : 1;
 
   return (
@@ -117,22 +117,18 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
       config={chartConfig}
       className="h-[250px] w-full max-w-full sm:h-[320px] md:h-[400px]"
     >
-      <AreaChart data={chartData} margin={margin}>
+      <AreaChart
+        data={chartData}
+        margin={{ top: 0, right: 8, left: 8, bottom: 0 }}
+      >
         <CartesianGrid strokeDasharray="3 3" className="stroke-muted/20" />
         <XAxis
           dataKey="age"
-          tick={{ fontSize }}
           tickLine={false}
           axisLine={false}
           interval={xAxisInterval}
         />
-        <YAxis
-          tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
-          tick={{ fontSize }}
-          tickLine={false}
-          axisLine={false}
-          width={isMobile ? 35 : 50}
-        />
+        <YAxis tick={true} tickLine={false} axisLine={false} width={0} />
         <ChartTooltip
           content={
             <ChartTooltipContent
@@ -172,9 +168,9 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
               scenario.fireType === FireType.COAST_FIRE
                 ? `Coast at ${fireAge}`
                 : `FIRE at ${fireAge}`,
-            position: "top",
+            position: "insideBottomLeft",
             style: {
-              fontSize: isMobile ? 10 : 12,
+              fontSize: 12,
               fill: "var(--color-referenceLine)",
             },
           }}
@@ -188,9 +184,9 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
               strokeWidth={1}
               label={{
                 value: `Full retirement at ${getTargetRetirementAge()}`,
-                position: "top",
+                position: "insideBottomRight",
                 style: {
-                  fontSize: isMobile ? 10 : 12,
+                  fontSize: 12,
                   fill: "var(--color-referenceLine)",
                 },
               }}

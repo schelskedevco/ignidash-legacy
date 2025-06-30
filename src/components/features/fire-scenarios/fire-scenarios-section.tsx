@@ -62,8 +62,8 @@ export function FireScenariosSection() {
 
         {/* Right Panel - Financial Outputs */}
         <div className="flex h-full w-full flex-col justify-between gap-4">
-          <div className="ml-4 flex items-center gap-2">
-            <p className="text-muted-foreground text-xs font-medium tracking-wider uppercase lg:text-left">
+          <div className="ml-4 flex items-center justify-center gap-2 lg:justify-start">
+            <p className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
               Your Projections
             </p>
             <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen}>

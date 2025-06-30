@@ -22,6 +22,7 @@ export function FireScenariosSection() {
   const [selectedScenario, setSelectedScenario] = useState(
     ScenarioId.REGULAR_FIRE
   );
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
   const scenario =
     SCENARIOS.find((s) => s.id === selectedScenario) || SCENARIOS[0];
@@ -65,9 +66,15 @@ export function FireScenariosSection() {
             <p className="text-muted-foreground text-xs font-medium tracking-wider uppercase lg:text-left">
               Your Projections
             </p>
-            <Tooltip>
+            <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen}>
               <TooltipTrigger asChild>
-                <Info className="text-muted-foreground h-3 w-3 cursor-help" />
+                <button
+                  onClick={() => setIsTooltipOpen(!isTooltipOpen)}
+                  className="focus-visible:ring-ring rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  aria-label="Information about projections"
+                >
+                  <Info className="text-muted-foreground hover:text-muted-foreground/80 h-3 w-3 cursor-pointer transition-colors" />
+                </button>
               </TooltipTrigger>
               <TooltipContent side="top" className="max-w-xs">
                 <p>

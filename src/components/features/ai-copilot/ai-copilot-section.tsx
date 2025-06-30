@@ -16,6 +16,7 @@ export function AICopilotSection() {
       id="ai-copilot"
       ariaLabel="AI Copilot Section"
       gradientVariant="coolPurple"
+      showBottomShadow={true}
     >
       <ProductPageSectionHeader
         icon={WandSparkles}

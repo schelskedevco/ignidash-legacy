@@ -62,6 +62,13 @@ export const BACKGROUND_GRADIENTS = {
     to-indigo-200/60 to-100%
     dark:via-purple-400/40 dark:to-indigo-400/50
   `,
+  freshMint: `
+    bg-gradient-to-b
+    from-background from-0%
+    via-teal-100/50 via-70%
+    to-emerald-200/60 to-100%
+    dark:from-background dark:via-teal-900/20 dark:to-emerald-900/30
+  `,
 } as const;
 
 // Focus state for links (primary interactive pattern)

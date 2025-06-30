@@ -24,7 +24,7 @@ export function ProductPageSectionHeader({
       </div>
 
       {/* Title */}
-      <h2 className="font-heading mb-4 text-2xl font-bold sm:text-3xl md:text-4xl">
+      <h2 className="font-heading mb-4 text-2xl font-bold drop-shadow-lg sm:text-3xl md:text-4xl">
         {title}
       </h2>
 

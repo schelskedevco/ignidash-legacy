@@ -22,9 +22,9 @@ export function HeroSection() {
           <h1
             className={`font-heading mx-auto mb-6 ${MAX_WIDTHS.content} ${TYPOGRAPHY.heroTitle} xl:mx-0`}
           >
-            <span className={GRADIENTS.text}>Design your life.</span>
+            <span className="text-foreground">Financial independence.</span>
             <br />
-            <span className="text-foreground">Plan your FIRE journey.</span>
+            <span className={GRADIENTS.text}>Personalized.</span>
           </h1>
 
           <p

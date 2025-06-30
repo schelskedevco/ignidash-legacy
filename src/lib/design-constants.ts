@@ -68,7 +68,7 @@ export const LINK_FOCUS_STATE =
 
 // Responsive typography patterns (following HeroSection approach)
 export const TYPOGRAPHY = {
-  heroTitle: "text-5xl leading-tight font-bold md:text-7xl",
+  heroTitle: "text-5xl font-bold md:text-7xl",
   heroSubtitle: "text-xl leading-relaxed md:text-2xl",
   alignment: "text-center xl:text-left",
 } as const;

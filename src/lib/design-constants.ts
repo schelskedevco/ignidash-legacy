@@ -34,9 +34,9 @@ export const CARD_BORDER_RADIUS = "rounded-lg";
 // Gradient patterns used across the app
 export const GRADIENTS = {
   primaryReverse: "bg-gradient-to-r from-pink-500 via-red-500 to-orange-500",
-  text: "bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent",
+  text: "bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent",
   textReverse:
-    "bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 bg-clip-text text-transparent",
+    "bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 dark:from-pink-400 dark:via-red-400 dark:to-orange-400 bg-clip-text text-transparent",
 } as const;
 
 // Background gradient variants for sections

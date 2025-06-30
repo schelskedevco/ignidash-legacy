@@ -24,16 +24,14 @@ export function HeroSection() {
           >
             <span className={GRADIENTS.text}>Design your life.</span>
             <br />
-            <span className="text-foreground">
-              Then plan your FIRE journey around it.
-            </span>
+            <span className="text-foreground">Plan your FIRE journey.</span>
           </h1>
 
           <p
             className={`text-muted-foreground mx-auto mb-8 ${MAX_WIDTHS.content} ${TYPOGRAPHY.heroSubtitle} xl:mx-0`}
           >
             Explore retirement timelines, run what-if projections, and get
-            AI-powered insights — all built around the life you want to live.
+            AI-powered insights — without the complexity of traditional tools.
           </p>
         </hgroup>
 

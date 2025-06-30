@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Route } from "lucide-react";
+import { Route, Info } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
 import { SCENARIOS } from "./lib/fire-data";
@@ -12,11 +12,17 @@ import { KeyMetricsCard } from "./components/financial-outputs/key-metrics-card"
 import { ScenarioId } from "./lib/fire-types";
 import { ConnectingWire } from "./components/connecting-wire";
 import { MAX_WIDTHS, SPACING, TYPOGRAPHY } from "@/lib/design-constants";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 
 export function FireScenariosSection() {
   const [selectedScenario, setSelectedScenario] = useState(
     ScenarioId.REGULAR_FIRE
   );
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
   const scenario =
     SCENARIOS.find((s) => s.id === selectedScenario) || SCENARIOS[0];
@@ -56,9 +62,28 @@ export function FireScenariosSection() {
 
         {/* Right Panel - Financial Outputs */}
         <div className="flex h-full w-full flex-col justify-between gap-4">
-          <p className="text-muted-foreground ml-4 text-xs font-medium tracking-wider uppercase lg:text-left">
-            Your Projections
-          </p>
+          <div className="ml-4 flex items-center gap-2">
+            <p className="text-muted-foreground text-xs font-medium tracking-wider uppercase lg:text-left">
+              Your Projections
+            </p>
+            <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen}>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => setIsTooltipOpen(!isTooltipOpen)}
+                  className="focus-visible:ring-ring rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  aria-label="Information about projections"
+                >
+                  <Info className="text-muted-foreground hover:text-muted-foreground/80 h-3 w-3 cursor-pointer transition-colors" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="max-w-xs">
+                <p>
+                  Projections use a 7% annual return and a 4% withdrawal rate,
+                  based on historical averages. Actual results may vary.
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
           <FireProjectionChartCard
             scenario={scenario}
             outputs={outputs}

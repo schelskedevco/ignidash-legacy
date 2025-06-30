@@ -78,8 +78,8 @@ export function FireScenariosSection() {
               </TooltipTrigger>
               <TooltipContent side="top" className="max-w-xs">
                 <p>
-                  Projections use a 7% annual return and a 4% withdrawal rate,
-                  based on historical averages. Actual results may vary.
+                  Demo projections use a 7% annual return and a 4% withdrawal
+                  rate, based on historical averages. Actual results may vary.
                 </p>
               </TooltipContent>
             </Tooltip>

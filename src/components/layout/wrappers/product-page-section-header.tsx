@@ -1,5 +1,5 @@
 import { LucideIcon } from "lucide-react";
-import { ICON_SIZES } from "@/lib/design-constants";
+import { ICON_SIZES, MAX_WIDTHS } from "@/lib/design-constants";
 
 interface ProductPageSectionHeaderProps {
   icon: LucideIcon;
@@ -29,7 +29,9 @@ export function ProductPageSectionHeader({
       </h2>
 
       {/* Description */}
-      <p className="text-muted-foreground mx-auto max-w-3xl text-base sm:text-lg">
+      <p
+        className={`text-muted-foreground mx-auto mb-8 ${MAX_WIDTHS.content} text-base sm:text-lg`}
+      >
         {description}
       </p>
     </div>

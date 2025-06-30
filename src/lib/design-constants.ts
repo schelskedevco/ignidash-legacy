@@ -35,6 +35,8 @@ export const CARD_BORDER_RADIUS = "rounded-lg";
 export const GRADIENTS = {
   primaryReverse: "bg-gradient-to-r from-pink-500 via-red-500 to-orange-500",
   text: "bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent",
+  textReverse:
+    "bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 bg-clip-text text-transparent",
 } as const;
 
 // Background gradient variants for sections

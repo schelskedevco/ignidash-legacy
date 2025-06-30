@@ -1,7 +1,12 @@
 import { Compass } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
-import { MAX_WIDTHS, TYPOGRAPHY, SPACING } from "@/lib/design-constants";
+import {
+  MAX_WIDTHS,
+  TYPOGRAPHY,
+  SPACING,
+  GRADIENTS,
+} from "@/lib/design-constants";
 
 export function LifeModulesSection() {
   return (
@@ -12,7 +17,11 @@ export function LifeModulesSection() {
     >
       <ProductPageSectionHeader
         icon={Compass}
-        title="Play Out Your What-Ifs"
+        title={
+          <>
+            Play Out Your <span className={GRADIENTS.text}>What-Ifs</span>
+          </>
+        }
         description="Drag and drop life events onto your timeline. Kids, time off, career pivots, big purchases—instantly see how each decision shifts your financial future."
       />
       {null}

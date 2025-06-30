@@ -11,7 +11,12 @@ import { FireProjectionChartCard } from "./components/financial-outputs/fire-pro
 import { KeyMetricsCard } from "./components/financial-outputs/key-metrics-card";
 import { ScenarioId } from "./lib/fire-types";
 import { ConnectingWire } from "./components/connecting-wire";
-import { MAX_WIDTHS, SPACING, TYPOGRAPHY } from "@/lib/design-constants";
+import {
+  MAX_WIDTHS,
+  SPACING,
+  TYPOGRAPHY,
+  GRADIENTS,
+} from "@/lib/design-constants";
 import {
   Tooltip,
   TooltipTrigger,
@@ -39,7 +44,12 @@ export function FireScenariosSection() {
     >
       <ProductPageSectionHeader
         icon={Route}
-        title="Every FIRE Path, Clearly Mapped"
+        title={
+          <>
+            Every <span className={GRADIENTS.textReverse}>FIRE</span> Path,
+            Clearly Mapped
+          </>
+        }
         description="Run the numbers on early retirement, sabbaticals, part-time work, and more. See how your future shifts."
       />
       <div className="grid grid-cols-1 place-items-center gap-4 lg:grid-cols-2">

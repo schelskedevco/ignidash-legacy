@@ -1,9 +1,10 @@
 import { LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
 import { ICON_SIZES, MAX_WIDTHS } from "@/lib/design-constants";
 
 interface ProductPageSectionHeaderProps {
   icon: LucideIcon;
-  title: string;
+  title: string | ReactNode;
   description: string;
   className?: string;
 }

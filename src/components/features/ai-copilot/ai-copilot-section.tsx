@@ -2,7 +2,12 @@ import { WandSparkles } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
 import { AICopilotDemo } from "./components/ai-copilot-demo";
-import { MAX_WIDTHS, TYPOGRAPHY, SPACING } from "@/lib/design-constants";
+import {
+  MAX_WIDTHS,
+  TYPOGRAPHY,
+  SPACING,
+  GRADIENTS,
+} from "@/lib/design-constants";
 
 export function AICopilotSection() {
   return (
@@ -14,7 +19,12 @@ export function AICopilotSection() {
     >
       <ProductPageSectionHeader
         icon={WandSparkles}
-        title="Your AI Retirement Advisor"
+        title={
+          <>
+            Your <span className={GRADIENTS.textReverse}>AI</span> Retirement
+            Advisor
+          </>
+        }
         description="Get wisdom inspired by the best minds in financial independence, personalized to your exact situation."
       />
       <AICopilotDemo />

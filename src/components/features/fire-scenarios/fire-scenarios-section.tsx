@@ -39,8 +39,8 @@ export function FireScenariosSection() {
     >
       <ProductPageSectionHeader
         icon={Route}
-        title="Every Path, Clearly Mapped"
-        description="Compare early retirement, sabbaticals, part-time transitions, and creative combinations. We'll calculate the timeline and trade-offs for every scenario you want to explore."
+        title="Every FIRE Path, Clearly Mapped"
+        description="Run the numbers on early retirement, sabbaticals, part-time work, and more. See how your future shifts."
       />
       <div className="grid grid-cols-1 place-items-center gap-4 lg:grid-cols-2">
         {/* Left Panel - Financial Inputs */}

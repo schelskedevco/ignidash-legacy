@@ -35,13 +35,13 @@ export const LifeEventCarousel = memo(function LifeEventCarousel({
 
   return (
     <div className={cn("relative", className)}>
-      {/* Gradient fade masks */}
+      {/* Gradient fade masks - positioned to match card content area */}
       <div
-        className="from-background pointer-events-none absolute top-0 left-0 z-10 h-full w-16 bg-gradient-to-r to-transparent"
+        className="from-background pointer-events-none absolute top-2 left-0 z-10 h-[calc(100%-1rem)] w-16 bg-gradient-to-r to-transparent"
         aria-hidden="true"
       />
       <div
-        className="from-background pointer-events-none absolute top-0 right-0 z-10 h-full w-16 bg-gradient-to-l to-transparent"
+        className="from-background pointer-events-none absolute top-2 right-0 z-10 h-[calc(100%-1rem)] w-16 bg-gradient-to-l to-transparent"
         aria-hidden="true"
       />
 

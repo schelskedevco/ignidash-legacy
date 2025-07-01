@@ -116,6 +116,7 @@ export function LifeModulesSection() {
       className={`${MAX_WIDTHS.container} ${SPACING.container} ${SPACING.sectionVerticalLg} ${TYPOGRAPHY.alignment} mx-auto`}
       id="life-modules"
       ariaLabel="Life Modules Section"
+      gradientVariant="subtleIndigo"
     >
       <ProductPageSectionHeader
         icon={Compass}

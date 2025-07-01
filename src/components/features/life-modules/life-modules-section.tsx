@@ -1,6 +1,7 @@
 import { Compass } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
+import { Separator } from "@/components/ui/separator";
 import { LifeEventCarousel } from "./life-event-carousel";
 import { LifeEventCard } from "./life-event-card";
 import {
@@ -113,6 +114,42 @@ export function LifeModulesSection() {
           />
         ))}
       </LifeEventCarousel>
+
+      {/* FIRE Impact Output Section */}
+      <div className="mt-16 text-center">
+        <div className="flex flex-col items-center justify-center gap-8 md:h-20 md:flex-row">
+          <div>
+            <div className="text-primary text-4xl font-bold">42</div>
+            <div className="text-muted-foreground text-sm">FI Age</div>
+          </div>
+
+          <Separator orientation="vertical" className="hidden md:block" />
+          <Separator orientation="horizontal" className="w-24 md:hidden" />
+
+          <div>
+            <div className="text-4xl font-bold text-green-600">$0</div>
+            <div className="text-muted-foreground text-sm">Total Selected</div>
+          </div>
+
+          <Separator orientation="vertical" className="hidden md:block" />
+          <Separator orientation="horizontal" className="w-24 md:hidden" />
+
+          <div>
+            <div className="text-muted-foreground text-4xl font-bold">—</div>
+            <div className="text-muted-foreground text-sm">Years Impact</div>
+          </div>
+
+          <Separator orientation="vertical" className="hidden md:block" />
+          <Separator orientation="horizontal" className="w-24 md:hidden" />
+
+          <div>
+            <div className="text-muted-foreground text-4xl font-bold">
+              $3,200
+            </div>
+            <div className="text-muted-foreground text-sm">Monthly Savings</div>
+          </div>
+        </div>
+      </div>
     </ProductPageSection>
   );
 }

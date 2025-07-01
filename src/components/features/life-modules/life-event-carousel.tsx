@@ -58,6 +58,7 @@ export const LifeEventCarousel = memo(function LifeEventCarousel({
                   speed: 1,
                   stopOnMouseEnter: true,
                   stopOnInteraction: false,
+                  stopOnFocusIn: false, // Don't stop on focus to avoid drag conflicts
                   startDelay: 0,
                 }),
               ]

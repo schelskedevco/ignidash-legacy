@@ -3,6 +3,7 @@
 import React, { useState, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { AnimatedNumber } from "@/components/features/fire-scenarios/components/animated-number";
 import { cn } from "@/lib/utils";
 
 interface LifeEventOption {
@@ -76,7 +77,10 @@ export function LifeEventCard({
       <CardContent>
         <div className="mb-4 text-center">
           <div className="text-primary mb-1 text-2xl font-bold sm:text-3xl">
-            {selectedOption ? formatCost(selectedOption.cost) : "$0"}
+            <AnimatedNumber
+              value={selectedOption ? selectedOption.cost : 0}
+              prefix="$"
+            />
           </div>
         </div>
 

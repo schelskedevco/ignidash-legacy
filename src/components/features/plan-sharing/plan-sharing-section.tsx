@@ -14,6 +14,8 @@ export function PlanSharingSection() {
       className={`${MAX_WIDTHS.container} ${SPACING.container} ${SPACING.sectionVerticalLg} ${TYPOGRAPHY.alignment} mx-auto`}
       id="plan-sharing"
       ariaLabel="Plan Sharing Section"
+      gradientVariant="warmRose"
+      showBottomShadow={true}
     >
       <ProductPageSectionHeader
         icon={Share2}

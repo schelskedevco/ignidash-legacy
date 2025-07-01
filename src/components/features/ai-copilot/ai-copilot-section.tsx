@@ -15,8 +15,7 @@ export function AICopilotSection() {
       className={`${MAX_WIDTHS.container} ${SPACING.container} ${SPACING.sectionVerticalLg} ${TYPOGRAPHY.alignment} mx-auto`}
       id="ai-copilot"
       ariaLabel="AI Copilot Section"
-      gradientVariant="coolIndigo"
-      showBottomShadow={true}
+      gradientVariant="subtleRose"
     >
       <ProductPageSectionHeader
         icon={WandSparkles}

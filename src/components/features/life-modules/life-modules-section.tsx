@@ -1,9 +1,12 @@
+"use client";
+
+import { useState, useCallback } from "react";
 import { Compass } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
 import { Separator } from "@/components/ui/separator";
 import { LifeEventCarousel } from "./life-event-carousel";
-import { LifeEventCard } from "./life-event-card";
+import { LifeEventCard, type LifeEventOption } from "./life-event-card";
 import {
   MAX_WIDTHS,
   TYPOGRAPHY,
@@ -88,6 +91,26 @@ const LIFE_EVENTS = [
 ];
 
 export function LifeModulesSection() {
+  const [selectedCards, setSelectedCards] = useState<Set<string>>(new Set());
+  const MAX_SELECTIONS = 3;
+
+  const handleSelectionChange = useCallback(
+    (cardId: string, option: LifeEventOption | null) => {
+      setSelectedCards((prev) => {
+        const newSet = new Set(prev);
+        if (option === null) {
+          // Deselection - remove card from set
+          newSet.delete(cardId);
+        } else {
+          // Selection - add card to set
+          newSet.add(cardId);
+        }
+        return newSet;
+      });
+    },
+    []
+  );
+
   return (
     <ProductPageSection
       className={`${MAX_WIDTHS.container} ${SPACING.container} ${SPACING.sectionVerticalLg} ${TYPOGRAPHY.alignment} mx-auto`}
@@ -111,6 +134,14 @@ export function LifeModulesSection() {
             id={event.id}
             title={event.title}
             options={event.options}
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            onSelectionChange={(option, index) =>
+              handleSelectionChange(event.id, option)
+            }
+            isDisabled={
+              selectedCards.size >= MAX_SELECTIONS &&
+              !selectedCards.has(event.id)
+            }
           />
         ))}
       </LifeEventCarousel>

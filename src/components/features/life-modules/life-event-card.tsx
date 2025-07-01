@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { AnimatedNumber } from "@/components/features/fire-scenarios/components/animated-number";
 import { cn } from "@/lib/utils";
 
-interface LifeEventOption {
+export interface LifeEventOption {
   label: string;
   cost: number;
 }
@@ -17,6 +17,7 @@ interface LifeEventCardProps {
   options: LifeEventOption[];
   className?: string;
   onSelectionChange?: (option: LifeEventOption | null, index: number) => void;
+  isDisabled?: boolean;
 }
 
 export function LifeEventCard({
@@ -25,6 +26,7 @@ export function LifeEventCard({
   options,
   className,
   onSelectionChange,
+  isDisabled = false,
 }: LifeEventCardProps) {
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(-1); // Start with no selection
   const selectedOption =
@@ -92,6 +94,7 @@ export function LifeEventCard({
                 variant={index === selectedOptionIndex ? "default" : "outline"}
                 size="sm"
                 className="w-full justify-between text-xs"
+                disabled={isDisabled && selectedOptionIndex !== index}
                 onClick={() => handleOptionSelect(option, index)}
               >
                 <span>{option.label}</span>

@@ -98,3 +98,4 @@ Import with `@/*` alias. Components use Radix UI + CVA patterns.
 ## Development Notes
 
 - Remember to reference tailwind-guidelines.md when creating new Tailwind components
+- Don't build after simple changes

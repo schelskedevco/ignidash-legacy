@@ -15,7 +15,7 @@ interface LifeEventCardProps {
   title: string;
   options: LifeEventOption[];
   className?: string;
-  onSelectionChange?: (option: LifeEventOption, index: number) => void;
+  onSelectionChange?: (option: LifeEventOption | null, index: number) => void;
 }
 
 export function LifeEventCard({
@@ -25,8 +25,9 @@ export function LifeEventCard({
   className,
   onSelectionChange,
 }: LifeEventCardProps) {
-  const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
-  const selectedOption = options[selectedOptionIndex];
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState(-1); // Start with no selection
+  const selectedOption =
+    selectedOptionIndex >= 0 ? options[selectedOptionIndex] : null;
 
   // Memoized formatCost function
   const formatCost = useCallback((cost: number) => {
@@ -40,8 +41,11 @@ export function LifeEventCard({
   }, []);
 
   const handleOptionSelect = (option: LifeEventOption, index: number) => {
-    setSelectedOptionIndex(index);
-    onSelectionChange?.(option, index);
+    // Toggle selection: if already selected, deselect (return to -1)
+    const newIndex = selectedOptionIndex === index ? -1 : index;
+    setSelectedOptionIndex(newIndex);
+
+    onSelectionChange?.(newIndex >= 0 ? option : null, newIndex);
   };
 
   // Guard against empty options
@@ -72,7 +76,7 @@ export function LifeEventCard({
       <CardContent>
         <div className="mb-4 text-center">
           <div className="text-primary mb-1 text-2xl font-bold sm:text-3xl">
-            {formatCost(selectedOption.cost)}
+            {selectedOption ? formatCost(selectedOption.cost) : "$0"}
           </div>
         </div>
 

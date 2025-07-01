@@ -18,7 +18,7 @@ const LIFE_EVENTS = [
     options: [
       { label: "Basic Needs", cost: 233000 },
       { label: "With College Fund", cost: 350000 },
-      { label: "Private School + College", cost: 500000 },
+      { label: "Premium Education", cost: 500000 },
     ],
   },
   {
@@ -59,7 +59,7 @@ const LIFE_EVENTS = [
   },
   {
     id: "world-travel",
-    title: "World Travel (3 months)",
+    title: "World Travel",
     options: [
       { label: "Budget Backpacking", cost: 12000 },
       { label: "Comfortable Tour", cost: 35000 },

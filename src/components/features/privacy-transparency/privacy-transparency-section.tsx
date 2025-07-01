@@ -14,8 +14,6 @@ export function PrivacyTransparencySection() {
       className={`${MAX_WIDTHS.container} ${SPACING.container} ${SPACING.sectionVerticalLg} ${TYPOGRAPHY.alignment} mx-auto`}
       id="privacy-transparency"
       ariaLabel="Privacy and Transparency Section"
-      gradientVariant="freshMint"
-      showBottomShadow={true}
     >
       <ProductPageSectionHeader
         icon={Shield}

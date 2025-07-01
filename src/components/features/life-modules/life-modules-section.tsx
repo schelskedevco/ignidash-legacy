@@ -18,7 +18,7 @@ import {
 const LIFE_EVENTS = [
   {
     id: "have-child",
-    title: "Have a Child",
+    title: "Child",
     options: [
       { label: "Basic Needs", cost: 233000 },
       { label: "With College Fund", cost: 350000 },
@@ -27,7 +27,7 @@ const LIFE_EVENTS = [
   },
   {
     id: "buy-car",
-    title: "Buy a Car",
+    title: "Car",
     options: [
       { label: "Used Reliable", cost: 15000 },
       { label: "New Mid-Range", cost: 35000 },
@@ -36,7 +36,7 @@ const LIFE_EVENTS = [
   },
   {
     id: "sabbatical",
-    title: "Take Sabbatical",
+    title: "Sabbatical",
     options: [
       { label: "3 Months", cost: 15000 },
       { label: "6 Months", cost: 30000 },
@@ -81,7 +81,7 @@ const LIFE_EVENTS = [
   },
   {
     id: "investment-property",
-    title: "Buy Investment Property",
+    title: "Investment Property",
     options: [
       { label: "Small Rental", cost: 150000 },
       { label: "Multi-Family", cost: 350000 },

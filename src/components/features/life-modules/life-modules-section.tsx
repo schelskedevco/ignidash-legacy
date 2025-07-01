@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Compass } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
@@ -13,12 +13,24 @@ import {
   SPACING,
   GRADIENTS,
 } from "@/lib/design-constants";
+import { AnimatedNumber } from "@/components/features/fire-scenarios/components/animated-number";
+import {
+  LifeEventData,
+  LifeEventSelection,
+  InvestmentOption,
+} from "./lib/life-event-types";
+import {
+  calculateFireWithLifeEvents,
+  calculateTotalCost,
+} from "./lib/life-event-utils";
 
-// Life events data
-const LIFE_EVENTS = [
+// Life events data with impact metadata
+const LIFE_EVENTS: LifeEventData[] = [
   {
     id: "have-child",
     title: "Child",
+    impactType: "ongoing",
+    durationYears: 18,
     options: [
       { label: "Basic Needs", cost: 233000 },
       { label: "With College Fund", cost: 350000 },
@@ -28,6 +40,8 @@ const LIFE_EVENTS = [
   {
     id: "buy-car",
     title: "Car",
+    impactType: "ongoing",
+    durationYears: 5,
     options: [
       { label: "Used Reliable", cost: 15000 },
       { label: "New Mid-Range", cost: 35000 },
@@ -37,6 +51,7 @@ const LIFE_EVENTS = [
   {
     id: "sabbatical",
     title: "Sabbatical",
+    impactType: "immediate",
     options: [
       { label: "3 Months", cost: 15000 },
       { label: "6 Months", cost: 30000 },
@@ -46,6 +61,7 @@ const LIFE_EVENTS = [
   {
     id: "home-renovation",
     title: "Home Renovation",
+    impactType: "immediate",
     options: [
       { label: "Kitchen Update", cost: 25000 },
       { label: "Full Remodel", cost: 75000 },
@@ -53,17 +69,9 @@ const LIFE_EVENTS = [
     ],
   },
   {
-    id: "start-business",
-    title: "Start Business",
-    options: [
-      { label: "Side Hustle", cost: 5000 },
-      { label: "Small Business", cost: 50000 },
-      { label: "Tech Startup", cost: 200000 },
-    ],
-  },
-  {
     id: "world-travel",
     title: "World Travel",
+    impactType: "immediate",
     options: [
       { label: "Budget Backpacking", cost: 12000 },
       { label: "Comfortable Tour", cost: 35000 },
@@ -73,6 +81,7 @@ const LIFE_EVENTS = [
   {
     id: "wedding",
     title: "Wedding",
+    impactType: "immediate",
     options: [
       { label: "Intimate Ceremony", cost: 15000 },
       { label: "Traditional Wedding", cost: 35000 },
@@ -82,34 +91,68 @@ const LIFE_EVENTS = [
   {
     id: "investment-property",
     title: "Investment Property",
+    impactType: "investment",
     options: [
-      { label: "Small Rental", cost: 150000 },
-      { label: "Multi-Family", cost: 350000 },
-      { label: "Commercial Space", cost: 750000 },
-    ],
+      {
+        label: "Small Rental",
+        cost: 150000,
+        monthlyReturn: 300,
+        breakEvenMonths: 6,
+      },
+      {
+        label: "Multi-Family",
+        cost: 350000,
+        monthlyReturn: 800,
+        breakEvenMonths: 6,
+      },
+      {
+        label: "Commercial Space",
+        cost: 750000,
+        monthlyReturn: 2000,
+        breakEvenMonths: 12,
+      },
+    ] as InvestmentOption[],
   },
 ];
 
 export function LifeModulesSection() {
-  const [selectedCards, setSelectedCards] = useState<Set<string>>(new Set());
+  const [selections, setSelections] = useState<Map<string, LifeEventSelection>>(
+    new Map()
+  );
   const MAX_SELECTIONS = 3;
 
   const handleSelectionChange = useCallback(
-    (cardId: string, option: LifeEventOption | null) => {
-      setSelectedCards((prev) => {
-        const newSet = new Set(prev);
+    (cardId: string, option: LifeEventOption | null, optionIndex: number) => {
+      setSelections((prev) => {
+        const newMap = new Map(prev);
         if (option === null) {
-          // Deselection - remove card from set
-          newSet.delete(cardId);
+          // Deselection - remove from map
+          newMap.delete(cardId);
         } else {
-          // Selection - add card to set
-          newSet.add(cardId);
+          // Selection - add to map with full details
+          newMap.set(cardId, {
+            eventId: cardId,
+            option,
+            optionIndex,
+          });
         }
-        return newSet;
+        return newMap;
       });
     },
     []
   );
+
+  // Calculate FIRE projections with selected life events
+  const fireCalculations = useMemo(() => {
+    const selectedEvents = Array.from(selections.values());
+    return calculateFireWithLifeEvents(LIFE_EVENTS, selectedEvents);
+  }, [selections]);
+
+  // Calculate total cost of selections
+  const totalCost = useMemo(() => {
+    const selectedEvents = Array.from(selections.values());
+    return calculateTotalCost(selectedEvents);
+  }, [selections]);
 
   return (
     <ProductPageSection
@@ -134,13 +177,11 @@ export function LifeModulesSection() {
             id={event.id}
             title={event.title}
             options={event.options}
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onSelectionChange={(option, index) =>
-              handleSelectionChange(event.id, option)
+              handleSelectionChange(event.id, option, index)
             }
             isDisabled={
-              selectedCards.size >= MAX_SELECTIONS &&
-              !selectedCards.has(event.id)
+              selections.size >= MAX_SELECTIONS && !selections.has(event.id)
             }
           />
         ))}
@@ -150,7 +191,11 @@ export function LifeModulesSection() {
       <div className="mt-16 text-center">
         <div className="flex flex-col items-center justify-center gap-8 md:h-20 md:flex-row">
           <div>
-            <div className="text-primary text-4xl font-bold">42</div>
+            <div className="text-primary text-4xl font-bold">
+              <AnimatedNumber
+                value={Math.round(fireCalculations.adjusted.fireAge)}
+              />
+            </div>
             <div className="text-muted-foreground text-sm">FI Age</div>
           </div>
 
@@ -158,7 +203,9 @@ export function LifeModulesSection() {
           <Separator orientation="horizontal" className="w-24 md:hidden" />
 
           <div>
-            <div className="text-4xl font-bold text-green-600">$0</div>
+            <div className="text-4xl font-bold text-green-600">
+              <AnimatedNumber value={totalCost} prefix="$" />
+            </div>
             <div className="text-muted-foreground text-sm">Total Selected</div>
           </div>
 
@@ -166,7 +213,26 @@ export function LifeModulesSection() {
           <Separator orientation="horizontal" className="w-24 md:hidden" />
 
           <div>
-            <div className="text-muted-foreground text-4xl font-bold">—</div>
+            <div
+              className={`text-4xl font-bold ${
+                fireCalculations.yearsImpact === 0
+                  ? "text-muted-foreground"
+                  : fireCalculations.yearsImpact > 0
+                    ? "text-orange-600"
+                    : "text-green-600"
+              }`}
+            >
+              {fireCalculations.yearsImpact === 0 ? (
+                "—"
+              ) : (
+                <>
+                  {fireCalculations.yearsImpact > 0 ? "+" : ""}
+                  <AnimatedNumber
+                    value={Number(fireCalculations.yearsImpact.toFixed(1))}
+                  />
+                </>
+              )}
+            </div>
             <div className="text-muted-foreground text-sm">Years Impact</div>
           </div>
 
@@ -175,7 +241,10 @@ export function LifeModulesSection() {
 
           <div>
             <div className="text-muted-foreground text-4xl font-bold">
-              $3,200
+              <AnimatedNumber
+                value={fireCalculations.adjusted.monthlySavings}
+                prefix="$"
+              />
             </div>
             <div className="text-muted-foreground text-sm">Monthly Savings</div>
           </div>

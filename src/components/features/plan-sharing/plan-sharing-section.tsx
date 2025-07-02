@@ -2,6 +2,7 @@ import { Share2 } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
 import { MockBrowser } from "./components/mock-browser";
+import { MockReddit } from "./components/mock-reddit";
 import {
   MAX_WIDTHS,
   TYPOGRAPHY,
@@ -27,8 +28,33 @@ export function PlanSharingSection() {
         }
         description="From running it by your inner circle to starting a conversation on Reddit or X, share your plan with one simple link."
       />
-      <div className="flex justify-center">
-        <MockBrowser />
+
+      <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+        {/* Left Column - MockBrowser */}
+        <div className="flex justify-center lg:justify-start">
+          <MockBrowser />
+        </div>
+
+        {/* Right Column - Social Examples */}
+        <div className="flex flex-col items-center gap-8 lg:items-start">
+          {/* Reddit Example */}
+          <div className="w-full space-y-3">
+            <p className="text-muted-foreground ml-4 text-center text-xs font-medium tracking-wider uppercase lg:text-left">
+              Share on Reddit
+            </p>
+            <div className="flex justify-center lg:justify-start">
+              <MockReddit />
+            </div>
+          </div>
+
+          {/* iMessage Example */}
+          <div className="w-full space-y-3">
+            <p className="text-muted-foreground ml-4 text-center text-xs font-medium tracking-wider uppercase lg:text-left">
+              Share with Friends
+            </p>
+            {/* <MockiMessage /> */}
+          </div>
+        </div>
       </div>
     </ProductPageSection>
   );

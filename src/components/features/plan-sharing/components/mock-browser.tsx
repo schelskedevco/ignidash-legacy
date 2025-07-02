@@ -52,7 +52,7 @@ export function MockBrowser() {
       {/* Page Content */}
       <CardContent className="space-y-6">
         {/* Social Media Preview Card */}
-        <Card className="border-primary/50 bg-accent space-y-3 p-4">
+        <Card className="border-primary/50 bg-accent p-4">
           {/* Mini Chart */}
           <span className="sr-only">
             Portfolio growth chart showing {scenario.subtitle} scenario reaching
@@ -66,7 +66,7 @@ export function MockBrowser() {
           />
 
           {/* Content Section */}
-          <div className="space-y-3">
+          <div className="space-y-3 text-left">
             <h3 className="text-xl font-semibold tracking-tight">
               {scenario.subtitle} — FIRE at{" "}
               {Math.round(baristaOutputs.baristaFireAge)}

@@ -27,6 +27,7 @@ interface GrowthChartProps {
   data: GrowthDataPoint[];
   outputs: FireOutputs;
   scenario: Scenario;
+  thumbnailMode?: boolean;
 }
 
 const chartConfig = {
@@ -43,7 +44,12 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
+export function GrowthChart({
+  data,
+  outputs,
+  scenario,
+  thumbnailMode = false,
+}: GrowthChartProps) {
   // Helper to get target retirement age for Coast FIRE
   const getTargetRetirementAge = () => {
     if (scenario.fireType === FireType.COAST_FIRE) {
@@ -86,11 +92,21 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
   return (
     <ChartContainer
       config={chartConfig}
-      className="h-[250px] min-h-[250px] w-full sm:h-[320px] sm:min-h-[320px] md:h-[400px] md:min-h-[400px]"
+      className={
+        thumbnailMode
+          ? "bg-card border-primary/50 h-[120px] min-h-[120px] w-full rounded-md border-1 sm:h-[140px] sm:min-h-[140px]"
+          : "h-[250px] min-h-[250px] w-full sm:h-[320px] sm:min-h-[320px] md:h-[400px] md:min-h-[400px]"
+      }
     >
       <AreaChart data={data} margin={{ top: 0, right: 8, left: 8, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" className="stroke-muted/20" />
-        <XAxis dataKey="age" tickLine={false} axisLine={false} interval={2} />
+        <XAxis
+          dataKey="age"
+          tickLine={false}
+          axisLine={false}
+          interval={2}
+          hide={thumbnailMode}
+        />
         <YAxis tick={true} tickLine={false} axisLine={false} width={0} />
         <ChartTooltip
           content={
@@ -126,17 +142,21 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
           stroke="var(--color-referenceLine)"
           strokeDasharray="20 20"
           strokeWidth={1}
-          label={{
-            value:
-              scenario.fireType === FireType.COAST_FIRE
-                ? `Coast at ${fireAge}`
-                : `FIRE at ${fireAge}`,
-            position: "insideBottomLeft",
-            style: {
-              fontSize: 12,
-              fill: "var(--color-referenceLine)",
-            },
-          }}
+          label={
+            thumbnailMode
+              ? undefined
+              : {
+                  value:
+                    scenario.fireType === FireType.COAST_FIRE
+                      ? `Coast at ${fireAge}`
+                      : `FIRE at ${fireAge}`,
+                  position: "insideBottomLeft",
+                  style: {
+                    fontSize: 12,
+                    fill: "var(--color-referenceLine)",
+                  },
+                }
+          }
         />
         {scenario.fireType === FireType.COAST_FIRE &&
           getTargetRetirementAge() && (
@@ -145,14 +165,18 @@ export function GrowthChart({ data, outputs, scenario }: GrowthChartProps) {
               stroke="var(--color-referenceLine)"
               strokeDasharray="20 20"
               strokeWidth={1}
-              label={{
-                value: `Full retirement at ${getTargetRetirementAge()}`,
-                position: "insideBottomRight",
-                style: {
-                  fontSize: 12,
-                  fill: "var(--color-referenceLine)",
-                },
-              }}
+              label={
+                thumbnailMode
+                  ? undefined
+                  : {
+                      value: `Full retirement at ${getTargetRetirementAge()}`,
+                      position: "insideBottomRight",
+                      style: {
+                        fontSize: 12,
+                        fill: "var(--color-referenceLine)",
+                      },
+                    }
+              }
             />
           )}
       </AreaChart>

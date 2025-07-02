@@ -28,7 +28,13 @@ export function MockiMessage() {
           {/* Sent message */}
           <div className="flex justify-end">
             <div className="max-w-[75%] rounded-tl-2xl rounded-tr-2xl rounded-br-xs rounded-bl-2xl bg-blue-500 px-4 py-2 text-white">
-              <p className="text-sm">Thank you! I should be there by 9:10</p>
+              <p className="text-sm">
+                Remember when I said I can&apos;t do another 20 years of this?
+                Turns out I don&apos;t have to{" "}
+                <span className="cursor-pointer underline">
+                  https://ignidash.com/p/barista-fire-journey
+                </span>
+              </p>
             </div>
           </div>
 
@@ -36,7 +42,8 @@ export function MockiMessage() {
           <div className="flex justify-start">
             <div className="bg-muted max-w-[75%] rounded-tl-2xl rounded-tr-2xl rounded-br-2xl rounded-bl-xs px-4 py-2">
               <p className="text-foreground text-sm">
-                Don&apos;t rush. I&apos;ve got it covered.
+                Bob, you said that when we were cellmates in Guantanamo. What
+                are you talking about?
               </p>
             </div>
           </div>

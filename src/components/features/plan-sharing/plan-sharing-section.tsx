@@ -32,7 +32,7 @@ export function PlanSharingSection() {
 
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
         {/* Left Column - MockBrowser */}
-        <div className="flex flex-col items-center gap-4 lg:items-start">
+        <div className="flex flex-col items-center justify-center gap-4 lg:items-start">
           <div className="w-full space-y-3">
             <p className="text-muted-foreground ml-4 text-center text-xs font-medium tracking-wider uppercase lg:text-left">
               Your Plan

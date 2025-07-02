@@ -31,7 +31,7 @@ export function MockiMessage() {
               <p className="text-sm">
                 Remember when I said I can&apos;t do another 20 years of this?
                 Turns out I don&apos;t have to{" "}
-                <span className="cursor-pointer underline">
+                <span className="cursor-pointer break-all underline">
                   https://ignidash.com/p/barista-fire-journey
                 </span>
               </p>

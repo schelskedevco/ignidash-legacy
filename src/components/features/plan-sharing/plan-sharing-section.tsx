@@ -30,7 +30,7 @@ export function PlanSharingSection() {
         description="From running it by your inner circle to starting a conversation on Reddit or X, share your plan with one simple link."
       />
 
-      <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+      <div className="grid gap-8 lg:grid-cols-2 lg:gap-4">
         {/* Left Column - MockBrowser */}
         <div className="flex flex-col items-center justify-center gap-4 lg:items-start">
           <div className="w-full space-y-3">

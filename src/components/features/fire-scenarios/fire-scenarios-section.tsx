@@ -52,7 +52,7 @@ export function FireScenariosSection() {
         }
         description="Run the numbers on early retirement, sabbaticals, part-time work, and more. See how your future shifts."
       />
-      <div className="grid grid-cols-1 place-items-center gap-4 lg:grid-cols-2">
+      <div className="grid grid-cols-1 place-items-center gap-8 lg:grid-cols-2 lg:gap-4">
         {/* Left Panel - Financial Inputs */}
         <div className="flex h-full w-full flex-col items-end justify-center">
           <div className="flex w-full items-end justify-center lg:justify-between">

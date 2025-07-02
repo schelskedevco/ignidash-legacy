@@ -12,7 +12,15 @@ export function MockiMessage() {
         <Video className="h-8 w-8" />
       </CardHeader>
 
-      <CardContent className="space-y-2 text-left"></CardContent>
+      <CardContent className="space-y-2">
+        <div className="space-y-1 text-center">
+          <p className="text-muted-foreground text-xs font-medium">iMessage</p>
+          <p className="text-xs">
+            <span className="text-foreground/80 font-medium">Today</span>{" "}
+            <span className="text-muted-foreground font-normal">9:41 AM</span>
+          </p>
+        </div>
+      </CardContent>
     </Card>
   );
 }

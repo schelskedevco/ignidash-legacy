@@ -13,6 +13,82 @@ import {
 import { calculateProjections } from "@/components/features/fire-scenarios/lib/fire-utils";
 import { Target } from "lucide-react";
 
+// Life events data with impact metadata
+export const LIFE_EVENTS: LifeEventData[] = [
+  {
+    id: "buy-car",
+    title: "Car",
+    impactType: "ongoing",
+    durationYears: 5,
+    options: [
+      { label: "Used Reliable", cost: 15000 },
+      { label: "New Mid-Range", cost: 35000 },
+      { label: "Luxury Vehicle", cost: 65000 },
+    ],
+  },
+  {
+    id: "sabbatical",
+    title: "Sabbatical",
+    impactType: "immediate",
+    options: [
+      { label: "3 Months", cost: 15000 },
+      { label: "6 Months", cost: 30000 },
+      { label: "1 Year", cost: 60000 },
+    ],
+  },
+  {
+    id: "home-renovation",
+    title: "Home Renovation",
+    impactType: "immediate",
+    options: [
+      { label: "Kitchen Update", cost: 25000 },
+      { label: "Full Remodel", cost: 75000 },
+      { label: "Major Addition", cost: 150000 },
+    ],
+  },
+  {
+    id: "have-child",
+    title: "Child",
+    impactType: "ongoing",
+    durationYears: 18,
+    options: [
+      { label: "Basic Needs", cost: 233000 },
+      { label: "With College Fund", cost: 350000 },
+      { label: "Premium Education", cost: 500000 },
+    ],
+  },
+  {
+    id: "world-travel",
+    title: "World Travel",
+    impactType: "immediate",
+    options: [
+      { label: "Budget Backpacking", cost: 12000 },
+      { label: "Comfortable Tour", cost: 35000 },
+      { label: "Luxury Journey", cost: 75000 },
+    ],
+  },
+  {
+    id: "wedding",
+    title: "Wedding",
+    impactType: "immediate",
+    options: [
+      { label: "Intimate Ceremony", cost: 15000 },
+      { label: "Traditional Wedding", cost: 35000 },
+      { label: "Dream Wedding", cost: 75000 },
+    ],
+  },
+  {
+    id: "inheritance",
+    title: "Inheritance",
+    impactType: "windfall",
+    options: [
+      { label: "Small Inheritance", income: 50000 },
+      { label: "Moderate Inheritance", income: 150000 },
+      { label: "Large Inheritance", income: 500000 },
+    ],
+  },
+] as const;
+
 // Baseline FIRE scenario inputs
 export const BASELINE_INPUTS: ScenarioInputs = {
   age: 28,

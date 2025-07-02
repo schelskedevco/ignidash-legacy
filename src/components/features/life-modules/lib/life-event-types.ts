@@ -38,17 +38,3 @@ export interface LifeEventSelection {
   option: LifeEventOption;
   optionIndex: number;
 }
-
-export interface OngoingEventData {
-  annualAmount: number;
-  durationYears: number;
-}
-
-export interface LifeEventImpact {
-  immediateAssetReduction: number;
-  annualExpenseIncrease: number; // For permanent expenses only
-  expenseIncreaseDurationYears?: number; // For single ongoing (legacy compatibility)
-
-  // Store individual ongoing events for proper rate handling
-  ongoingEvents?: OngoingEventData[];
-}

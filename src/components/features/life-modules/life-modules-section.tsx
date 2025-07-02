@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback } from "react";
 import { Compass } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
@@ -18,11 +18,7 @@ import {
 } from "@/lib/design-constants";
 import { AnimatedNumber } from "@/components/features/fire-scenarios/components/animated-number";
 import { LifeEventSelection } from "./lib/life-event-types";
-import {
-  calculateFireWithLifeEvents,
-  calculateTotalCost,
-  LIFE_EVENTS,
-} from "./lib/life-event-utils";
+import { LIFE_EVENTS, calculateInitialFireAge } from "./lib/life-event-utils";
 import { cn } from "@/lib/utils";
 
 const MAX_SELECTIONS = 3;
@@ -51,32 +47,11 @@ export function LifeModulesSection() {
     []
   );
 
-  // Calculate FIRE projections with selected life events
-  const fireCalculations = useMemo(() => {
-    const selectedEvents = Array.from(selections.values());
-    return calculateFireWithLifeEvents(LIFE_EVENTS, selectedEvents);
-  }, [selections]);
+  // Calculate baseline FIRE age
+  const fireAge = calculateInitialFireAge();
 
-  // Calculate total cost of selections
-  const totalCost = useMemo(() => {
-    const selectedEvents = Array.from(selections.values());
-    return calculateTotalCost(selectedEvents);
-  }, [selections]);
-
-  // Calculate properly rounded years impact to avoid "+0.0" display
-  const displayYearsImpact = useMemo(() => {
-    const impact = fireCalculations.yearsImpact;
-
-    // If the absolute impact is less than 0.5 years, treat as zero
-    if (Math.abs(impact) < 0.5) {
-      return 0;
-    }
-
-    // Otherwise, round to nearest whole number
-    return Math.round(impact);
-  }, [fireCalculations.yearsImpact]);
-
-  const showYearsImpact = displayYearsImpact !== 0;
+  // Placeholder for total cost - to be implemented
+  const totalCost = 0;
 
   return (
     <ProductPageSection
@@ -117,9 +92,7 @@ export function LifeModulesSection() {
         <div className="flex flex-col items-center justify-center gap-8 md:h-20 md:flex-row">
           <div>
             <div className="text-primary text-4xl font-bold">
-              <AnimatedNumber
-                value={Math.round(fireCalculations.adjusted.fireAge)}
-              />
+              <AnimatedNumber value={fireAge} />
             </div>
             <div className="text-muted-foreground text-sm">FI Age</div>
           </div>
@@ -154,25 +127,7 @@ export function LifeModulesSection() {
           <Separator orientation="horizontal" className="w-24 md:hidden" />
 
           <div>
-            <div
-              className={cn(
-                "text-4xl font-bold",
-                !showYearsImpact
-                  ? "text-muted-foreground"
-                  : displayYearsImpact > 0
-                    ? "text-orange-600 dark:text-orange-500"
-                    : "text-green-600 dark:text-green-500"
-              )}
-            >
-              {!showYearsImpact ? (
-                "—"
-              ) : (
-                <>
-                  {displayYearsImpact > 0 && "+"}
-                  <AnimatedNumber value={displayYearsImpact} />
-                </>
-              )}
-            </div>
+            <div className="text-muted-foreground text-4xl font-bold">—</div>
             <div className="text-muted-foreground text-sm">Years Impact</div>
           </div>
         </div>

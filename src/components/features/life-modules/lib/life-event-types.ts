@@ -1,14 +1,10 @@
 export interface LifeEventOption {
   label: string;
-  cost: number;
+  cost?: number;
+  income?: number;
 }
 
-export interface InvestmentOption extends LifeEventOption {
-  monthlyReturn: number;
-  breakEvenMonths: number;
-}
-
-export type LifeEventImpactType = "immediate" | "ongoing" | "investment";
+export type LifeEventImpactType = "immediate" | "ongoing" | "windfall";
 
 export interface BaseLifeEvent {
   id: string;
@@ -27,25 +23,23 @@ export interface OngoingLifeEvent extends BaseLifeEvent {
   durationYears: number;
 }
 
-export interface InvestmentLifeEvent extends BaseLifeEvent {
-  impactType: "investment";
-  options: InvestmentOption[];
+export interface WindfallLifeEvent extends BaseLifeEvent {
+  impactType: "windfall";
+  options: LifeEventOption[];
 }
 
 export type LifeEventData =
   | ImmediateLifeEvent
   | OngoingLifeEvent
-  | InvestmentLifeEvent;
+  | WindfallLifeEvent;
 
 export interface LifeEventSelection {
   eventId: string;
-  option: LifeEventOption | InvestmentOption;
+  option: LifeEventOption;
   optionIndex: number;
 }
 
 export interface LifeEventImpact {
   immediateAssetReduction: number;
   annualExpenseIncrease: number;
-  monthlyIncomeAfterBreakeven: number;
-  breakEvenMonths: number;
 }

@@ -5,8 +5,11 @@ import { Compass } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
 import { Separator } from "@/components/ui/separator";
-import { LifeEventCarousel } from "./life-event-carousel";
-import { LifeEventCard, type LifeEventOption } from "./life-event-card";
+import { LifeEventCarousel } from "./components/life-event-carousel";
+import {
+  LifeEventCard,
+  type LifeEventOption,
+} from "./components/life-event-card";
 import {
   MAX_WIDTHS,
   TYPOGRAPHY,
@@ -14,15 +17,12 @@ import {
   GRADIENTS,
 } from "@/lib/design-constants";
 import { AnimatedNumber } from "@/components/features/fire-scenarios/components/animated-number";
-import {
-  LifeEventData,
-  LifeEventSelection,
-  InvestmentOption,
-} from "./lib/life-event-types";
+import { LifeEventData, LifeEventSelection } from "./lib/life-event-types";
 import {
   calculateFireWithLifeEvents,
   calculateTotalCost,
 } from "./lib/life-event-utils";
+import { cn } from "@/lib/utils";
 
 // Life events data with impact metadata
 const LIFE_EVENTS: LifeEventData[] = [
@@ -89,47 +89,31 @@ const LIFE_EVENTS: LifeEventData[] = [
     ],
   },
   {
-    id: "investment-property",
-    title: "Investment Property",
-    impactType: "investment",
+    id: "inheritance",
+    title: "Inheritance",
+    impactType: "windfall",
     options: [
-      {
-        label: "Small Rental",
-        cost: 150000,
-        monthlyReturn: 300,
-        breakEvenMonths: 6,
-      },
-      {
-        label: "Multi-Family",
-        cost: 350000,
-        monthlyReturn: 800,
-        breakEvenMonths: 6,
-      },
-      {
-        label: "Commercial Space",
-        cost: 750000,
-        monthlyReturn: 2000,
-        breakEvenMonths: 12,
-      },
-    ] as InvestmentOption[],
+      { label: "Small Inheritance", income: 50000 },
+      { label: "Moderate Inheritance", income: 150000 },
+      { label: "Large Inheritance", income: 500000 },
+    ],
   },
-];
+] as const;
+
+const MAX_SELECTIONS = 3;
 
 export function LifeModulesSection() {
   const [selections, setSelections] = useState<Map<string, LifeEventSelection>>(
     new Map()
   );
-  const MAX_SELECTIONS = 3;
 
   const handleSelectionChange = useCallback(
     (cardId: string, option: LifeEventOption | null, optionIndex: number) => {
       setSelections((prev) => {
         const newMap = new Map(prev);
         if (option === null) {
-          // Deselection - remove from map
           newMap.delete(cardId);
         } else {
-          // Selection - add to map with full details
           newMap.set(cardId, {
             eventId: cardId,
             option,
@@ -154,6 +138,21 @@ export function LifeModulesSection() {
     return calculateTotalCost(selectedEvents);
   }, [selections]);
 
+  // Calculate properly rounded years impact to avoid "+0.0" display
+  const displayYearsImpact = useMemo(() => {
+    const impact = fireCalculations.yearsImpact;
+
+    // If the absolute impact is less than 0.5 years, treat as zero
+    if (Math.abs(impact) < 0.5) {
+      return 0;
+    }
+
+    // Otherwise, round to nearest whole number
+    return Math.round(impact);
+  }, [fireCalculations.yearsImpact]);
+
+  const showYearsImpact = displayYearsImpact !== 0;
+
   return (
     <ProductPageSection
       className={`${MAX_WIDTHS.container} ${SPACING.container} ${SPACING.sectionVerticalLg} ${TYPOGRAPHY.alignment} mx-auto`}
@@ -167,7 +166,7 @@ export function LifeModulesSection() {
             Play Out Your <span className={GRADIENTS.text}>What-Ifs</span>
           </>
         }
-        description="Drag and drop life events onto your timeline. Kids, time off, career pivots, big purchases—instantly see how each decision shifts your financial future."
+        description="Select life events to see how each decision impacts your financial independence timeline. Kids, time off, career pivots, big purchases—instantly see how each choice shifts your future."
       />
 
       <LifeEventCarousel>
@@ -203,10 +202,26 @@ export function LifeModulesSection() {
           <Separator orientation="horizontal" className="w-24 md:hidden" />
 
           <div>
-            <div className="text-4xl font-bold text-green-600">
-              <AnimatedNumber value={totalCost} prefix="$" />
+            <div
+              className={cn(
+                "text-4xl font-bold",
+                totalCost === 0
+                  ? "text-muted-foreground"
+                  : totalCost > 0
+                    ? "text-red-600 dark:text-red-500"
+                    : "text-green-600 dark:text-green-500"
+              )}
+            >
+              {totalCost === 0 ? (
+                "—"
+              ) : (
+                <>
+                  {totalCost > 0 ? "-" : "+"}
+                  <AnimatedNumber value={Math.abs(totalCost)} prefix="$" />
+                </>
+              )}
             </div>
-            <div className="text-muted-foreground text-sm">Total Selected</div>
+            <div className="text-muted-foreground text-sm">Total Impact</div>
           </div>
 
           <Separator orientation="vertical" className="hidden md:block" />
@@ -214,39 +229,25 @@ export function LifeModulesSection() {
 
           <div>
             <div
-              className={`text-4xl font-bold ${
-                fireCalculations.yearsImpact === 0
+              className={cn(
+                "text-4xl font-bold",
+                !showYearsImpact
                   ? "text-muted-foreground"
-                  : fireCalculations.yearsImpact > 0
-                    ? "text-orange-600"
-                    : "text-green-600"
-              }`}
+                  : displayYearsImpact > 0
+                    ? "text-orange-600 dark:text-orange-500"
+                    : "text-green-600 dark:text-green-500"
+              )}
             >
-              {fireCalculations.yearsImpact === 0 ? (
+              {!showYearsImpact ? (
                 "—"
               ) : (
                 <>
-                  {fireCalculations.yearsImpact > 0 ? "+" : ""}
-                  <AnimatedNumber
-                    value={Number(fireCalculations.yearsImpact.toFixed(1))}
-                  />
+                  {displayYearsImpact > 0 && "+"}
+                  <AnimatedNumber value={displayYearsImpact} />
                 </>
               )}
             </div>
             <div className="text-muted-foreground text-sm">Years Impact</div>
-          </div>
-
-          <Separator orientation="vertical" className="hidden md:block" />
-          <Separator orientation="horizontal" className="w-24 md:hidden" />
-
-          <div>
-            <div className="text-muted-foreground text-4xl font-bold">
-              <AnimatedNumber
-                value={fireCalculations.adjusted.monthlySavings}
-                prefix="$"
-              />
-            </div>
-            <div className="text-muted-foreground text-sm">Monthly Savings</div>
           </div>
         </div>
       </div>

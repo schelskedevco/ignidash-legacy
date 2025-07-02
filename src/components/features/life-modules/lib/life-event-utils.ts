@@ -2,7 +2,6 @@ import {
   LifeEventData,
   LifeEventSelection,
   LifeEventImpact,
-  InvestmentOption,
 } from "./life-event-types";
 import {
   Scenario,
@@ -26,10 +25,11 @@ export const BASELINE_INPUTS: ScenarioInputs = {
 
 // Calculate the total cost of selected life events
 export function calculateTotalCost(selections: LifeEventSelection[]): number {
-  return selections.reduce(
-    (total, selection) => total + selection.option.cost,
-    0
-  );
+  return selections.reduce((total, selection) => {
+    const cost = selection.option.cost || 0;
+    const income = selection.option.income || 0;
+    return total + cost - income;
+  }, 0);
 }
 
 // Calculate the impact of a single life event
@@ -40,29 +40,26 @@ export function calculateSingleEventImpact(
   const impact: LifeEventImpact = {
     immediateAssetReduction: 0,
     annualExpenseIncrease: 0,
-    monthlyIncomeAfterBreakeven: 0,
-    breakEvenMonths: 0,
   };
 
   switch (event.impactType) {
     case "immediate":
       // Immediate expenses reduce current assets
-      impact.immediateAssetReduction = selection.option.cost;
+      impact.immediateAssetReduction = selection.option.cost || 0;
       break;
 
     case "ongoing":
       // Ongoing expenses increase annual expenses over duration
-      // Convert total cost to annual expense over duration
-      impact.annualExpenseIncrease =
-        selection.option.cost / event.durationYears;
+      // Guard against division by zero
+      if (event.durationYears && event.durationYears > 0) {
+        impact.annualExpenseIncrease =
+          (selection.option.cost || 0) / event.durationYears;
+      }
       break;
 
-    case "investment":
-      // Investments reduce assets initially but provide income after break-even
-      const investmentOption = selection.option as InvestmentOption;
-      impact.immediateAssetReduction = investmentOption.cost;
-      impact.monthlyIncomeAfterBreakeven = investmentOption.monthlyReturn;
-      impact.breakEvenMonths = investmentOption.breakEvenMonths;
+    case "windfall":
+      // Windfalls increase current assets (negative reduction)
+      impact.immediateAssetReduction = -(selection.option.income || 0);
       break;
   }
 
@@ -77,30 +74,20 @@ export function calculateLifeEventImpact(
   const combinedImpact: LifeEventImpact = {
     immediateAssetReduction: 0,
     annualExpenseIncrease: 0,
-    monthlyIncomeAfterBreakeven: 0,
-    breakEvenMonths: 0,
   };
 
   selections.forEach((selection) => {
     const event = events.find((e) => e.id === selection.eventId);
-    if (!event) return;
+    if (!event) {
+      console.warn(`Event with id ${selection.eventId} not found`);
+      return;
+    }
 
     const impact = calculateSingleEventImpact(event, selection);
 
     // Aggregate impacts
     combinedImpact.immediateAssetReduction += impact.immediateAssetReduction;
     combinedImpact.annualExpenseIncrease += impact.annualExpenseIncrease;
-
-    // For simplicity, sum monthly income from all investments
-    // In reality, different investments might have different break-even periods
-    combinedImpact.monthlyIncomeAfterBreakeven +=
-      impact.monthlyIncomeAfterBreakeven;
-
-    // Use the longest break-even period
-    combinedImpact.breakEvenMonths = Math.max(
-      combinedImpact.breakEvenMonths,
-      impact.breakEvenMonths
-    );
   });
 
   return combinedImpact;
@@ -123,14 +110,6 @@ export function adjustScenarioForLifeEvents(
   // Increase annual expenses by ongoing costs
   adjustedInputs.annualExpenses =
     baseInputs.annualExpenses + impact.annualExpenseIncrease;
-
-  // Reduce expenses by investment income (conservative: annual income from monthly)
-  // This is a simplification - in reality, income would start after break-even
-  const annualInvestmentIncome = impact.monthlyIncomeAfterBreakeven * 12;
-  adjustedInputs.annualExpenses = Math.max(
-    0,
-    adjustedInputs.annualExpenses - annualInvestmentIncome
-  );
 
   return adjustedInputs;
 }

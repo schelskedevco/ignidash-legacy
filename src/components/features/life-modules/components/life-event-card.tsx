@@ -5,11 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AnimatedNumber } from "@/components/features/fire-scenarios/components/animated-number";
 import { cn } from "@/lib/utils";
-
-export interface LifeEventOption {
-  label: string;
-  cost: number;
-}
+import { LifeEventOption } from "../lib/life-event-types";
+export type { LifeEventOption };
 
 interface LifeEventCardProps {
   id: string;
@@ -28,31 +25,31 @@ export function LifeEventCard({
   onSelectionChange,
   isDisabled = false,
 }: LifeEventCardProps) {
-  const [selectedOptionIndex, setSelectedOptionIndex] = useState(-1); // Start with no selection
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState(-1);
   const selectedOption =
     selectedOptionIndex >= 0 ? options[selectedOptionIndex] : null;
 
-  // Memoized formatCost function
-  const formatCost = useCallback((cost: number) => {
-    if (cost >= 1000000) {
-      return `$${(cost / 1000000).toFixed(1)}M`;
-    } else if (cost >= 1000) {
-      return `$${(cost / 1000).toFixed(0)}k`;
+  // Memoized formatAmount function
+  const formatAmount = useCallback((amount: number): string => {
+    const absAmount = Math.abs(amount);
+
+    if (absAmount >= 1000000) {
+      return `$${(absAmount / 1000000).toFixed(1)}M`;
+    } else if (absAmount >= 1000) {
+      return `$${(absAmount / 1000).toFixed(0)}k`;
     } else {
-      return `$${cost}`;
+      return `$${absAmount}`;
     }
   }, []);
 
   const handleOptionSelect = (option: LifeEventOption, index: number) => {
-    // Toggle selection: if already selected, deselect (return to -1)
     const newIndex = selectedOptionIndex === index ? -1 : index;
     setSelectedOptionIndex(newIndex);
-
     onSelectionChange?.(newIndex >= 0 ? option : null, newIndex);
   };
 
-  // Guard against empty options
-  if (!options || options.length === 0) {
+  // Guard against empty or undefined options
+  if (!Array.isArray(options) || options.length === 0) {
     return (
       <Card className={cn("w-full", className)}>
         <CardContent className="text-muted-foreground py-8 text-center">
@@ -65,8 +62,9 @@ export function LifeEventCard({
   return (
     <Card
       className={cn(
-        "my-2 w-64 border-2 md:w-80",
-        "hover:border-primary/30 transition-all duration-300 hover:shadow-lg",
+        "my-2 w-full max-w-xs md:w-80",
+        "hover:border-primary/30 border-2",
+        "transition-all duration-300 hover:shadow-lg",
         "motion-safe:hover:scale-102 motion-reduce:hover:scale-100",
         className
       )}
@@ -78,11 +76,32 @@ export function LifeEventCard({
       </CardHeader>
       <CardContent>
         <div className="mb-4 text-center">
-          <div className="text-primary mb-1 text-2xl font-bold sm:text-3xl">
-            <AnimatedNumber
-              value={selectedOption ? selectedOption.cost : 0}
-              prefix="$"
-            />
+          <div
+            className={cn(
+              "mb-1 text-2xl font-bold sm:text-3xl",
+              selectedOption?.income
+                ? "text-green-600 dark:text-green-500"
+                : selectedOption?.cost
+                  ? "text-red-600 dark:text-red-500"
+                  : "text-muted-foreground"
+            )}
+            aria-label={
+              selectedOption
+                ? `Selected: ${selectedOption.income ? "Income" : "Cost"} of ${formatAmount(selectedOption.income || selectedOption.cost || 0)}`
+                : "No option selected"
+            }
+          >
+            {selectedOption ? (
+              <>
+                {selectedOption.income ? "+" : "-"}
+                <AnimatedNumber
+                  value={selectedOption.income || selectedOption.cost || 0}
+                  prefix="$"
+                />
+              </>
+            ) : (
+              "—"
+            )}
           </div>
         </div>
 
@@ -96,9 +115,12 @@ export function LifeEventCard({
                 className="w-full justify-between text-xs"
                 disabled={isDisabled && selectedOptionIndex !== index}
                 onClick={() => handleOptionSelect(option, index)}
+                aria-pressed={index === selectedOptionIndex}
               >
                 <span>{option.label}</span>
-                <span className="font-semibold">{formatCost(option.cost)}</span>
+                <span className="font-semibold">
+                  {formatAmount(option.income || option.cost || 0)}
+                </span>
               </Button>
             ))}
           </div>

@@ -1,6 +1,7 @@
 import { Share2 } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
+import { ShareDemoGrid } from "./components/share-demo-grid";
 import {
   MAX_WIDTHS,
   TYPOGRAPHY,
@@ -26,7 +27,7 @@ export function PlanSharingSection() {
         }
         description="From running it by your inner circle to starting a conversation on Reddit or X, share your plan with one simple link."
       />
-      {null}
+      <ShareDemoGrid />
     </ProductPageSection>
   );
 }

@@ -12,13 +12,32 @@ export function MockiMessage() {
         <Video className="h-8 w-8" />
       </CardHeader>
 
-      <CardContent className="space-y-2">
+      <CardContent className="space-y-4">
         <div className="space-y-1 text-center">
           <p className="text-muted-foreground text-xs font-medium">iMessage</p>
           <p className="text-xs">
             <span className="text-foreground/80 font-medium">Today</span>{" "}
             <span className="text-muted-foreground font-normal">9:41 AM</span>
           </p>
+        </div>
+
+        {/* Messages */}
+        <div className="space-y-2 px-2">
+          {/* Sent message */}
+          <div className="flex justify-end">
+            <div className="max-w-[75%] rounded-tl-2xl rounded-tr-2xl rounded-br-sm rounded-bl-2xl bg-blue-500 px-4 py-2 text-white">
+              <p className="text-sm">Thank you! I should be there by 9:10</p>
+            </div>
+          </div>
+
+          {/* Received message */}
+          <div className="flex justify-start">
+            <div className="bg-muted max-w-[75%] rounded-tl-2xl rounded-tr-2xl rounded-br-2xl rounded-bl-sm px-4 py-2">
+              <p className="text-foreground text-sm">
+                Don&apos;t rush. I&apos;ve got it covered.
+              </p>
+            </div>
+          </div>
         </div>
       </CardContent>
     </Card>

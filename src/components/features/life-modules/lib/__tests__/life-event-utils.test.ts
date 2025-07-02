@@ -945,6 +945,24 @@ describe("Critical Missing Test Cases", () => {
       expect(isFinite(result.adjusted.yearsToFire)).toBe(true);
     });
 
+    it("CRITICAL: should never allow FI age to go below baseline age", () => {
+      const events = [createWindfallLifeEvent({ id: "mega-windfall" })];
+      const selections = [
+        createLifeEventSelection("mega-windfall", 0, undefined, 10000000), // $10M windfall - more than enough to retire immediately
+      ];
+
+      const result = calculateFireWithLifeEvents(events, selections);
+
+      // FI age should never go below baseline age (28)
+      expect(result.adjusted.fireAge).toBeGreaterThanOrEqual(28);
+      expect(result.adjusted.yearsToFire).toBeGreaterThanOrEqual(0);
+
+      // When windfall enables immediate FI, yearsToFire should be exactly 0
+      if (result.adjusted.yearsToFire === 0) {
+        expect(result.adjusted.fireAge).toBe(28); // Exactly at baseline age
+      }
+    });
+
     it("should handle scenarios pushing FIRE beyond normal retirement age", () => {
       const events = [
         createImmediateLifeEvent({

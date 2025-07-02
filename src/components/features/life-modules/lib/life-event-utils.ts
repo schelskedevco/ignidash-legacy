@@ -274,6 +274,13 @@ export function calculateFireWithLifeEvents(
     adjustedScenario
   ) as RegularFireOutputs;
 
+  // Ensure FI age never goes below baseline age (protect against "already FI" scenarios)
+  const minFireAge = BASELINE_INPUTS.age;
+  if (adjustedOutputs.fireAge < minFireAge) {
+    adjustedOutputs.fireAge = minFireAge;
+    adjustedOutputs.yearsToFire = 0;
+  }
+
   // Calculate years impact (positive means delayed FI, negative means earlier FI)
   const yearsImpact = adjustedOutputs.yearsToFire - baselineOutputs.yearsToFire;
 

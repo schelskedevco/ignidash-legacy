@@ -20,7 +20,7 @@ export function MockReddit() {
               alt="r/Fire subreddit icon"
               width={32}
               height={32}
-              className="h-8 w-8 rounded-full"
+              className="h-8 w-8 shrink-0 rounded-full"
             />
           </div>
           <div>
@@ -34,16 +34,19 @@ export function MockReddit() {
                 r/Fire
               </a>
             </h2>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground hidden text-sm sm:block">
               722k members • 129 online
             </p>
           </div>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" className="rounded-full">
+          <Button size="sm" variant="outline" className="rounded-full">
             Create Post
           </Button>
-          <Button className="rounded-full bg-blue-600 text-white hover:bg-blue-700">
+          <Button
+            size="sm"
+            className="rounded-full bg-blue-600 text-white hover:bg-blue-700"
+          >
             Join
           </Button>
         </div>

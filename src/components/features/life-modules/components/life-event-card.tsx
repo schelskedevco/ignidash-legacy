@@ -3,15 +3,17 @@
 import React, { useState, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { AnimatedNumber } from "@/components/features/fire-scenarios/components/animated-number";
 import { cn } from "@/lib/utils";
-import { LifeEventOption } from "../lib/life-event-types";
+import { LifeEventOption, LifeEventImpactType } from "../lib/life-event-types";
 export type { LifeEventOption };
 
 interface LifeEventCardProps {
   id: string;
   title: string;
   options: LifeEventOption[];
+  impactType?: LifeEventImpactType;
   className?: string;
   onSelectionChange?: (option: LifeEventOption | null, index: number) => void;
   isDisabled?: boolean;
@@ -21,6 +23,7 @@ export function LifeEventCard({
   id,
   title,
   options,
+  impactType,
   className,
   onSelectionChange,
   isDisabled = false,
@@ -28,6 +31,33 @@ export function LifeEventCard({
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(-1);
   const selectedOption =
     selectedOptionIndex >= 0 ? options[selectedOptionIndex] : null;
+
+  // Helper function to get badge properties based on impact type
+  const getBadgeProps = (type: LifeEventImpactType) => {
+    switch (type) {
+      case "windfall":
+        return {
+          variant: "default" as const,
+          className:
+            "bg-green-600 text-white hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600",
+          label: "Windfall (+)",
+        };
+      case "immediate":
+        return {
+          variant: "destructive" as const,
+          className:
+            "bg-red-600 text-white hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600",
+          label: "Immediate Expense (-)",
+        };
+      case "ongoing":
+        return {
+          variant: "secondary" as const,
+          className:
+            "bg-orange-600 text-white hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600",
+          label: "Ongoing Expense (-)",
+        };
+    }
+  };
 
   // Memoized formatAmount function
   const formatAmount = useCallback((amount: number): string => {
@@ -70,9 +100,19 @@ export function LifeEventCard({
       )}
     >
       <CardHeader>
-        <CardTitle className="font-heading text-center text-lg font-semibold">
-          {title}
-        </CardTitle>
+        <div className="flex flex-col items-center gap-2">
+          <CardTitle className="font-heading text-center text-lg font-semibold">
+            {title}
+          </CardTitle>
+          {impactType && (
+            <Badge
+              variant={getBadgeProps(impactType).variant}
+              className={getBadgeProps(impactType).className}
+            >
+              {getBadgeProps(impactType).label}
+            </Badge>
+          )}
+        </div>
       </CardHeader>
       <CardContent>
         <div className="mb-4 text-center">

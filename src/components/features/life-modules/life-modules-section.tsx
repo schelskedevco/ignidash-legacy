@@ -27,17 +27,6 @@ import { cn } from "@/lib/utils";
 // Life events data with impact metadata
 const LIFE_EVENTS: LifeEventData[] = [
   {
-    id: "have-child",
-    title: "Child",
-    impactType: "ongoing",
-    durationYears: 18,
-    options: [
-      { label: "Basic Needs", cost: 233000 },
-      { label: "With College Fund", cost: 350000 },
-      { label: "Premium Education", cost: 500000 },
-    ],
-  },
-  {
     id: "buy-car",
     title: "Car",
     impactType: "ongoing",
@@ -66,6 +55,17 @@ const LIFE_EVENTS: LifeEventData[] = [
       { label: "Kitchen Update", cost: 25000 },
       { label: "Full Remodel", cost: 75000 },
       { label: "Major Addition", cost: 150000 },
+    ],
+  },
+  {
+    id: "have-child",
+    title: "Child",
+    impactType: "ongoing",
+    durationYears: 18,
+    options: [
+      { label: "Basic Needs", cost: 233000 },
+      { label: "With College Fund", cost: 350000 },
+      { label: "Premium Education", cost: 500000 },
     ],
   },
   {
@@ -176,6 +176,7 @@ export function LifeModulesSection() {
             id={event.id}
             title={event.title}
             options={event.options}
+            impactType={event.impactType}
             onSelectionChange={(option, index) =>
               handleSelectionChange(event.id, option, index)
             }

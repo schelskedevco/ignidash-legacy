@@ -3,6 +3,7 @@ import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-p
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
 import { MockBrowser } from "./components/mock-browser";
 import { MockReddit } from "./components/mock-reddit";
+import { MockiMessage } from "./components/mock-imessage";
 import {
   MAX_WIDTHS,
   TYPOGRAPHY,
@@ -52,7 +53,7 @@ export function PlanSharingSection() {
             <p className="text-muted-foreground ml-4 text-center text-xs font-medium tracking-wider uppercase lg:text-left">
               Share with Friends
             </p>
-            {/* <MockiMessage /> */}
+            <MockiMessage />
           </div>
         </div>
       </div>

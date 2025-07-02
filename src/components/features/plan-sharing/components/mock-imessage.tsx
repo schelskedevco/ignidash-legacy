@@ -25,14 +25,14 @@ export function MockiMessage() {
         <div className="space-y-2 px-2">
           {/* Sent message */}
           <div className="flex justify-end">
-            <div className="max-w-[75%] rounded-tl-2xl rounded-tr-2xl rounded-br-sm rounded-bl-2xl bg-blue-500 px-4 py-2 text-white">
+            <div className="max-w-[75%] rounded-tl-2xl rounded-tr-2xl rounded-br-xs rounded-bl-2xl bg-blue-500 px-4 py-2 text-white">
               <p className="text-sm">Thank you! I should be there by 9:10</p>
             </div>
           </div>
 
           {/* Received message */}
           <div className="flex justify-start">
-            <div className="bg-muted max-w-[75%] rounded-tl-2xl rounded-tr-2xl rounded-br-2xl rounded-bl-sm px-4 py-2">
+            <div className="bg-muted max-w-[75%] rounded-tl-2xl rounded-tr-2xl rounded-br-2xl rounded-bl-xs px-4 py-2">
               <p className="text-foreground text-sm">
                 Don&apos;t rush. I&apos;ve got it covered.
               </p>

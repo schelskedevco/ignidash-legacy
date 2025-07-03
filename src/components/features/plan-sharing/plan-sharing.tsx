@@ -11,8 +11,7 @@ export function PlanSharingSection() {
       className="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 sm:py-20 md:py-24 lg:px-8 lg:py-28 xl:text-left"
       id="plan-sharing"
       ariaLabel="Plan Sharing Section"
-      gradientVariant="warmRose"
-      showBottomShadow={true}
+      gradientVariant="primary"
     >
       <ProductPageSectionHeader
         icon={Share2}

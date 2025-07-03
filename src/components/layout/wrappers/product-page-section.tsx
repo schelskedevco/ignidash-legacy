@@ -1,14 +1,15 @@
 import { ReactNode } from "react";
-import { GradientBackground } from "@/components/layout/effects/gradient-background";
-import { BottomShadow } from "@/components/layout/effects/bottom-shadow";
+import {
+  GradientBackground,
+  GradientVariant,
+} from "@/components/layout/effects/gradient-background";
 
 interface ProductPageSectionProps {
   id?: string;
   children: ReactNode;
   className?: string;
   ariaLabel: string;
-  gradientVariant?: "subtleRose" | "warmRose";
-  showBottomShadow?: boolean;
+  gradientVariant: GradientVariant;
 }
 
 export function ProductPageSection({
@@ -17,7 +18,6 @@ export function ProductPageSection({
   className = "",
   ariaLabel,
   gradientVariant,
-  showBottomShadow = false,
 }: ProductPageSectionProps) {
   return (
     <section id={id} className={"relative"} aria-label={ariaLabel}>
@@ -25,10 +25,6 @@ export function ProductPageSection({
 
       {/* Main content */}
       <div className={`relative z-10 ${className}`}>{children}</div>
-
-      {showBottomShadow ? (
-        <div aria-hidden="true">{<BottomShadow />}</div>
-      ) : null}
     </section>
   );
 }

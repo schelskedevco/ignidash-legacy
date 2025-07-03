@@ -66,7 +66,7 @@ export function LifeModulesSection() {
             Play Out Your <span className={GRADIENTS.text}>What-Ifs</span>
           </>
         }
-        description="Select life events to see how each decision impacts your financial independence timeline. Kids, time off, career pivots, big purchases—instantly see how each choice shifts your future."
+        description="See how kids, career changes, time off, and other major decisions affect your financial independence timeline."
       />
 
       <LifeEventCarousel>

@@ -30,7 +30,7 @@ export function PlanSharingSection() {
         {/* Left Column - MockBrowser */}
         <div className="flex flex-col items-center justify-center gap-4 lg:items-start">
           <div className="w-full space-y-3">
-            <p className="text-muted-foreground ml-4 text-center text-xs font-medium tracking-wider uppercase lg:text-left">
+            <p className="text-muted-foreground text-center text-xs font-medium tracking-wider uppercase lg:ml-4 lg:text-left">
               Your Plan
             </p>
             <div className="flex justify-center lg:justify-start">
@@ -43,7 +43,7 @@ export function PlanSharingSection() {
         <div className="flex flex-col items-center gap-4 lg:items-start">
           {/* Reddit Example */}
           <div className="w-full space-y-3">
-            <p className="text-muted-foreground ml-4 text-center text-xs font-medium tracking-wider uppercase lg:text-left">
+            <p className="text-muted-foreground text-center text-xs font-medium tracking-wider uppercase lg:ml-4 lg:text-left">
               Your Socials
             </p>
             <div className="flex justify-center lg:justify-start">

@@ -54,7 +54,7 @@ export function FireScenariosSection() {
       />
       <div className="grid grid-cols-1 place-items-center gap-8 lg:grid-cols-2 lg:gap-4">
         {/* Left Panel - Financial Inputs */}
-        <div className="flex h-full w-full flex-col items-end justify-center">
+        <div className="flex h-full w-full flex-col items-center justify-center lg:items-end">
           <div className="flex w-full items-end justify-center lg:justify-between">
             <p className="text-muted-foreground mb-4 ml-4 text-xs font-medium tracking-wider uppercase">
               Your Inputs
@@ -71,7 +71,7 @@ export function FireScenariosSection() {
         </div>
 
         {/* Right Panel - Financial Outputs */}
-        <div className="flex h-full w-full flex-col justify-between gap-4">
+        <div className="flex h-full w-full flex-col items-center justify-between gap-4 lg:items-start">
           <div className="ml-4 flex items-center justify-center gap-2 lg:justify-start">
             <p className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
               Your Projections

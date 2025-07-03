@@ -15,7 +15,7 @@ export function FinancialInputsCard({
   onScenarioChange,
 }: FinancialInputsCardProps) {
   return (
-    <Card className="hover:border-primary/30 w-full transition-all duration-300 hover:shadow-sm">
+    <Card className="hover:border-primary/30 w-full max-w-2xl transition-all duration-300 hover:shadow-sm">
       <CardContent>
         <Tabs
           value={selectedScenario}

@@ -1,15 +1,15 @@
 // Gradient definitions for FIRE app rose theme
 const GRADIENT_VARIANTS = {
-  // Primary gradient - used for most sections
+  // Primary gradient - fully responsive with max size cap
   primary:
-    "bg-gradient-to-b from-transparent from-0% via-rose-100/80 via-50% to-transparent to-100% dark:from-transparent dark:via-rose-950/40 dark:to-transparent",
+    "bg-radial-[circle_250px_at_center] sm:bg-radial-[circle_300px_at_center] md:bg-radial-[circle_350px_at_center] lg:bg-radial-[circle_400px_at_center] xl:bg-radial-[circle_450px_at_center] 2xl:bg-radial-[circle_500px_at_center] from-rose-100/80 from-0% via-rose-100/80 via-40% via-rose-100/80 via-50% via-rose-100/80 via-60% to-transparent to-100% dark:from-rose-950/40 dark:via-rose-950/40 dark:via-rose-950/40 dark:via-rose-950/40 dark:to-transparent",
 
-  // Hero gradient - fades down from top (opposite of footer)
-  hero: "bg-gradient-to-b from-rose-100/75 from-0% via-transparent via-30% to-transparent to-100% dark:from-rose-950/40 dark:via-transparent dark:to-transparent",
+  // Hero gradient - smaller, concentrated at top
+  hero: "bg-radial-[circle_200px_at_50%_0%] sm:bg-radial-[circle_250px_at_50%_0%] md:bg-radial-[circle_300px_at_50%_0%] lg:bg-radial-[circle_350px_at_50%_0%] xl:bg-radial-[circle_400px_at_50%_0%] from-rose-100/75 from-0% via-rose-100/75 via-30% to-transparent to-100% dark:from-rose-950/40 dark:via-rose-950/40 dark:to-transparent",
 
-  // Footer gradient - fades up from bottom
+  // Footer gradient - smaller, concentrated at bottom
   footer:
-    "bg-gradient-to-t from-rose-100/75 from-0% via-transparent via-30% to-transparent to-100% dark:from-rose-950/40 dark:via-transparent dark:to-transparent",
+    "bg-radial-[circle_200px_at_50%_100%] sm:bg-radial-[circle_250px_at_50%_100%] md:bg-radial-[circle_300px_at_50%_100%] lg:bg-radial-[circle_350px_at_50%_100%] xl:bg-radial-[circle_400px_at_50%_100%] from-rose-100/75 from-0% via-rose-100/75 via-30% to-transparent to-100% dark:from-rose-950/40 dark:via-rose-950/40 dark:to-transparent",
 } as const;
 
 export type GradientVariant = keyof typeof GRADIENT_VARIANTS;

@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { BackgroundGradient } from "@/lib/constants/design-constants";
 import { GradientBackground } from "@/components/layout/effects/gradient-background";
 import { BottomShadow } from "@/components/layout/effects/bottom-shadow";
 
@@ -8,7 +7,7 @@ interface ProductPageSectionProps {
   children: ReactNode;
   className?: string;
   ariaLabel: string;
-  gradientVariant?: BackgroundGradient;
+  gradientVariant?: "subtleRose" | "warmRose";
   showBottomShadow?: boolean;
 }
 

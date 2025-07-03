@@ -12,12 +12,6 @@ import { KeyMetricsCard } from "./components/financial-outputs/key-metrics-card"
 import { ScenarioId } from "./types";
 import { ConnectingWire } from "./components/connecting-wire";
 import {
-  MAX_WIDTHS,
-  SPACING,
-  TYPOGRAPHY,
-  GRADIENTS,
-} from "@/lib/constants/design-constants";
-import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
@@ -37,7 +31,7 @@ export function FireScenariosSection() {
   return (
     <ProductPageSection
       id="fire-scenarios"
-      className={`${MAX_WIDTHS.container} ${SPACING.container} ${SPACING.sectionVerticalLg} ${TYPOGRAPHY.alignment} mx-auto`}
+      className="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 sm:py-20 md:py-24 lg:px-8 lg:py-28 xl:text-left"
       ariaLabel="Fire Scenarios Section"
       gradientVariant="warmRose"
       showBottomShadow={true}
@@ -46,8 +40,11 @@ export function FireScenariosSection() {
         icon={Route}
         title={
           <>
-            Every <span className={GRADIENTS.textReverse}>FIRE</span> Path,
-            Clearly Mapped
+            Every{" "}
+            <span className="bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 bg-clip-text text-transparent dark:from-pink-400 dark:via-red-400 dark:to-orange-400">
+              FIRE
+            </span>{" "}
+            Path, Clearly Mapped
           </>
         }
         description="Run the numbers on early retirement, sabbaticals, part-time work, and more. See how your future shifts."

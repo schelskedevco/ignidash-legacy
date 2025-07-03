@@ -3,13 +3,6 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import {
-  LOGO_SIZE,
-  SPACING,
-  MAX_WIDTHS,
-  LINK_FOCUS_STATE,
-  ICON_SIZES,
-} from "@/lib/constants/design-constants";
 
 interface FooterLink {
   name: string;
@@ -67,26 +60,26 @@ export function Footer() {
 
   return (
     <footer className="bg-background border-t">
-      <div className={`mx-auto ${MAX_WIDTHS.container} ${SPACING.container}`}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
-        <div className={SPACING.sectionVertical}>
+        <div className="py-12 sm:py-16 md:py-20">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-6 md:gap-12">
             {/* Company Info - Spans 2 columns on desktop */}
             <div className="col-span-2 space-y-4">
               <Link
                 href="/"
-                className={`group flex items-center gap-2 ${LINK_FOCUS_STATE}`}
+                className="group focus-visible:ring-ring flex items-center gap-2 rounded-sm focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:outline-none"
               >
                 <Image
                   src="/flame-icon.svg"
                   alt="Ignidash flame icon"
-                  className={LOGO_SIZE}
+                  className="h-8 w-8"
                   width={32}
                   height={32}
                 />
                 <span className="font-heading text-xl font-bold">Ignidash</span>
               </Link>
-              <p className={`text-muted-foreground ${MAX_WIDTHS.xs} text-sm`}>
+              <p className="text-muted-foreground max-w-xs text-sm">
                 Design your life. Plan your FIRE journey. Get AI-powered
                 insights tailored to your values and goals.
               </p>
@@ -98,7 +91,7 @@ export function Footer() {
                   className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors"
                   aria-label="Email us at joe@schelske.dev"
                 >
-                  <Mail className={ICON_SIZES.sm} />
+                  <Mail className="h-4 w-4" />
                   joe@schelske.dev
                 </a>
                 <a
@@ -106,11 +99,11 @@ export function Footer() {
                   className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors"
                   aria-label="Call us at (952) 242-5109"
                 >
-                  <Phone className={ICON_SIZES.sm} />
+                  <Phone className="h-4 w-4" />
                   (952) 242-5109
                 </a>
                 <div className="text-muted-foreground flex items-center gap-2 text-sm">
-                  <MapPin className={ICON_SIZES.sm} />
+                  <MapPin className="h-4 w-4" />
                   Twin Cities, Minnesota
                 </div>
               </div>
@@ -128,7 +121,7 @@ export function Footer() {
                       <li key={link.name}>
                         <Link
                           href={link.href}
-                          className={`text-muted-foreground hover:text-foreground -mx-1 px-1 text-sm transition-colors ${LINK_FOCUS_STATE}`}
+                          className="text-muted-foreground hover:text-foreground focus-visible:ring-ring -mx-1 rounded-sm px-1 text-sm transition-colors focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:outline-none"
                         >
                           {link.name}
                         </Link>
@@ -144,7 +137,7 @@ export function Footer() {
         <Separator />
 
         {/* Bottom Footer */}
-        <div className={SPACING.sectionVerticalSm}>
+        <div className="py-6 sm:py-8">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             {/* Copyright */}
             <div className="text-center sm:text-left">

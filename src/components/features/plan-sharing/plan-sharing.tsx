@@ -4,17 +4,11 @@ import { ProductPageSection } from "@/components/layout/wrappers/product-page-se
 import { MockBrowser } from "./components/mock-browser";
 import { MockReddit } from "./components/mock-reddit";
 import { MockiMessage } from "./components/mock-imessage";
-import {
-  MAX_WIDTHS,
-  TYPOGRAPHY,
-  SPACING,
-  GRADIENTS,
-} from "@/lib/constants/design-constants";
 
 export function PlanSharingSection() {
   return (
     <ProductPageSection
-      className={`${MAX_WIDTHS.container} ${SPACING.container} ${SPACING.sectionVerticalLg} ${TYPOGRAPHY.alignment} mx-auto`}
+      className="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 sm:py-20 md:py-24 lg:px-8 lg:py-28 xl:text-left"
       id="plan-sharing"
       ariaLabel="Plan Sharing Section"
       gradientVariant="warmRose"
@@ -24,7 +18,10 @@ export function PlanSharingSection() {
         icon={Share2}
         title={
           <>
-            <span className={GRADIENTS.text}>Share</span> Your Plan
+            <span className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent dark:from-orange-400 dark:via-red-400 dark:to-pink-400">
+              Share
+            </span>{" "}
+            Your Plan
           </>
         }
         description="From running it by your inner circle to starting a conversation on Reddit or X, share your plan with one simple link."

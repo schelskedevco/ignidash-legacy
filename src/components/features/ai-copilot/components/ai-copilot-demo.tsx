@@ -5,11 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Play, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import {
-  ICON_SIZES,
-  SPACING,
-  MAX_WIDTHS,
-} from "@/lib/constants/design-constants";
 
 const qaData = [
   {
@@ -122,13 +117,9 @@ export function AICopilotDemo() {
   }, [showAnswer, isComplete, isPaused]);
 
   return (
-    <div
-      className={`ai-copilot-demo flex flex-col items-center justify-center ${SPACING.container}`}
-    >
+    <div className="ai-copilot-demo flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
       {/* Content container */}
-      <div
-        className={`mx-auto w-full ${MAX_WIDTHS.content} ${SPACING.elementSpacing} flex min-h-[480px] flex-col`}
-      >
+      <div className="mx-auto flex min-h-[480px] w-full max-w-sm flex-col space-y-2 sm:space-y-4 md:max-w-2xl lg:max-w-3xl lg:space-y-6">
         {/* Controls */}
         <div className="mb-4 flex items-center justify-center gap-4">
           <Button
@@ -140,12 +131,12 @@ export function AICopilotDemo() {
           >
             {isPaused ? (
               <>
-                <Play className={ICON_SIZES.sm} />
+                <Play className="h-4 w-4" />
                 Resume
               </>
             ) : (
               <>
-                <Pause className={ICON_SIZES.sm} />
+                <Pause className="h-4 w-4" />
                 Pause
               </>
             )}
@@ -167,7 +158,7 @@ export function AICopilotDemo() {
               prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -20 }
             }
             transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
-            className={SPACING.elementSpacing}
+            className="space-y-2 sm:space-y-4 lg:space-y-6"
           >
             {/* User Question */}
             <div className="text-left">

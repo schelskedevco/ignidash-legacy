@@ -10,12 +10,6 @@ import {
   LifeEventCard,
   type LifeEventOption,
 } from "./components/life-event-card";
-import {
-  MAX_WIDTHS,
-  TYPOGRAPHY,
-  SPACING,
-  GRADIENTS,
-} from "@/lib/constants/design-constants";
 import { AnimatedNumber } from "@/components/shared/animated-number";
 import { LifeEventSelection } from "./types";
 import { LIFE_EVENTS, calculateInitialFireAge } from "./utils";
@@ -55,7 +49,7 @@ export function LifeModulesSection() {
 
   return (
     <ProductPageSection
-      className={`${MAX_WIDTHS.container} ${SPACING.container} ${SPACING.sectionVerticalLg} ${TYPOGRAPHY.alignment} mx-auto`}
+      className="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 sm:py-20 md:py-24 lg:px-8 lg:py-28 xl:text-left"
       id="life-modules"
       ariaLabel="Life Modules Section"
     >
@@ -63,7 +57,10 @@ export function LifeModulesSection() {
         icon={Compass}
         title={
           <>
-            Play Out Your <span className={GRADIENTS.text}>What-Ifs</span>
+            Play Out Your{" "}
+            <span className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent dark:from-orange-400 dark:via-red-400 dark:to-pink-400">
+              What-Ifs
+            </span>
           </>
         }
         description="See how kids, career changes, time off, and other major decisions affect your financial independence timeline."

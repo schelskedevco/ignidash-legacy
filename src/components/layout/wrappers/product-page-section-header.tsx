@@ -1,6 +1,5 @@
 import { LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
-import { ICON_SIZES, MAX_WIDTHS } from "@/lib/constants/design-constants";
 
 interface ProductPageSectionHeaderProps {
   icon: LucideIcon;
@@ -18,10 +17,8 @@ export function ProductPageSectionHeader({
   return (
     <div className={`mb-12 text-center ${className}`}>
       {/* Icon container */}
-      <div
-        className={`mb-6 inline-flex ${ICON_SIZES["3xl"]} items-center justify-center rounded-full border-2 border-rose-200 bg-rose-100 dark:border-rose-400 dark:bg-rose-300`}
-      >
-        <Icon className={`${ICON_SIZES.xl} text-rose-600`} />
+      <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-rose-200 bg-rose-100 dark:border-rose-400 dark:bg-rose-300">
+        <Icon className="h-8 w-8 text-rose-600" />
       </div>
 
       {/* Title */}
@@ -30,9 +27,7 @@ export function ProductPageSectionHeader({
       </h2>
 
       {/* Description */}
-      <p
-        className={`text-muted-foreground mx-auto mb-8 ${MAX_WIDTHS.content} text-base sm:text-lg`}
-      >
+      <p className="text-muted-foreground mx-auto mb-8 max-w-sm text-base sm:text-lg md:max-w-2xl lg:max-w-3xl">
         {description}
       </p>
     </div>

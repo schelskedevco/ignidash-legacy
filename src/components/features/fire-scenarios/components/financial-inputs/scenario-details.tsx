@@ -4,7 +4,6 @@ import {
   BaristaFireParameters,
   FireType,
 } from "../../types";
-import { SPACING } from "@/lib/constants/design-constants";
 import {
   User,
   DollarSign,
@@ -40,7 +39,7 @@ export function ScenarioDetails({ scenario }: ScenarioDetailsProps) {
   };
 
   return (
-    <div className={SPACING.elementSpacing}>
+    <div className="space-y-2 sm:space-y-4 lg:space-y-6">
       <ScenarioHeader
         icon={Icon}
         title={scenario.subtitle}

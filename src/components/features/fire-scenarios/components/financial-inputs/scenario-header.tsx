@@ -1,8 +1,4 @@
 import { LucideIcon } from "lucide-react";
-import {
-  ICON_SIZES,
-  CARD_BORDER_RADIUS,
-} from "@/lib/constants/design-constants";
 
 interface ScenarioHeaderProps {
   icon: LucideIcon;
@@ -23,9 +19,9 @@ export function ScenarioHeader({
     <header className="space-y-3">
       {/* Icon and Title Container */}
       <div className="flex items-center gap-3">
-        <div className={`shrink-0 ${CARD_BORDER_RADIUS} p-2 sm:p-3 ${bgColor}`}>
+        <div className={`shrink-0 rounded-lg p-2 sm:p-3 ${bgColor}`}>
           <Icon
-            className={`${ICON_SIZES.lg} sm:${ICON_SIZES.xl} ${iconColor}`}
+            className={`h-6 w-6 sm:h-8 sm:w-8 ${iconColor}`}
             aria-hidden="true"
           />
           <span className="sr-only">{`${title} icon`}</span>

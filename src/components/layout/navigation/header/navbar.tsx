@@ -13,24 +13,17 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { ModeToggle } from "./mode-toggle";
-import {
-  ICON_SIZES,
-  BUTTON_ICON_SIZE,
-  LOGO_SIZE,
-  MAX_WIDTHS,
-  SPACING,
-  LINK_FOCUS_STATE,
-  GRADIENTS,
-  SHEET_WIDTH,
-} from "@/lib/constants/design-constants";
 
 function Logo() {
   return (
-    <Link href="/" className={`flex items-center gap-2 ${LINK_FOCUS_STATE}`}>
+    <Link
+      href="/"
+      className="focus-visible:ring-ring flex items-center gap-2 rounded-sm focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:outline-none"
+    >
       <Image
         src="/flame-icon.svg"
         alt="Ignidash flame icon"
-        className={LOGO_SIZE}
+        className="h-8 w-8"
         width={32}
         height={32}
       />
@@ -49,12 +42,12 @@ function NavLink({
   return (
     <Link
       href={href}
-      className={`group flex items-center justify-between p-4 text-base font-medium ${LINK_FOCUS_STATE}`}
+      className="group focus-visible:ring-ring flex items-center justify-between rounded-sm p-4 text-base font-medium focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:outline-none"
     >
       <span className="transition-colors group-hover:text-orange-500">
         {children}
       </span>
-      <ChevronRight className={`${ICON_SIZES.lg} text-muted-foreground`} />
+      <ChevronRight className="text-muted-foreground h-6 w-6" />
     </Link>
   );
 }
@@ -139,38 +132,36 @@ export function Navbar() {
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div
-        className={`mx-auto flex h-16 items-center justify-between ${MAX_WIDTHS.container} ${SPACING.container}`}
-      >
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-4 md:flex">
-          <ModeToggle iconSize={ICON_SIZES.lg} />
+          <ModeToggle iconSize="h-6 w-6" />
           <Button asChild variant="ghost">
             <Link href="/dashboard">Sign In</Link>
           </Button>
           <Button
             asChild
-            className={`${GRADIENTS.primaryReverse} text-white hover:from-pink-600 hover:via-red-600 hover:to-orange-600`}
+            className="bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 text-white hover:from-pink-600 hover:via-red-600 hover:to-orange-600"
           >
             <Link href="/dashboard" className="flex items-center gap-2">
               Get Started
-              <ArrowRight className={BUTTON_ICON_SIZE} />
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
         </div>
 
         {/* Mobile Navigation */}
         <div className="flex items-center gap-2 md:hidden">
-          <ModeToggle iconSize={ICON_SIZES.lg} />
+          <ModeToggle iconSize="h-6 w-6" />
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Open menu">
-                <Menu className={ICON_SIZES.lg} />
+                <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className={SHEET_WIDTH}>
+            <SheetContent side="right" className="w-full">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
 
               {/* Mobile Header */}

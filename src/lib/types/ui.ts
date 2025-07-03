@@ -6,7 +6,7 @@ import { LucideIcon } from "lucide-react";
 
 export interface IconProps {
   icon: LucideIcon;
-  size?: keyof typeof import("@/lib/constants/design-constants").ICON_SIZES;
+  size?: "sm" | "lg" | "xl" | "3xl";
   className?: string;
 }
 

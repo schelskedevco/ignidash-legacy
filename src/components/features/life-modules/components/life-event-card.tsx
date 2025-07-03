@@ -4,9 +4,9 @@ import React, { useState, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { AnimatedNumber } from "@/components/features/fire-scenarios/components/animated-number";
-import { cn } from "@/lib/utils";
-import { LifeEventOption, LifeEventImpactType } from "../lib/life-event-types";
+import { AnimatedNumber } from "@/components/shared/animated-number";
+import { cn } from "@/lib/utils/cn";
+import { LifeEventOption, LifeEventImpactType } from "../types";
 export type { LifeEventOption };
 
 interface LifeEventCardProps {

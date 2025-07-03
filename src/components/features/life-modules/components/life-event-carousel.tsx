@@ -7,7 +7,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import AutoScroll from "embla-carousel-auto-scroll";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/cn";
 
 interface LifeEventCarouselProps {
   children: React.ReactNode;

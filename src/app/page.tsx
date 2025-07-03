@@ -1,10 +1,10 @@
 import { Navbar } from "@/components/layout/navigation/header/navbar";
-import { HeroSection } from "@/components/features/hero/hero-section";
-import { FireScenariosSection } from "@/components/features/fire-scenarios/fire-scenarios-section";
-import { LifeModulesSection } from "@/components/features/life-modules/life-modules-section";
-import { AICopilotSection } from "@/components/features/ai-copilot/ai-copilot-section";
-import { PlanSharingSection } from "@/components/features/plan-sharing/plan-sharing-section";
-import { PrivacyTransparencySection } from "@/components/features/privacy-transparency/privacy-transparency-section";
+import { HeroSection } from "@/components/features/hero/hero";
+import { FireScenariosSection } from "@/components/features/fire-scenarios/fire-scenarios";
+import { LifeModulesSection } from "@/components/features/life-modules/life-modules";
+import { AICopilotSection } from "@/components/features/ai-copilot/ai-copilot";
+import { PlanSharingSection } from "@/components/features/plan-sharing/plan-sharing";
+import { PrivacyTransparencySection } from "@/components/features/privacy-transparency/privacy-transparency";
 import { Footer } from "@/components/layout/navigation/footer";
 
 export default function Home() {

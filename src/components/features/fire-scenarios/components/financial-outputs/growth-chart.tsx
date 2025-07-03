@@ -21,7 +21,7 @@ import {
   CoastFireOutputs,
   BaristaFireOutputs,
   CoastFireParameters,
-} from "../../lib/fire-types";
+} from "../../types";
 
 interface GrowthChartProps {
   data: GrowthDataPoint[];

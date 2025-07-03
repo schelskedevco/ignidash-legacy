@@ -7,7 +7,7 @@ import {
   TYPOGRAPHY,
   SPACING,
   GRADIENTS,
-} from "@/lib/design-constants";
+} from "@/lib/constants/design-constants";
 
 export function AICopilotSection() {
   return (

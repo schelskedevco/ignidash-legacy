@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { BackgroundGradient } from "@/lib/design-constants";
+import { BackgroundGradient } from "@/lib/constants/design-constants";
 import { GradientBackground } from "@/components/layout/effects/gradient-background";
 import { BottomShadow } from "@/components/layout/effects/bottom-shadow";
 

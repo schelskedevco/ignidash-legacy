@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScenarioDetails } from "./scenario-details";
-import { Scenario, ScenarioId } from "../../lib/fire-types";
+import { Scenario, ScenarioId } from "../../types";
 
 interface FinancialInputsCardProps {
   scenarios: Scenario[];

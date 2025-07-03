@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { calculateInitialFireAge, BASELINE_INPUTS } from "../life-event-utils";
+import { calculateInitialFireAge, BASELINE_INPUTS } from "../utils";
 
 describe("calculateInitialFireAge", () => {
   it("should calculate FIRE age correctly", () => {

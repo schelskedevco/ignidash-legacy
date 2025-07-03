@@ -3,8 +3,8 @@ import {
   CoastFireParameters,
   BaristaFireParameters,
   FireType,
-} from "../../lib/fire-types";
-import { SPACING } from "@/lib/design-constants";
+} from "../../types";
+import { SPACING } from "@/lib/constants/design-constants";
 import {
   User,
   DollarSign,

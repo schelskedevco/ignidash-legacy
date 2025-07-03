@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { KeyMetrics } from "./key-metrics";
-import { Scenario, FireOutputs } from "../../lib/fire-types";
+import { Scenario, FireOutputs } from "../../types";
 
 interface KeyMetricsCardProps {
   scenario: Scenario;

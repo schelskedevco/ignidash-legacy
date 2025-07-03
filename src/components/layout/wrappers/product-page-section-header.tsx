@@ -1,6 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
-import { ICON_SIZES, MAX_WIDTHS } from "@/lib/design-constants";
+import { ICON_SIZES, MAX_WIDTHS } from "@/lib/constants/design-constants";
 
 interface ProductPageSectionHeaderProps {
   icon: LucideIcon;

@@ -1,7 +1,7 @@
 import {
   BACKGROUND_GRADIENTS,
   BackgroundGradient,
-} from "@/lib/design-constants";
+} from "@/lib/constants/design-constants";
 
 interface GradientBackgroundProps {
   variant: BackgroundGradient;

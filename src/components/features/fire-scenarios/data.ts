@@ -6,7 +6,7 @@ import {
   BaristaFireScenario,
   FireType,
   ScenarioId,
-} from "./fire-types";
+} from "./types";
 
 // Helper functions to create properly typed scenarios
 const createRegularFireScenario = (

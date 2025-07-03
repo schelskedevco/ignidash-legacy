@@ -8,7 +8,7 @@ import {
   CoastFireOutputs,
   BaristaFireOutputs,
   FireOutputs,
-} from "./fire-types";
+} from "./types";
 
 // Helper function to calculate FIRE number
 function calculateFireNumber(

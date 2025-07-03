@@ -4,19 +4,19 @@ import { useState } from "react";
 import { Route, Info } from "lucide-react";
 import { ProductPageSectionHeader } from "@/components/layout/wrappers/product-page-section-header";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
-import { SCENARIOS } from "./lib/fire-data";
-import { calculateProjections, generateGrowthData } from "./lib/fire-utils";
+import { SCENARIOS } from "./data";
+import { calculateProjections, generateGrowthData } from "./utils";
 import { FinancialInputsCard } from "./components/financial-inputs/financial-inputs-card";
 import { FireProjectionChartCard } from "./components/financial-outputs/fire-projection-chart-card";
 import { KeyMetricsCard } from "./components/financial-outputs/key-metrics-card";
-import { ScenarioId } from "./lib/fire-types";
+import { ScenarioId } from "./types";
 import { ConnectingWire } from "./components/connecting-wire";
 import {
   MAX_WIDTHS,
   SPACING,
   TYPOGRAPHY,
   GRADIENTS,
-} from "@/lib/design-constants";
+} from "@/lib/constants/design-constants";
 import {
   Tooltip,
   TooltipTrigger,

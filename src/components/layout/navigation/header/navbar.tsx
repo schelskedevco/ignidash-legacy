@@ -22,7 +22,7 @@ import {
   LINK_FOCUS_STATE,
   GRADIENTS,
   SHEET_WIDTH,
-} from "@/lib/design-constants";
+} from "@/lib/constants/design-constants";
 
 function Logo() {
   return (

@@ -7,7 +7,7 @@ import {
   GRADIENTS,
   TYPOGRAPHY,
   SPACING,
-} from "@/lib/design-constants";
+} from "@/lib/constants/design-constants";
 import { ProductPageSection } from "@/components/layout/wrappers/product-page-section";
 
 export function HeroSection() {

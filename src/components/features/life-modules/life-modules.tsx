@@ -15,11 +15,11 @@ import {
   TYPOGRAPHY,
   SPACING,
   GRADIENTS,
-} from "@/lib/design-constants";
-import { AnimatedNumber } from "@/components/features/fire-scenarios/components/animated-number";
-import { LifeEventSelection } from "./lib/life-event-types";
-import { LIFE_EVENTS, calculateInitialFireAge } from "./lib/life-event-utils";
-import { cn } from "@/lib/utils";
+} from "@/lib/constants/design-constants";
+import { AnimatedNumber } from "@/components/shared/animated-number";
+import { LifeEventSelection } from "./types";
+import { LIFE_EVENTS, calculateInitialFireAge } from "./utils";
+import { cn } from "@/lib/utils/cn";
 
 const MAX_SELECTIONS = 3;
 

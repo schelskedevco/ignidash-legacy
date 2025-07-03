@@ -5,7 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Play, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ICON_SIZES, SPACING, MAX_WIDTHS } from "@/lib/design-constants";
+import {
+  ICON_SIZES,
+  SPACING,
+  MAX_WIDTHS,
+} from "@/lib/constants/design-constants";
 
 const qaData = [
   {

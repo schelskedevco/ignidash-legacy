@@ -9,7 +9,7 @@ import {
   MAX_WIDTHS,
   LINK_FOCUS_STATE,
   ICON_SIZES,
-} from "@/lib/design-constants";
+} from "@/lib/constants/design-constants";
 
 interface FooterLink {
   name: string;

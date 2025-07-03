@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { GrowthChart } from "./growth-chart";
-import { Scenario, FireOutputs, GrowthDataPoint } from "../../lib/fire-types";
+import { Scenario, FireOutputs, GrowthDataPoint } from "../../types";
 
 interface FireProjectionChartCardProps {
   scenario: Scenario;

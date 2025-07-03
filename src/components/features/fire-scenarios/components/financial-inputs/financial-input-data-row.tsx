@@ -1,5 +1,5 @@
 import { LucideIcon } from "lucide-react";
-import { AnimatedNumber } from "../animated-number";
+import { AnimatedNumber } from "@/components/shared/animated-number";
 
 interface FinancialInputDataRowProps {
   icon: LucideIcon;

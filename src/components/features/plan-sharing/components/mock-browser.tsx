@@ -5,12 +5,12 @@ import { Copy, Check, Globe, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { GrowthChart } from "@/components/features/fire-scenarios/components/financial-outputs/growth-chart";
-import { SCENARIOS } from "@/components/features/fire-scenarios/lib/fire-data";
+import { SCENARIOS } from "@/components/features/fire-scenarios/data";
 import {
   calculateProjections,
   generateGrowthData,
-} from "@/components/features/fire-scenarios/lib/fire-utils";
-import { BaristaFireOutputs } from "@/components/features/fire-scenarios/lib/fire-types";
+} from "@/components/features/fire-scenarios/utils";
+import { type BaristaFireOutputs } from "@/components/features/fire-scenarios/types";
 
 export function MockBrowser() {
   const [copied, setCopied] = useState(false);

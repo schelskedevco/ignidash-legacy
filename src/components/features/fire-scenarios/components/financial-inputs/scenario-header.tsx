@@ -1,5 +1,8 @@
 import { LucideIcon } from "lucide-react";
-import { ICON_SIZES, CARD_BORDER_RADIUS } from "@/lib/design-constants";
+import {
+  ICON_SIZES,
+  CARD_BORDER_RADIUS,
+} from "@/lib/constants/design-constants";
 
 interface ScenarioHeaderProps {
   icon: LucideIcon;

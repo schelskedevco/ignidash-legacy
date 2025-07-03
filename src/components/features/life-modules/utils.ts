@@ -1,12 +1,12 @@
-import { LifeEventData } from "./life-event-types";
+import { LifeEventData } from "./types";
 import {
   ScenarioInputs,
   Scenario,
   FireType,
   ScenarioId,
   RegularFireOutputs,
-} from "@/components/features/fire-scenarios/lib/fire-types";
-import { calculateProjections } from "@/components/features/fire-scenarios/lib/fire-utils";
+} from "@/components/features/fire-scenarios/types";
+import { calculateProjections } from "@/components/features/fire-scenarios/utils";
 import { Target } from "lucide-react";
 
 // Life events data with impact metadata

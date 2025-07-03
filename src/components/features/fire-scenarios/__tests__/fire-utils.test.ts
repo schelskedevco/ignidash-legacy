@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { calculateProjections, generateGrowthData } from "../fire-utils";
+import { calculateProjections, generateGrowthData } from "../utils";
 import {
   FireType,
   ScenarioId,
@@ -9,9 +9,9 @@ import {
   RegularFireOutputs,
   CoastFireOutputs,
   BaristaFireOutputs,
-} from "../fire-types";
+} from "../types";
 import { Target, Baby, Plane } from "lucide-react";
-import { SCENARIOS } from "../fire-data";
+import { SCENARIOS } from "../data";
 
 // Test data factories
 const createRegularFireScenario = (overrides = {}): RegularFireScenario => ({

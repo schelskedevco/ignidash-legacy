@@ -4,12 +4,8 @@ const GRADIENT_VARIANTS = {
   primary:
     "bg-gradient-to-b from-transparent from-0% via-rose-100/70 via-50% to-transparent to-100% dark:from-transparent dark:via-rose-950/30 dark:to-transparent",
 
-  // Accent gradient - used sparingly for emphasis
-  accent:
-    "bg-gradient-to-b from-transparent from-0% via-rose-200/80 via-50% to-transparent to-100% dark:from-transparent dark:via-rose-900/40 dark:to-transparent",
-
-  // Hero gradient - special treatment for top section
-  hero: "bg-gradient-to-b from-rose-100/80 from-0% via-rose-100/70 via-30% to-transparent to-70% dark:from-rose-950/40 dark:via-rose-900/35 dark:to-transparent",
+  // Hero gradient - fades down from top (opposite of footer)
+  hero: "bg-gradient-to-b from-rose-100/60 from-0% via-transparent via-30% to-transparent to-100% dark:from-rose-950/30 dark:via-transparent dark:to-transparent",
 
   // Footer gradient - fades up from bottom
   footer:

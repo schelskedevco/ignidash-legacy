@@ -1,15 +1,19 @@
 // Gradient definitions for FIRE app rose theme
 const GRADIENT_VARIANTS = {
-  // Primary gradient - fully responsive with max size cap
+  // Primary gradient - top to bottom
   primary:
-    "bg-radial-[ellipse_600px_400px_at_center] from-rose-200 to-transparent dark:from-rose-950/70 dark:to-transparent",
+    "bg-gradient-to-b from-rose-200/50 to-transparent dark:from-rose-950/40 dark:to-transparent",
 
-  // Hero gradient - smaller, concentrated at top
-  hero: "bg-radial-[circle_350px_at_50%_0%] from-rose-200/90 to-transparent dark:from-rose-950/60 dark:to-transparent",
+  // Primary gradient reversed - bottom to top
+  primaryReverse:
+    "bg-gradient-to-t from-rose-200/50 to-transparent dark:from-rose-950/40 dark:to-transparent",
 
-  // Footer gradient - smaller, concentrated at bottom
+  // Hero gradient - concentrated at top
+  hero: "bg-gradient-to-b from-rose-200/60 via-rose-100/25 to-transparent dark:from-rose-950/50 dark:via-rose-950/20 dark:to-transparent",
+
+  // Footer gradient - bottom to top
   footer:
-    "bg-radial-[circle_350px_at_50%_100%] from-rose-200/90 to-transparent dark:from-rose-950/60 dark:to-transparent",
+    "bg-gradient-to-t from-rose-200/60 via-rose-100/25 to-transparent dark:from-rose-950/50 dark:via-rose-950/20 dark:to-transparent",
 } as const;
 
 export type GradientVariant = keyof typeof GRADIENT_VARIANTS;

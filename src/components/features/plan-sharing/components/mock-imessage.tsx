@@ -5,7 +5,7 @@ import { ChevronLeft, Video, Plus, Mic } from "lucide-react";
 
 export function MockiMessage() {
   return (
-    <Card className="hover:border-primary/30 w-full max-w-2xl gap-2 py-2 shadow-lg transition-all duration-300">
+    <Card className="hover:border-primary/30 w-full max-w-md gap-2 py-2 shadow-lg transition-all duration-300">
       <CardHeader className="flex items-center justify-between border-b [.border-b]:pb-2">
         <ChevronLeft className="h-6 w-6 text-blue-500" />
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-pink-400 to-purple-500">

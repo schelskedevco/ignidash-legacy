@@ -11,7 +11,7 @@ import {
 
 export function MockReddit() {
   return (
-    <Card className="hover:border-primary/30 w-full max-w-2xl gap-2 py-2 shadow-lg transition-all duration-300">
+    <Card className="hover:border-primary/30 w-full max-w-md gap-2 py-2 shadow-lg transition-all duration-300">
       <CardHeader className="flex items-center justify-between border-b [.border-b]:pb-2">
         <div className="flex items-center gap-3">
           <div className="flex h-8 w-8 items-center justify-center">

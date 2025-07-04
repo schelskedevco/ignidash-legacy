@@ -32,7 +32,7 @@ export function MockBrowser() {
   };
 
   return (
-    <Card className="hover:border-primary/30 w-full max-w-2xl shadow-lg transition-all duration-300">
+    <Card className="hover:border-primary/30 w-full max-w-md shadow-lg transition-all duration-300">
       <CardHeader className="flex items-center gap-2 border-b">
         <div className="flex gap-2">
           <div className="h-3 w-3 rounded-full bg-red-400"></div>

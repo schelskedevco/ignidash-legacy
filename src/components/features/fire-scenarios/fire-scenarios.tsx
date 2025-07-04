@@ -10,7 +10,6 @@ import { FinancialInputsCard } from "./components/financial-inputs/financial-inp
 import { FireProjectionChartCard } from "./components/financial-outputs/fire-projection-chart-card";
 import { KeyMetricsCard } from "./components/financial-outputs/key-metrics-card";
 import { ScenarioId } from "./types";
-import { ConnectingWire } from "./components/connecting-wire";
 import {
   Tooltip,
   TooltipTrigger,
@@ -55,15 +54,12 @@ export function FireScenariosSection() {
             <p className="text-muted-foreground mb-4 text-xs font-medium tracking-wider uppercase lg:ml-4">
               Your Inputs
             </p>
-
-            <ConnectingWire placement="top" />
           </div>
           <FinancialInputsCard
             scenarios={SCENARIOS}
             selectedScenario={selectedScenario}
             onScenarioChange={setSelectedScenario}
           />
-          <ConnectingWire placement="bottom" />
         </div>
 
         {/* Right Panel - Financial Outputs */}
